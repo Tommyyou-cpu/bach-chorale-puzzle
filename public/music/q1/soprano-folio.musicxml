@@ -60,7 +60,6 @@
       <note>
         <pitch>
           <step>C</step>
-          <alter>1</alter>
           <octave>5</octave>
         </pitch>
         <duration>10080</duration>
@@ -103,8 +102,8 @@
       </note>
       <note>
         <pitch>
-          <step>E</step>
-          <octave>5</octave>
+          <step>A</step>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>

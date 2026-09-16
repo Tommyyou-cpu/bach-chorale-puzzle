@@ -41,8 +41,7 @@
       </attributes>
       <note default-x="36.13" default-y="-505">
         <pitch>
-          <step>B</step>
-          <alter>-1</alter>
+          <step>F</step>
           <octave>3</octave>
         </pitch>
         <duration>10080</duration>
@@ -126,7 +125,7 @@
     <measure number="3" width="326.3">
       <note default-x="47.79" default-y="-530">
         <pitch>
-          <step>A</step>
+          <step>D</step>
           <octave>3</octave>
         </pitch>
         <duration>5040</duration>

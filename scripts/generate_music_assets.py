@@ -65,22 +65,22 @@ PIECES = (
 # voice-leading 只改非稳定拍，harmony 只改稳定拍；mixed 同时采用两项改写。
 DECOY_MUTATIONS = {
     "q1": {
-        "soprano": {"voice-leading": (14, 71, 78), "harmony": (6, 69, 76)},
-        "alto": {"voice-leading": (3, 64, 69), "harmony": (2, 64, 69)},
+        "soprano": {"voice-leading": (14, 71, 78), "harmony": (2, 73, 72)},
+        "alto": {"voice-leading": (3, 64, 69), "harmony": (16, 63, 62)},
         "tenor": {"voice-leading": (7, 62, 55), "harmony": (0, 61, 62)},
         "bass": {"voice-leading": (19, 47, 40), "harmony": (14, 56, 51)},
     },
     "q2": {
-        "soprano": {"voice-leading": (1, 67, 74), "harmony": (6, 72, 79)},
-        "alto": {"voice-leading": (7, 65, 58), "harmony": (8, 65, 66)},
-        "tenor": {"voice-leading": (1, 58, 53), "harmony": (2, 63, 58)},
-        "bass": {"voice-leading": (10, 48, 41), "harmony": (12, 46, 50)},
+        "soprano": {"voice-leading": (1, 67, 74), "harmony": (6, 72, 70)},
+        "alto": {"voice-leading": (7, 65, 58), "harmony": (2, 67, 66)},
+        "tenor": {"voice-leading": (1, 58, 53), "harmony": (12, 58, 60)},
+        "bass": {"voice-leading": (10, 48, 41), "harmony": (15, 55, 54)},
     },
     "q3": {
         "soprano": {"voice-leading": (1, 72, 79), "harmony": (4, 67, 74)},
-        "alto": {"voice-leading": (4, 64, 57), "harmony": (0, 65, 70)},
-        "tenor": {"voice-leading": (2, 65, 58), "harmony": (13, 57, 62)},
-        "bass": {"voice-leading": (13, 45, 38), "harmony": (8, 50, 57)},
+        "alto": {"voice-leading": (4, 64, 57), "harmony": (3, 62, 63)},
+        "tenor": {"voice-leading": (2, 65, 58), "harmony": (11, 62, 61)},
+        "bass": {"voice-leading": (13, 45, 38), "harmony": (0, 58, 53)},
     },
 }
 
@@ -285,6 +285,18 @@ def candidates_for(piece_id: str, voice: str, source: tuple[Event, ...]) -> tupl
     )
 
 
+def validate_harmony_changes(piece_id: str, candidates: tuple[tuple[Candidate, ...], ...], source: tuple[tuple[Event, ...], ...]) -> None:
+    """确保每条和声干扰都改变其稳定拍的纵向音高类集合。"""
+    for voice_index, voice_candidates in enumerate(candidates):
+        mutation = voice_candidates[2].mutations[0]
+        time = mutation.offset + EPSILON
+        original = [pitch_at(events, time) for events in source]
+        changed = original.copy()
+        changed[voice_index] = mutation.new_midi
+        if any(pitch is None for pitch in original) or set(pitch % 12 for pitch in original if pitch is not None) == set(pitch % 12 for pitch in changed if pitch is not None):
+            raise RuntimeError(f"{piece_id}/{VOICE_KEYS[voice_index]} 的和声干扰没有改变稳定拍和弦音集合")
+
+
 def validate_combinations(
     piece_id: str,
     candidates: tuple[tuple[Candidate, ...], ...],
@@ -412,6 +424,7 @@ def main() -> None:
         for voice, voice_candidates, events in zip(VOICE_KEYS, candidates, source):
             if signature(voice_candidates[0].events) != signature(events) or shape(voice_candidates[0].events) != shape(events):
                 raise RuntimeError(f"{piece['id']}/{voice} 的 variant 0 不再是原作")
+        validate_harmony_changes(piece["id"], candidates, source)
         baseline = original_baseline(source)
         reports.append(validate_combinations(piece["id"], candidates, source, baseline))
         prepared.append((piece, originals, source, candidates))
@@ -472,6 +485,7 @@ def main() -> None:
         "thresholds": {
             "ranges": {voice: list(bounds) for voice, bounds in zip(VOICE_KEYS, VOICE_RANGES)},
             "voiceOrder": "每个时段均不得新增相对原作的声部交叉、越位或同音",
+            "harmonyChange": "每条和声干扰必须改变指定稳定拍的纵向音高类集合",
             "stableDissonance": "每两拍检查一次；共同持续半拍的稳定拍不协和不得超出原作例外",
             "parallelPerfect": "全部音符边界禁止新增同向纯五度或纯八度",
         },

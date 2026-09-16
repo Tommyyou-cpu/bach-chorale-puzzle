@@ -78,13 +78,12 @@
       </note>
       <note default-x="207.62" default-y="-320">
         <pitch>
-          <step>B</step>
+          <step>E</step>
           <alter>-1</alter>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
       </note>
       <note default-x="244.68" default-y="-325">
@@ -194,9 +193,8 @@
       </note>
       <note default-x="128.15" default-y="-335">
         <pitch>
-          <step>B</step>
-          <alter>-1</alter>
-          <octave>3</octave>
+          <step>C</step>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>

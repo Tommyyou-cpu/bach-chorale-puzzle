@@ -173,11 +173,13 @@
       </note>
       <note default-x="98.12" default-y="-15">
         <pitch>
-          <step>G</step>
-          <octave>5</octave>
+          <step>B</step>
+          <alter>-1</alter>
+          <octave>4</octave>
         </pitch>
         <duration>20160</duration>
         <type>half</type>
+        <accidental>flat</accidental>
         <stem>down</stem>
         <lyric name="1" number="1">
           <syllabic>begin</syllabic>

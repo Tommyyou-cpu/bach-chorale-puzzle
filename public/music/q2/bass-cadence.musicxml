@@ -197,8 +197,9 @@
     <measure number="3" width="129.61">
       <note default-x="19.85" default-y="-540">
         <pitch>
-          <step>D</step>
-          <octave>3</octave>
+          <step>B</step>
+          <alter>-1</alter>
+          <octave>2</octave>
         </pitch>
         <duration>20160</duration>
         <type>half</type>
@@ -240,11 +241,13 @@
     <measure number="4" width="231.8">
       <note default-x="33.67" default-y="-515">
         <pitch>
-          <step>G</step>
+          <step>F</step>
+          <alter>1</alter>
           <octave>3</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
+        <accidental>sharp</accidental>
         <stem>down</stem>
         <beam number="1">begin</beam>
       </note>

@@ -153,11 +153,13 @@
       </note>
       <note default-x="190.95" default-y="-325">
         <pitch>
-          <step>D</step>
+          <step>C</step>
+          <alter>1</alter>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
+        <accidental>sharp</accidental>
         <stem>down</stem>
       </note>
       <note default-x="260.86" default-y="-330">
@@ -176,8 +178,8 @@
     <measure number="4" width="162.87">
       <note default-x="33.1" default-y="-340">
         <pitch>
-          <step>D</step>
-          <octave>4</octave>
+          <step>A</step>
+          <octave>3</octave>
         </pitch>
         <duration>30240</duration>
         <type>half</type>

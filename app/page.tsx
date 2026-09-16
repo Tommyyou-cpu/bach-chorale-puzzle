@@ -3,29 +3,34 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, ChevronLeft, ChevronRight, Headphones, LoaderCircle, Pause, Play, RefreshCw, RotateCcw, Volume2, VolumeX } from "lucide-react";
 import rawQuestions from "./questions.generated.json";
-import { candidateFor, GameState, isComplete, newGame, Question, scoreGame, VOICES, VoiceKey } from "./game";
+import { candidateFor, Candidate, DecoyType, GameState, isComplete, isOriginalSelection, newGame, Question, restoreGame, scoreGame, VOICES, VoiceKey } from "./game";
 import { useAudioPlayer } from "./use-audio-player";
 import { VerovioScore } from "./verovio-score";
 
 const questions=rawQuestions as Question[];
-const STORAGE_KEY="bach-puzzle-state-v2";
+const STORAGE_KEY="bach-puzzle-state-v3";
+const LEGACY_STORAGE_KEY="bach-puzzle-state-v2";
 const VOICE_META:Record<VoiceKey,{name:string;short:string}>={soprano:{name:"女高音",short:"S"},alto:{name:"女低音",short:"A"},tenor:{name:"男高音",short:"T"},bass:{name:"男低音",short:"B"}};
 const LETTERS=["A","B","C","D"];
+const DECOY_LABELS:Record<DecoyType,string>={original:"巴赫原作","voice-leading":"声部进行干扰",harmony:"和声走向干扰",mixed:"和声与声部进行混合干扰"};
 
-function safeState():GameState{if(typeof window==="undefined")return newGame(questions,20260916);try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"null");if(saved?.version===2&&saved.orders&&saved.selections)return saved;}catch{}return newGame(questions);}
+function savedState(){try{for(const key of [STORAGE_KEY,LEGACY_STORAGE_KEY]){const raw=localStorage.getItem(key);if(!raw)continue;const parsed=JSON.parse(raw);if(parsed&&typeof parsed==="object"&&!Array.isArray(parsed))return parsed;}}catch{}return undefined;}
+function safeState():GameState{if(typeof window==="undefined")return newGame(questions,20260916);return restoreGame(questions,savedState());}
+function revealDetails(candidate:Candidate|undefined){if(!candidate)return{type:"未找到所选项",reason:"该选项已不在当前题目中。"};const explanation=candidate.explanation?.trim();return{type:DECOY_LABELS[candidate.decoyType]||"干扰声部",reason:explanation||(candidate.isOriginal?"这条声部属于本题的巴赫原作。":"这是一条为听辨设置的替代声部。")};}
 
 export default function Home(){
   const [state,setState]=useState<GameState>(()=>newGame(questions,20260916));const [ready,setReady]=useState(false);const [message,setMessage]=useState("");const [loop,setLoop]=useState(false);const [muted,setMuted]=useState([false,false,false,false]);const [scoreMode,setScoreMode]=useState<"chosen"|"original">("chosen");const headingRef=useRef<HTMLHeadingElement>(null);const player=useAudioPlayer();
   useEffect(()=>{setState(safeState());setReady(true);},[]);useEffect(()=>{if(ready)localStorage.setItem(STORAGE_KEY,JSON.stringify(state));},[state,ready]);useEffect(()=>{player.stop();setMuted([false,false,false,false]);},[state.current,state.submitted]);
   const question=questions[state.current];const selections=state.selections[question.id]||{};const selectedCount=VOICES.filter(v=>selections[v]).length;const complete=isComplete(state);const score=useMemo(()=>scoreGame(questions,state.selections),[state.selections]);
-  const ordered=(voice:VoiceKey)=>state.orders[question.id]?.[voice]?.map(id=>candidateFor(question,voice,id)!).filter(Boolean)||question.voices[voice];
+  const ordered=(voice:VoiceKey)=>{const candidates=state.orders[question.id]?.[voice]?.map(id=>candidateFor(question,voice,id)).filter((candidate):candidate is Candidate=>Boolean(candidate));return candidates?.length===question.voices[voice].length?candidates:question.voices[voice];};
   const chosenCandidates=VOICES.map(v=>candidateFor(question,v,selections[v])).filter(Boolean);
   const originalCandidates=VOICES.map(v=>question.voices[v].find(c=>c.isOriginal)!);
+  const allOriginal=VOICES.every(v=>isOriginalSelection(question,v,selections[v]));
   const playPaths=(paths:string[],label:string,withMute=false)=>player.play({paths,label,loop,muted:withMute?muted:undefined});
   const choose=(voice:VoiceKey,id:string)=>{player.stop();setMessage("");setState(s=>({...s,selections:{...s.selections,[question.id]:{...s.selections[question.id],[voice]:id}}}));};
   const go=(index:number)=>{setState(s=>({...s,current:index}));requestAnimationFrame(()=>headingRef.current?.focus());};
   const submit=()=>{if(!complete){setMessage("还有声部没有选择。完成全部 12 个选择后才能揭晓。");return;}player.stop();setState(s=>({...s,submitted:true,current:0}));setMessage("");setTimeout(()=>headingRef.current?.focus(),0);};
-  const reset=()=>{player.stop();const next=newGame(questions,Date.now());setState(next);setMessage("已重新洗牌，开始新的挑战。");setScoreMode("chosen");};
+  const reset=()=>{player.stop();setState(previous=>newGame(questions,Date.now(),previous.orders));setMessage("已重新洗牌，开始新的挑战。");setScoreMode("chosen");};
   const currentScorePaths=(scoreMode==="chosen"?chosenCandidates:originalCandidates).map(c=>c!.score);
 
   return <main className="site-shell">
@@ -36,8 +41,8 @@ export default function Home(){
       <section className="results-hero"><p className="kicker">挑战结果</p><h2 ref={headingRef} tabIndex={-1}>你拼对了 <em>{score.questions}</em> 首圣咏</h2><p>共找到 <strong>{score.voices}</strong> / 12 条巴赫原作声部。现在，让乐谱告诉你差异在哪里。</p><button className="reset-button" onClick={reset}><RotateCcw size={17}/>重新挑战</button></section>
       <div className="result-tabs" role="tablist" aria-label="选择结果题目">{questions.map((q,i)=><button role="tab" aria-selected={state.current===i} className={state.current===i?"active":""} onClick={()=>go(i)} key={q.id}>第 {i+1} 题</button>)}</div>
       <article className="reveal-card">
-        <div className="reveal-heading"><div><p>{question.bwv} · {question.measures}</p><h3>{question.title}</h3></div><span className={VOICES.every(v=>candidateFor(question,v,selections[v])?.isOriginal)?"seal correct":"seal"}>{VOICES.every(v=>candidateFor(question,v,selections[v])?.isOriginal)?"完整拼对":"查看差异"}</span></div>
-        <div className="answer-grid">{VOICES.map((voice,index)=>{const order=ordered(voice);const chosen=selections[voice];const correct=question.voices[voice].find(c=>c.isOriginal)!;const chosenLetter=LETTERS[order.findIndex(c=>c.id===chosen)];const correctLetter=LETTERS[order.findIndex(c=>c.id===correct.id)];const ok=chosen===correct.id;return <div className={`answer-row ${ok?"right":"wrong"}`} key={voice}><span>{VOICE_META[voice].short}</span><strong>{VOICE_META[voice].name}</strong><p>你选 {chosenLetter} · 原作 {correctLetter}</p><span>{ok?<Check size={16}/>:"×"}</span></div>})}</div>
+        <div className="reveal-heading"><div><p>{question.bwv} · {question.measures}</p><h3>{question.title}</h3></div><span className={allOriginal?"seal correct":"seal"}>{allOriginal?"完整拼对":"查看差异"}</span></div>
+        <div className="answer-grid">{VOICES.map(voice=>{const order=ordered(voice);const chosen=selections[voice];const chosenCandidate=candidateFor(question,voice,chosen);const correct=question.voices[voice].find(c=>c.isOriginal)!;const chosenLetter=LETTERS[order.findIndex(c=>c.id===chosen)]||"—";const correctLetter=LETTERS[order.findIndex(c=>c.id===correct.id)]||"—";const ok=chosen===correct.id;const details=revealDetails(chosenCandidate);return <div className={`answer-row ${ok?"right":"wrong"}`} key={voice}><span className="answer-voice" aria-hidden="true">{VOICE_META[voice].short}</span><div className="answer-copy"><strong>{VOICE_META[voice].name}</strong><p>你选 {chosenLetter} · 原作 {correctLetter}</p><dl className="answer-explanation"><div><dt>所选类型</dt><dd>{details.type}</dd></div><div><dt>选择原因</dt><dd>{details.reason}</dd></div>{!ok&&<div className="answer-original"><dt>正确项</dt><dd>巴赫原作（选项 {correctLetter}）</dd></div>}</dl></div><span className="answer-status" role="img" aria-label={ok?"回答正确":"回答不正确"}>{ok?<Check aria-hidden="true" size={16}/>:<span aria-hidden="true">×</span>}</span></div>})}</div>
         <div className="compare-controls"><button onClick={()=>playPaths(chosenCandidates.map(c=>c!.audio),"你的组合",true)} disabled={player.loading}><Play size={16} fill="currentColor"/>听你的组合</button><button onClick={()=>playPaths(originalCandidates.map(c=>c.audio),"巴赫原作",true)} disabled={player.loading}><Play size={16} fill="currentColor"/>听巴赫原作</button></div>
         <div className="score-tabs" role="tablist" aria-label="乐谱对照"><button role="tab" aria-selected={scoreMode==="chosen"} onClick={()=>setScoreMode("chosen")} className={scoreMode==="chosen"?"active":""}>你的组合谱</button><button role="tab" aria-selected={scoreMode==="original"} onClick={()=>setScoreMode("original")} className={scoreMode==="original"?"active":""}>巴赫原谱</button></div>
         <VerovioScore paths={currentScorePaths} title={scoreMode==="chosen"?"你的组合":"巴赫原谱"}/>

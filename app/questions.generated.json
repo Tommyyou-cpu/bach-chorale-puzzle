@@ -37,7 +37,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 2 小节第 3 拍的稳定拍将 A4 改为 E5，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 C#5 改为 C5，改变该拍的和声成员。"
         },
         {
           "id": "soprano-cadence",
@@ -46,7 +46,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 2 小节第 3 拍将 A4 改为 E5 改变和声，并在第 4 小节第 2 拍将 B4 改为 F#5 扰动声部连接。"
+          "explanation": "混合干扰：在第 1 小节第 3 拍将 C#5 改为 C5 改变和声，并在第 4 小节第 2 拍将 B4 改为 F#5 扰动声部连接。"
         }
       ],
       "alto": [
@@ -75,7 +75,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 E4 改为 A4，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 4 小节第 3 拍的稳定拍将 E-4 改为 D4，改变该拍的和声成员。"
         },
         {
           "id": "alto-cadence",
@@ -84,7 +84,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 1 小节第 3 拍将 E4 改为 A4 改变和声，并在第 1 小节第 4 拍将 E4 改为 A4 扰动声部连接。"
+          "explanation": "混合干扰：在第 4 小节第 3 拍将 E-4 改为 D4 改变和声，并在第 1 小节第 4 拍将 E4 改为 A4 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -203,7 +203,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 2 小节第 3 拍的稳定拍将 C5 改为 G5，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 2 小节第 3 拍的稳定拍将 C5 改为 B-4，改变该拍的和声成员。"
         },
         {
           "id": "soprano-cadence",
@@ -212,7 +212,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 2 小节第 3 拍将 C5 改为 G5 改变和声，并在第 1 小节第 2 拍将 G4 改为 D5 扰动声部连接。"
+          "explanation": "混合干扰：在第 2 小节第 3 拍将 C5 改为 B-4 改变和声，并在第 1 小节第 2 拍将 G4 改为 D5 扰动声部连接。"
         }
       ],
       "alto": [
@@ -241,7 +241,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 3 小节第 1 拍的稳定拍将 F4 改为 F#4，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 G4 改为 F#4，改变该拍的和声成员。"
         },
         {
           "id": "alto-cadence",
@@ -250,7 +250,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 3 小节第 1 拍将 F4 改为 F#4 改变和声，并在第 2 小节第 4 拍将 F4 改为 B-3 扰动声部连接。"
+          "explanation": "混合干扰：在第 1 小节第 3 拍将 G4 改为 F#4 改变和声，并在第 2 小节第 4 拍将 F4 改为 B-3 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -279,7 +279,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 E-4 改为 B-3，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 4 小节第 3 拍的稳定拍将 B-3 改为 C4，改变该拍的和声成员。"
         },
         {
           "id": "tenor-cadence",
@@ -288,7 +288,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 1 小节第 3 拍将 E-4 改为 B-3 改变和声，并在第 1 小节第 2 拍将 B-3 改为 F3 扰动声部连接。"
+          "explanation": "混合干扰：在第 4 小节第 3 拍将 B-3 改为 C4 改变和声，并在第 1 小节第 2 拍将 B-3 改为 F3 扰动声部连接。"
         }
       ],
       "bass": [
@@ -317,7 +317,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 3 小节第 1 拍的稳定拍将 B-2 改为 D3，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 4 小节第 1 拍的稳定拍将 G3 改为 F#3，改变该拍的和声成员。"
         },
         {
           "id": "bass-cadence",
@@ -326,7 +326,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 3 小节第 1 拍将 B-2 改为 D3 改变和声，并在第 2 小节第 3.5 拍将 C3 改为 F2 扰动声部连接。"
+          "explanation": "混合干扰：在第 4 小节第 1 拍将 G3 改为 F#3 改变和声，并在第 2 小节第 3.5 拍将 C3 改为 F2 扰动声部连接。"
         }
       ]
     }
@@ -407,7 +407,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 F4 改为 B-4，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 D4 改为 E-4，改变该拍的和声成员。"
         },
         {
           "id": "alto-cadence",
@@ -416,7 +416,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 1 小节第 1 拍将 F4 改为 B-4 改变和声，并在第 1 小节第 3.5 拍将 E4 改为 A3 扰动声部连接。"
+          "explanation": "混合干扰：在第 1 小节第 3 拍将 D4 改为 E-4 改变和声，并在第 1 小节第 3.5 拍将 E4 改为 A3 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -445,7 +445,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 4 小节第 1 拍的稳定拍将 A3 改为 D4，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 3 小节第 3 拍的稳定拍将 D4 改为 C#4，改变该拍的和声成员。"
         },
         {
           "id": "tenor-cadence",
@@ -454,7 +454,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 4 小节第 1 拍将 A3 改为 D4 改变和声，并在第 1 小节第 2 拍将 F4 改为 B-3 扰动声部连接。"
+          "explanation": "混合干扰：在第 3 小节第 3 拍将 D4 改为 C#4 改变和声，并在第 1 小节第 2 拍将 F4 改为 B-3 扰动声部连接。"
         }
       ],
       "bass": [
@@ -483,7 +483,7 @@
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",
-          "explanation": "和声干扰：在第 3 小节第 1 拍的稳定拍将 D3 改为 A3，改变该拍的和声成员。"
+          "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 B-3 改为 F3，改变该拍的和声成员。"
         },
         {
           "id": "bass-cadence",
@@ -492,7 +492,7 @@
           "isOriginal": false,
           "variant": 3,
           "decoyType": "mixed",
-          "explanation": "混合干扰：在第 3 小节第 1 拍将 D3 改为 A3 改变和声，并在第 3 小节第 4 拍将 A2 改为 D2 扰动声部连接。"
+          "explanation": "混合干扰：在第 1 小节第 1 拍将 B-3 改为 F3 改变和声，并在第 3 小节第 4 拍将 A2 改为 D2 扰动声部连接。"
         }
       ]
     }
