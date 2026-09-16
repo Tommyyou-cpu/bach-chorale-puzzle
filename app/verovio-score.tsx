@@ -2,12 +2,13 @@
 import { useEffect, useState } from "react";
 
 const VOICE_NAMES=["女高音","女低音","男高音","男低音"];
+const VOICE_CLEFS=[["G","2"],["G","2"],["F","4"],["F","4"]] as const;
 const resolveAsset=(path:string)=>new URL(path.replace(/^\//,""),document.baseURI).toString();
 
 async function combineParts(paths:string[]){
   const texts=await Promise.all(paths.map(async p=>{const r=await fetch(resolveAsset(p));if(!r.ok)throw new Error("乐谱文件加载失败");return r.text();}));
   const parser=new DOMParser(); const docs=texts.map(t=>parser.parseFromString(t,"application/xml")); const output=docs[0].cloneNode(true) as XMLDocument; const root=output.documentElement; root.querySelectorAll("part").forEach(n=>n.remove()); const list=root.querySelector("part-list")!; list.querySelectorAll("score-part").forEach(n=>n.remove());
-  docs.forEach((doc,index)=>{const scorePart=doc.querySelector("score-part")!;const part=doc.querySelector("part")!;const id=`P${index+1}`;scorePart.setAttribute("id",id);scorePart.querySelector("part-name")!.textContent=VOICE_NAMES[index];part.setAttribute("id",id);list.appendChild(output.importNode(scorePart,true));root.appendChild(output.importNode(part,true));});
+  docs.forEach((doc,index)=>{const scorePart=doc.querySelector("score-part")!;const part=doc.querySelector("part")!;const id=`P${index+1}`;const [sign,line]=VOICE_CLEFS[index];scorePart.setAttribute("id",id);scorePart.querySelector("part-name")!.textContent=VOICE_NAMES[index];part.setAttribute("id",id);part.querySelectorAll("clef").forEach(n=>n.remove());let attributes=part.querySelector("attributes");if(!attributes){attributes=doc.createElement("attributes");part.insertBefore(attributes,part.firstChild);}const clef=doc.createElement("clef");const signNode=doc.createElement("sign");const lineNode=doc.createElement("line");signNode.textContent=sign;lineNode.textContent=line;clef.appendChild(signNode);clef.appendChild(lineNode);attributes.appendChild(clef);list.appendChild(output.importNode(scorePart,true));root.appendChild(output.importNode(part,true));});
   return new XMLSerializer().serializeToString(output);
 }
 
