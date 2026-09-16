@@ -189,19 +189,23 @@ for (const question of questions) {
       if (typeof candidate.isOriginal !== "boolean") {
         fail(`${label}.isOriginal 必须是布尔值`);
       }
+      if (candidate.variant !== variant) {
+        fail(`${label}.variant 必须为 ${variant}，当前为 ${display(candidate.variant)}`);
+      }
+      if (!isNonEmptyString(candidate.explanation)) {
+        fail(`${label}.explanation 必须是非空字符串`);
+      }
       if (variant === 0) {
         if (candidate.isOriginal !== true) fail(`${label} 必须是原作（isOriginal: true）`);
-        if (Object.hasOwn(candidate, "decoyType")) fail(`${label} 是原作，不得包含 decoyType`);
-        if (Object.hasOwn(candidate, "explanation")) fail(`${label} 是原作，不得包含 explanation`);
+        if (candidate.decoyType !== "original") {
+          fail(`${label}.decoyType 必须为 "original"，当前为 ${display(candidate.decoyType)}`);
+        }
       } else {
         if (candidate.isOriginal !== false) fail(`${label} 必须是干扰项（isOriginal: false）`);
         if (!DECOY_TYPES.includes(candidate.decoyType)) {
           fail(`${label}.decoyType 必须是 ${DECOY_TYPES.join("、")} 之一，当前为 ${display(candidate.decoyType)}`);
         } else {
           decoyTypes.push(candidate.decoyType);
-        }
-        if (!isNonEmptyString(candidate.explanation)) {
-          fail(`${label}.explanation 必须是非空字符串`);
         }
       }
 
