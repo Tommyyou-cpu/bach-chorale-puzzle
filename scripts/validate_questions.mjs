@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const QUESTIONS_PATH = path.join(ROOT, "app", "questions.generated.json");
 const MUSIC_DIR = path.join(ROOT, "public", "music");
+const GENERATED_SCORES_DIR = path.join(ROOT, "public", "generated-scores");
 const VOICES = ["soprano", "alto", "tenor", "bass"];
 const QUESTION_IDS = ["q1", "q2", "q3"];
 const DECOY_TYPES = ["voice-leading", "harmony", "mixed"];
@@ -12,7 +13,7 @@ const VARIANTS_PER_VOICE = 4;
 const EXPECTED_ASSETS_PER_FORMAT = QUESTION_IDS.length * VOICES.length * VARIANTS_PER_VOICE;
 
 const errors = [];
-const referenced = { wav: new Set(), musicxml: new Set() };
+const referenced = { mp3: new Set(), wav: new Set(), musicxml: new Set() };
 
 function fail(message) {
   errors.push(message);
@@ -74,7 +75,7 @@ function verifyAsset({ questionId, voice, variant, candidate, field, extension }
 }
 
 function collectMusicAssets() {
-  const assets = { wav: new Set(), musicxml: new Set() };
+  const assets = { mp3: new Set(), wav: new Set(), musicxml: new Set() };
   if (!fs.existsSync(MUSIC_DIR)) {
     fail("缺少 public/music 目录");
     return assets;
@@ -86,6 +87,7 @@ function collectMusicAssets() {
       if (entry.isDirectory()) visit(fullPath);
       else if (entry.isFile()) {
         const route = `/music/${path.relative(MUSIC_DIR, fullPath).split(path.sep).join("/")}`;
+        if (entry.name.endsWith(".mp3")) assets.mp3.add(route);
         if (entry.name.endsWith(".wav")) assets.wav.add(route);
         if (entry.name.endsWith(".musicxml")) assets.musicxml.add(route);
       }
@@ -94,6 +96,34 @@ function collectMusicAssets() {
 
   visit(MUSIC_DIR);
   return assets;
+}
+
+function verifyGeneratedScores(questions) {
+  const expected = new Set();
+  for (const question of questions) {
+    if (!isRecord(question) || !isNonEmptyString(question.id) || !isRecord(question.voices)) continue;
+    const candidates = VOICES.map((voice) => question.voices[voice]);
+    if (candidates.some((items) => !Array.isArray(items))) continue;
+    for (const soprano of candidates[0]) for (const alto of candidates[1]) {
+      for (const tenor of candidates[2]) for (const bass of candidates[3]) {
+        const selected = [soprano, alto, tenor, bass];
+        if (selected.some((candidate) => !isRecord(candidate) || !isNonEmptyString(candidate.id))) continue;
+        expected.add(path.join(GENERATED_SCORES_DIR, question.id, `${selected.map((candidate) => candidate.id).join("--")}.svg`));
+      }
+    }
+  }
+
+  let verified = 0;
+  for (const filePath of expected) {
+    try {
+      const markup = fs.readFileSync(filePath, "utf8");
+      if (!/<svg(?:\s|>)/i.test(markup)) fail(`预生成乐谱不是有效 SVG：${path.relative(ROOT, filePath)}`);
+      else verified += 1;
+    } catch {
+      fail(`缺少预生成乐谱：${path.relative(ROOT, filePath)}`);
+    }
+  }
+  return { expected: expected.size, verified };
 }
 
 let questions;
@@ -209,7 +239,8 @@ for (const question of questions) {
         }
       }
 
-      verifyAsset({ questionId, voice, variant, candidate, field: "audio", extension: "wav" });
+      verifyAsset({ questionId, voice, variant, candidate, field: "audio", extension: "mp3" });
+      verifyAsset({ questionId, voice, variant, candidate, field: "audioFallback", extension: "wav" });
       verifyAsset({ questionId, voice, variant, candidate, field: "score", extension: "musicxml" });
     }
 
@@ -225,12 +256,13 @@ for (const question of questions) {
 }
 
 const musicAssets = collectMusicAssets();
+const generatedScores = verifyGeneratedScores(questions);
 const dynamicExpectedAssets = questions.length * VOICES.length * VARIANTS_PER_VOICE;
 if (dynamicExpectedAssets !== EXPECTED_ASSETS_PER_FORMAT) {
-  fail(`按当前题目数计算应有 ${dynamicExpectedAssets} 个 WAV 与 MusicXML；项目约定应为 ${EXPECTED_ASSETS_PER_FORMAT} 个`);
+  fail(`按当前题目数计算应有 ${dynamicExpectedAssets} 个 MP3、WAV 与 MusicXML；项目约定应为 ${EXPECTED_ASSETS_PER_FORMAT} 个`);
 }
 
-for (const extension of ["wav", "musicxml"]) {
+for (const extension of ["mp3", "wav", "musicxml"]) {
   if (referenced[extension].size !== EXPECTED_ASSETS_PER_FORMAT) {
     fail(`题库引用的 ${extension} 资源应为 ${EXPECTED_ASSETS_PER_FORMAT} 个唯一文件，当前为 ${referenced[extension].size}`);
   }
@@ -251,8 +283,10 @@ if (errors.length > 0) {
     questions: questions.length,
     tracks: dynamicExpectedAssets,
     combinations: questions.length * VARIANTS_PER_VOICE ** VOICES.length,
+    mp3Files: musicAssets.mp3.size,
     wavFiles: musicAssets.wav.size,
     musicxmlFiles: musicAssets.musicxml.size,
+    generatedScoreFiles: generatedScores.verified,
     scoreCases: { allCorrect: "3/12", allWrong: "0/0", partial: "0–3/0–12" },
   }, null, 2));
 }

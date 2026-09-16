@@ -24,7 +24,6 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: node scripts/validate_questions.mjs
       - name: Build static site
         shell: bash
         run: |
@@ -38,6 +37,12 @@ jobs:
           if [[ -d "dist/client/$REPO_NAME/_next" ]]; then
             mv "dist/client/$REPO_NAME/_next" "dist/client/_next"
           fi
+      - name: Verify mobile assets
+        shell: bash
+        run: |
+          test "$(find dist/client/music -type f -name '*.mp3' | wc -l | tr -d ' ')" = "48"
+          test "$(find dist/client/generated-scores -type f -name '*.svg' | wc -l | tr -d ' ')" = "768"
+          test -s "dist/client/generated-scores/q1/soprano-ivory--alto-ivory--tenor-ivory--bass-ivory.svg"
       - uses: actions/configure-pages@v5
         with:
           enablement: true

@@ -4,5 +4,10 @@ button:focus-visible,a:focus-visible,[tabindex="-1"]:focus-visible{outline:3px s
 @media(max-width:360px){.site-shell{padding-left:10px;padding-right:10px}.masthead{gap:10px}.masthead h1{font-size:1.12rem}.quiz-card{padding-left:10px;padding-right:10px}.voice-row{padding:9px}.option-grid{gap:7px}.ensemble-title svg{display:none}.ensemble-bar{width:calc(100% - 16px)}.ensemble-bar .bar-actions button:not(.primary):not(:first-child){display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+/* 静态乐谱使用 SVG 的自身宽度（由 viewBox / width 决定），小屏幕可横向查看。 */
+.score-svg{width:max-content;min-width:100%}.score-svg svg{width:auto;max-width:none}
+.score-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0 0 14px}.score-actions button,.score-actions a{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:0 12px;border:1px solid var(--gold-dark);background:transparent;color:var(--gold-dark);font:inherit;text-decoration:none;cursor:pointer}
+@media(max-width:760px){.score-svg{min-width:100%}.score-actions{justify-content:flex-start}}
+
 /* 揭晓说明：保持可见的标签与语义化定义列表一致。 */
 .answer-row{align-items:start}.answer-row>.answer-voice{grid-row:auto;margin-top:2px}.answer-copy{min-width:0}.answer-copy>strong{display:block}.answer-copy>p{margin:3px 0 0;color:var(--muted);font-size:.75rem}.answer-explanation{display:grid;gap:4px;margin:10px 0 0}.answer-explanation>div{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px;align-items:baseline}.answer-explanation dt{color:var(--gold-dark);font-size:.7rem;white-space:nowrap}.answer-explanation dd{margin:0;color:#504e47;font-size:.76rem;line-height:1.45}.answer-explanation .answer-original dd{font-weight:600}.answer-row>.answer-status{grid-row:auto;grid-column:auto;align-self:center;justify-self:end}

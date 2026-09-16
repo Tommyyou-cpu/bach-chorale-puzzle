@@ -14,7 +14,8 @@
       "soprano": [
         {
           "id": "soprano-ivory",
-          "audio": "/music/q1/soprano-ivory.wav",
+          "audio": "/music/q1/soprano-ivory.mp3",
+          "audioFallback": "/music/q1/soprano-ivory.wav",
           "score": "/music/q1/soprano-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -23,7 +24,8 @@
         },
         {
           "id": "soprano-quill",
-          "audio": "/music/q1/soprano-quill.wav",
+          "audio": "/music/q1/soprano-quill.mp3",
+          "audioFallback": "/music/q1/soprano-quill.wav",
           "score": "/music/q1/soprano-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -32,7 +34,8 @@
         },
         {
           "id": "soprano-folio",
-          "audio": "/music/q1/soprano-folio.wav",
+          "audio": "/music/q1/soprano-folio.mp3",
+          "audioFallback": "/music/q1/soprano-folio.wav",
           "score": "/music/q1/soprano-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -41,7 +44,8 @@
         },
         {
           "id": "soprano-cadence",
-          "audio": "/music/q1/soprano-cadence.wav",
+          "audio": "/music/q1/soprano-cadence.mp3",
+          "audioFallback": "/music/q1/soprano-cadence.wav",
           "score": "/music/q1/soprano-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -52,7 +56,8 @@
       "alto": [
         {
           "id": "alto-ivory",
-          "audio": "/music/q1/alto-ivory.wav",
+          "audio": "/music/q1/alto-ivory.mp3",
+          "audioFallback": "/music/q1/alto-ivory.wav",
           "score": "/music/q1/alto-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -61,7 +66,8 @@
         },
         {
           "id": "alto-quill",
-          "audio": "/music/q1/alto-quill.wav",
+          "audio": "/music/q1/alto-quill.mp3",
+          "audioFallback": "/music/q1/alto-quill.wav",
           "score": "/music/q1/alto-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -70,7 +76,8 @@
         },
         {
           "id": "alto-folio",
-          "audio": "/music/q1/alto-folio.wav",
+          "audio": "/music/q1/alto-folio.mp3",
+          "audioFallback": "/music/q1/alto-folio.wav",
           "score": "/music/q1/alto-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -79,7 +86,8 @@
         },
         {
           "id": "alto-cadence",
-          "audio": "/music/q1/alto-cadence.wav",
+          "audio": "/music/q1/alto-cadence.mp3",
+          "audioFallback": "/music/q1/alto-cadence.wav",
           "score": "/music/q1/alto-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -90,7 +98,8 @@
       "tenor": [
         {
           "id": "tenor-ivory",
-          "audio": "/music/q1/tenor-ivory.wav",
+          "audio": "/music/q1/tenor-ivory.mp3",
+          "audioFallback": "/music/q1/tenor-ivory.wav",
           "score": "/music/q1/tenor-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -99,7 +108,8 @@
         },
         {
           "id": "tenor-quill",
-          "audio": "/music/q1/tenor-quill.wav",
+          "audio": "/music/q1/tenor-quill.mp3",
+          "audioFallback": "/music/q1/tenor-quill.wav",
           "score": "/music/q1/tenor-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -108,7 +118,8 @@
         },
         {
           "id": "tenor-folio",
-          "audio": "/music/q1/tenor-folio.wav",
+          "audio": "/music/q1/tenor-folio.mp3",
+          "audioFallback": "/music/q1/tenor-folio.wav",
           "score": "/music/q1/tenor-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -117,7 +128,8 @@
         },
         {
           "id": "tenor-cadence",
-          "audio": "/music/q1/tenor-cadence.wav",
+          "audio": "/music/q1/tenor-cadence.mp3",
+          "audioFallback": "/music/q1/tenor-cadence.wav",
           "score": "/music/q1/tenor-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -128,7 +140,8 @@
       "bass": [
         {
           "id": "bass-ivory",
-          "audio": "/music/q1/bass-ivory.wav",
+          "audio": "/music/q1/bass-ivory.mp3",
+          "audioFallback": "/music/q1/bass-ivory.wav",
           "score": "/music/q1/bass-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -137,7 +150,8 @@
         },
         {
           "id": "bass-quill",
-          "audio": "/music/q1/bass-quill.wav",
+          "audio": "/music/q1/bass-quill.mp3",
+          "audioFallback": "/music/q1/bass-quill.wav",
           "score": "/music/q1/bass-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -146,7 +160,8 @@
         },
         {
           "id": "bass-folio",
-          "audio": "/music/q1/bass-folio.wav",
+          "audio": "/music/q1/bass-folio.mp3",
+          "audioFallback": "/music/q1/bass-folio.wav",
           "score": "/music/q1/bass-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -155,7 +170,8 @@
         },
         {
           "id": "bass-cadence",
-          "audio": "/music/q1/bass-cadence.wav",
+          "audio": "/music/q1/bass-cadence.mp3",
+          "audioFallback": "/music/q1/bass-cadence.wav",
           "score": "/music/q1/bass-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -180,7 +196,8 @@
       "soprano": [
         {
           "id": "soprano-ivory",
-          "audio": "/music/q2/soprano-ivory.wav",
+          "audio": "/music/q2/soprano-ivory.mp3",
+          "audioFallback": "/music/q2/soprano-ivory.wav",
           "score": "/music/q2/soprano-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -189,7 +206,8 @@
         },
         {
           "id": "soprano-quill",
-          "audio": "/music/q2/soprano-quill.wav",
+          "audio": "/music/q2/soprano-quill.mp3",
+          "audioFallback": "/music/q2/soprano-quill.wav",
           "score": "/music/q2/soprano-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -198,7 +216,8 @@
         },
         {
           "id": "soprano-folio",
-          "audio": "/music/q2/soprano-folio.wav",
+          "audio": "/music/q2/soprano-folio.mp3",
+          "audioFallback": "/music/q2/soprano-folio.wav",
           "score": "/music/q2/soprano-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -207,7 +226,8 @@
         },
         {
           "id": "soprano-cadence",
-          "audio": "/music/q2/soprano-cadence.wav",
+          "audio": "/music/q2/soprano-cadence.mp3",
+          "audioFallback": "/music/q2/soprano-cadence.wav",
           "score": "/music/q2/soprano-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -218,7 +238,8 @@
       "alto": [
         {
           "id": "alto-ivory",
-          "audio": "/music/q2/alto-ivory.wav",
+          "audio": "/music/q2/alto-ivory.mp3",
+          "audioFallback": "/music/q2/alto-ivory.wav",
           "score": "/music/q2/alto-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -227,7 +248,8 @@
         },
         {
           "id": "alto-quill",
-          "audio": "/music/q2/alto-quill.wav",
+          "audio": "/music/q2/alto-quill.mp3",
+          "audioFallback": "/music/q2/alto-quill.wav",
           "score": "/music/q2/alto-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -236,7 +258,8 @@
         },
         {
           "id": "alto-folio",
-          "audio": "/music/q2/alto-folio.wav",
+          "audio": "/music/q2/alto-folio.mp3",
+          "audioFallback": "/music/q2/alto-folio.wav",
           "score": "/music/q2/alto-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -245,7 +268,8 @@
         },
         {
           "id": "alto-cadence",
-          "audio": "/music/q2/alto-cadence.wav",
+          "audio": "/music/q2/alto-cadence.mp3",
+          "audioFallback": "/music/q2/alto-cadence.wav",
           "score": "/music/q2/alto-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -256,7 +280,8 @@
       "tenor": [
         {
           "id": "tenor-ivory",
-          "audio": "/music/q2/tenor-ivory.wav",
+          "audio": "/music/q2/tenor-ivory.mp3",
+          "audioFallback": "/music/q2/tenor-ivory.wav",
           "score": "/music/q2/tenor-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -265,7 +290,8 @@
         },
         {
           "id": "tenor-quill",
-          "audio": "/music/q2/tenor-quill.wav",
+          "audio": "/music/q2/tenor-quill.mp3",
+          "audioFallback": "/music/q2/tenor-quill.wav",
           "score": "/music/q2/tenor-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -274,7 +300,8 @@
         },
         {
           "id": "tenor-folio",
-          "audio": "/music/q2/tenor-folio.wav",
+          "audio": "/music/q2/tenor-folio.mp3",
+          "audioFallback": "/music/q2/tenor-folio.wav",
           "score": "/music/q2/tenor-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -283,7 +310,8 @@
         },
         {
           "id": "tenor-cadence",
-          "audio": "/music/q2/tenor-cadence.wav",
+          "audio": "/music/q2/tenor-cadence.mp3",
+          "audioFallback": "/music/q2/tenor-cadence.wav",
           "score": "/music/q2/tenor-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -294,7 +322,8 @@
       "bass": [
         {
           "id": "bass-ivory",
-          "audio": "/music/q2/bass-ivory.wav",
+          "audio": "/music/q2/bass-ivory.mp3",
+          "audioFallback": "/music/q2/bass-ivory.wav",
           "score": "/music/q2/bass-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -303,7 +332,8 @@
         },
         {
           "id": "bass-quill",
-          "audio": "/music/q2/bass-quill.wav",
+          "audio": "/music/q2/bass-quill.mp3",
+          "audioFallback": "/music/q2/bass-quill.wav",
           "score": "/music/q2/bass-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -312,7 +342,8 @@
         },
         {
           "id": "bass-folio",
-          "audio": "/music/q2/bass-folio.wav",
+          "audio": "/music/q2/bass-folio.mp3",
+          "audioFallback": "/music/q2/bass-folio.wav",
           "score": "/music/q2/bass-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -321,7 +352,8 @@
         },
         {
           "id": "bass-cadence",
-          "audio": "/music/q2/bass-cadence.wav",
+          "audio": "/music/q2/bass-cadence.mp3",
+          "audioFallback": "/music/q2/bass-cadence.wav",
           "score": "/music/q2/bass-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -346,7 +378,8 @@
       "soprano": [
         {
           "id": "soprano-ivory",
-          "audio": "/music/q3/soprano-ivory.wav",
+          "audio": "/music/q3/soprano-ivory.mp3",
+          "audioFallback": "/music/q3/soprano-ivory.wav",
           "score": "/music/q3/soprano-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -355,7 +388,8 @@
         },
         {
           "id": "soprano-quill",
-          "audio": "/music/q3/soprano-quill.wav",
+          "audio": "/music/q3/soprano-quill.mp3",
+          "audioFallback": "/music/q3/soprano-quill.wav",
           "score": "/music/q3/soprano-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -364,7 +398,8 @@
         },
         {
           "id": "soprano-folio",
-          "audio": "/music/q3/soprano-folio.wav",
+          "audio": "/music/q3/soprano-folio.mp3",
+          "audioFallback": "/music/q3/soprano-folio.wav",
           "score": "/music/q3/soprano-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -373,7 +408,8 @@
         },
         {
           "id": "soprano-cadence",
-          "audio": "/music/q3/soprano-cadence.wav",
+          "audio": "/music/q3/soprano-cadence.mp3",
+          "audioFallback": "/music/q3/soprano-cadence.wav",
           "score": "/music/q3/soprano-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -384,7 +420,8 @@
       "alto": [
         {
           "id": "alto-ivory",
-          "audio": "/music/q3/alto-ivory.wav",
+          "audio": "/music/q3/alto-ivory.mp3",
+          "audioFallback": "/music/q3/alto-ivory.wav",
           "score": "/music/q3/alto-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -393,7 +430,8 @@
         },
         {
           "id": "alto-quill",
-          "audio": "/music/q3/alto-quill.wav",
+          "audio": "/music/q3/alto-quill.mp3",
+          "audioFallback": "/music/q3/alto-quill.wav",
           "score": "/music/q3/alto-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -402,7 +440,8 @@
         },
         {
           "id": "alto-folio",
-          "audio": "/music/q3/alto-folio.wav",
+          "audio": "/music/q3/alto-folio.mp3",
+          "audioFallback": "/music/q3/alto-folio.wav",
           "score": "/music/q3/alto-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -411,7 +450,8 @@
         },
         {
           "id": "alto-cadence",
-          "audio": "/music/q3/alto-cadence.wav",
+          "audio": "/music/q3/alto-cadence.mp3",
+          "audioFallback": "/music/q3/alto-cadence.wav",
           "score": "/music/q3/alto-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -422,7 +462,8 @@
       "tenor": [
         {
           "id": "tenor-ivory",
-          "audio": "/music/q3/tenor-ivory.wav",
+          "audio": "/music/q3/tenor-ivory.mp3",
+          "audioFallback": "/music/q3/tenor-ivory.wav",
           "score": "/music/q3/tenor-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -431,7 +472,8 @@
         },
         {
           "id": "tenor-quill",
-          "audio": "/music/q3/tenor-quill.wav",
+          "audio": "/music/q3/tenor-quill.mp3",
+          "audioFallback": "/music/q3/tenor-quill.wav",
           "score": "/music/q3/tenor-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -440,7 +482,8 @@
         },
         {
           "id": "tenor-folio",
-          "audio": "/music/q3/tenor-folio.wav",
+          "audio": "/music/q3/tenor-folio.mp3",
+          "audioFallback": "/music/q3/tenor-folio.wav",
           "score": "/music/q3/tenor-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -449,7 +492,8 @@
         },
         {
           "id": "tenor-cadence",
-          "audio": "/music/q3/tenor-cadence.wav",
+          "audio": "/music/q3/tenor-cadence.mp3",
+          "audioFallback": "/music/q3/tenor-cadence.wav",
           "score": "/music/q3/tenor-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,
@@ -460,7 +504,8 @@
       "bass": [
         {
           "id": "bass-ivory",
-          "audio": "/music/q3/bass-ivory.wav",
+          "audio": "/music/q3/bass-ivory.mp3",
+          "audioFallback": "/music/q3/bass-ivory.wav",
           "score": "/music/q3/bass-ivory.musicxml",
           "isOriginal": true,
           "variant": 0,
@@ -469,7 +514,8 @@
         },
         {
           "id": "bass-quill",
-          "audio": "/music/q3/bass-quill.wav",
+          "audio": "/music/q3/bass-quill.mp3",
+          "audioFallback": "/music/q3/bass-quill.wav",
           "score": "/music/q3/bass-quill.musicxml",
           "isOriginal": false,
           "variant": 1,
@@ -478,7 +524,8 @@
         },
         {
           "id": "bass-folio",
-          "audio": "/music/q3/bass-folio.wav",
+          "audio": "/music/q3/bass-folio.mp3",
+          "audioFallback": "/music/q3/bass-folio.wav",
           "score": "/music/q3/bass-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
@@ -487,7 +534,8 @@
         },
         {
           "id": "bass-cadence",
-          "audio": "/music/q3/bass-cadence.wav",
+          "audio": "/music/q3/bass-cadence.mp3",
+          "audioFallback": "/music/q3/bass-cadence.wav",
           "score": "/music/q3/bass-cadence.musicxml",
           "isOriginal": false,
           "variant": 3,

@@ -14,14 +14,18 @@ npm run dev
 ## 验证与构建
 
 ```bash
-node scripts/validate_questions.mjs
+npm run prepare:assets
+npm run validate
 npm run build
 ```
+
+`prepare:assets` 会从 WAV 生成移动端优先使用的 MP3，并预先雕刻三道题的 768 种四声部 SVG 乐谱。生成的 SVG 位于 `public/generated-scores`，由构建流程自动创建，不提交到 Git。
 
 题库与音频可通过下列命令重新生成：
 
 ```bash
 python3 scripts/generate_music_assets.py
+npm run prepare:assets
 ```
 
 素材、许可与生成方法见 [SOURCES.md](./SOURCES.md)，自动检查记录见 [MUSIC_VALIDATION.md](./MUSIC_VALIDATION.md)。

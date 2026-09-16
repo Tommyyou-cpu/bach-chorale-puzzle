@@ -6,6 +6,7 @@ export type DecoyType = "original" | "voice-leading" | "harmony" | "mixed";
 export type Candidate = {
   id: string;
   audio: string;
+  audioFallback: string;
   score: string;
   isOriginal: boolean;
   variant: number;

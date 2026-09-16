@@ -452,7 +452,8 @@ def main() -> None:
                 decoy_type, explanation = candidate_metadata(variant, candidate)
                 entries.append({
                     "id": opaque_id,
-                    "audio": f"/music/{piece['id']}/{wav_path.name}",
+                    "audio": f"/music/{piece['id']}/{opaque_id}.mp3",
+                    "audioFallback": f"/music/{piece['id']}/{wav_path.name}",
                     "score": f"/music/{piece['id']}/{xml_path.name}",
                     "isOriginal": variant == 0,
                     "variant": variant,
