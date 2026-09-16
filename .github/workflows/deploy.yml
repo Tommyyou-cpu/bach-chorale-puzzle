@@ -35,6 +35,9 @@ jobs:
             export BASE_PATH="/$REPO_NAME"
           fi
           npm run build
+          if [[ -d "dist/client/$REPO_NAME/_next" ]]; then
+            mv "dist/client/$REPO_NAME/_next" "dist/client/_next"
+          fi
       - uses: actions/configure-pages@v5
         with:
           enablement: true
