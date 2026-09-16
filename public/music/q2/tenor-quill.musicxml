@@ -19,21 +19,21 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="Pcd665b669b56a40b24ccef415542be4c">
+    <score-part id="P1">
       <part-name>男高音 候选 2</part-name>
       <part-abbreviation>Pno</part-abbreviation>
-      <score-instrument id="Ie04d2d8b2c79574e7d69767721b24f1c">
+      <score-instrument id="I1">
         <instrument-name>Piano</instrument-name>
         <instrument-abbreviation>Pno</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="Ie04d2d8b2c79574e7d69767721b24f1c">
+      <midi-instrument id="I1">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="Pcd665b669b56a40b24ccef415542be4c">
+  <part id="P1">
     <!--========================= Measure 1 ==========================-->
     <measure number="1" width="315.38">
       <print>
@@ -68,13 +68,11 @@
       </note>
       <note default-x="158.72" default-y="-335">
         <pitch>
-          <step>B</step>
-          <alter>-1</alter>
-          <octave>2</octave>
+          <step>F</step>
+          <octave>3</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
       </note>
       <note default-x="207.62" default-y="-320">
@@ -103,11 +101,10 @@
         <pitch>
           <step>E</step>
           <alter>-1</alter>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
       </note>
       <note default-x="57.34" default-y="-335">
@@ -133,10 +130,12 @@
       <note default-x="131.75" default-y="-340">
         <pitch>
           <step>A</step>
-          <octave>4</octave>
+          <alter>0</alter>
+          <octave>3</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
+        <accidental>natural</accidental>
         <stem>down</stem>
       </note>
     </measure>
@@ -175,11 +174,10 @@
         <pitch>
           <step>E</step>
           <alter>-1</alter>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
       </note>
       <note default-x="83.55" default-y="-320">
@@ -206,11 +204,10 @@
         <pitch>
           <step>E</step>
           <alter>-1</alter>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
       </note>
     </measure>

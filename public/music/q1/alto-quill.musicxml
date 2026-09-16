@@ -19,21 +19,21 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="P261bde0070e2647472f7f38d1f717fb9">
+    <score-part id="P1">
       <part-name>女低音 候选 2</part-name>
       <part-abbreviation>Pno</part-abbreviation>
-      <score-instrument id="I2fe9fd1f89b4a47baef7a2df28a769bf">
+      <score-instrument id="I1">
         <instrument-name>Piano</instrument-name>
         <instrument-abbreviation>Pno</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I2fe9fd1f89b4a47baef7a2df28a769bf">
+      <midi-instrument id="I1">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="P261bde0070e2647472f7f38d1f717fb9">
+  <part id="P1">
     <!--========================= Measure 1 ==========================-->
     <measure number="1">
       <attributes>
@@ -43,16 +43,6 @@
         <pitch>
           <step>F</step>
           <alter>1</alter>
-          <octave>3</octave>
-        </pitch>
-        <duration>10080</duration>
-        <type>quarter</type>
-        <accidental>sharp</accidental>
-        <stem>up</stem>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
@@ -71,7 +61,16 @@
       <note>
         <pitch>
           <step>E</step>
-          <octave>5</octave>
+          <octave>4</octave>
+        </pitch>
+        <duration>10080</duration>
+        <type>quarter</type>
+        <stem>up</stem>
+      </note>
+      <note>
+        <pitch>
+          <step>A</step>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
@@ -104,11 +103,10 @@
         <pitch>
           <step>G</step>
           <alter>1</alter>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>sharp</accidental>
         <stem>up</stem>
       </note>
       <note>
@@ -138,11 +136,10 @@
         <pitch>
           <step>F</step>
           <alter>1</alter>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
-        <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">begin</beam>
       </note>
@@ -172,11 +169,10 @@
         <pitch>
           <step>C</step>
           <alter>1</alter>
-          <octave>5</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>sharp</accidental>
         <stem>up</stem>
       </note>
       <note>
@@ -205,7 +201,7 @@
       <note>
         <pitch>
           <step>E</step>
-          <octave>5</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>

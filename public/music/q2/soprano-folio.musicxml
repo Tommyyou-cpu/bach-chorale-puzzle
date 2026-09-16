@@ -19,21 +19,21 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="P6340658aa41cc9f2405956e670563c5a">
+    <score-part id="P1">
       <part-name>女高音 候选 3</part-name>
       <part-abbreviation>Pno</part-abbreviation>
-      <score-instrument id="Iad7a39d9cd31ebfea314b296aac2a3f5">
+      <score-instrument id="I1">
         <instrument-name>Piano</instrument-name>
         <instrument-abbreviation>Pno</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="Iad7a39d9cd31ebfea314b296aac2a3f5">
+      <midi-instrument id="I1">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="P6340658aa41cc9f2405956e670563c5a">
+  <part id="P1">
     <!--========================= Measure 1 ==========================-->
     <measure number="1" width="315.38">
       <print>
@@ -99,12 +99,11 @@
         <pitch>
           <step>B</step>
           <alter>-1</alter>
-          <octave>5</octave>
+          <octave>4</octave>
         </pitch>
         <duration>15120</duration>
         <type>quarter</type>
         <dot />
-        <accidental>flat</accidental>
         <stem>down</stem>
         <lyric name="1" number="1">
           <syllabic>single</syllabic>
@@ -174,8 +173,8 @@
       </note>
       <note default-x="98.12" default-y="-15">
         <pitch>
-          <step>C</step>
-          <octave>4</octave>
+          <step>G</step>
+          <octave>5</octave>
         </pitch>
         <duration>20160</duration>
         <type>half</type>
@@ -261,11 +260,10 @@
         <pitch>
           <step>B</step>
           <alter>-1</alter>
-          <octave>5</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
         <lyric name="1" number="1">
           <syllabic>end</syllabic>

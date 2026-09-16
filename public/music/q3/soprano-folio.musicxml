@@ -19,21 +19,21 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="Pb3c85b1faeb934a8ca7cc09a709c295f">
+    <score-part id="P1">
       <part-name>女高音 候选 3</part-name>
       <part-abbreviation>Pno</part-abbreviation>
-      <score-instrument id="I4344b2538ef588988045ba46ea882329">
+      <score-instrument id="I1">
         <instrument-name>Piano</instrument-name>
         <instrument-abbreviation>Pno</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I4344b2538ef588988045ba46ea882329">
+      <midi-instrument id="I1">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="Pb3c85b1faeb934a8ca7cc09a709c295f">
+  <part id="P1">
     <!--========================= Measure 1 ==========================-->
     <measure number="1" width="300.72">
       <attributes>
@@ -77,11 +77,10 @@
         <pitch>
           <step>B</step>
           <alter>-1</alter>
-          <octave>5</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>flat</accidental>
         <stem>down</stem>
         <lyric name="1" number="1">
           <syllabic>single</syllabic>
@@ -114,8 +113,8 @@
     <measure number="2" width="235.77">
       <note default-x="28.14" default-y="-30">
         <pitch>
-          <step>G</step>
-          <octave>4</octave>
+          <step>D</step>
+          <octave>5</octave>
         </pitch>
         <duration>20160</duration>
         <type>half</type>
@@ -152,7 +151,7 @@
       <note default-x="182.75" default-y="-5">
         <pitch>
           <step>E</step>
-          <octave>4</octave>
+          <octave>5</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
@@ -224,7 +223,7 @@
       <note default-x="228.94" default-y="-10">
         <pitch>
           <step>D</step>
-          <octave>4</octave>
+          <octave>5</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
