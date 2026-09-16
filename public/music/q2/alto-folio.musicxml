@@ -19,21 +19,21 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="Pd6c9daf3d6034e5c7371597e7505931d">
+    <score-part id="P1">
       <part-name>女低音 候选 3</part-name>
       <part-abbreviation>Pno</part-abbreviation>
-      <score-instrument id="I8d7253951d4526d8801dab712b0a2254">
+      <score-instrument id="I1">
         <instrument-name>Piano</instrument-name>
         <instrument-abbreviation>Pno</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I8d7253951d4526d8801dab712b0a2254">
+      <midi-instrument id="I1">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="Pd6c9daf3d6034e5c7371597e7505931d">
+  <part id="P1">
     <!--========================= Measure 1 ==========================-->
     <measure number="1" width="315.38">
       <print>
@@ -61,11 +61,10 @@
         <pitch>
           <step>B</step>
           <alter>-1</alter>
-          <octave>4</octave>
+          <octave>3</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
-        <accidental>flat</accidental>
         <stem>up</stem>
       </note>
       <note default-x="158.72" default-y="-210">
@@ -80,11 +79,13 @@
       </note>
       <note default-x="207.62" default-y="-200">
         <pitch>
-          <step>G</step>
+          <step>F</step>
+          <alter>1</alter>
           <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
+        <accidental>sharp</accidental>
         <stem>up</stem>
       </note>
       <note default-x="244.68" default-y="-205">
@@ -102,7 +103,7 @@
       <note default-x="22.25" default-y="-200">
         <pitch>
           <step>G</step>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
@@ -141,7 +142,7 @@
       <note default-x="19.85" default-y="-205">
         <pitch>
           <step>F</step>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>20160</duration>
         <type>half</type>
@@ -191,7 +192,7 @@
       <note default-x="128.15" default-y="-200">
         <pitch>
           <step>G</step>
-          <octave>3</octave>
+          <octave>4</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>

@@ -16,25 +16,37 @@
           "id": "soprano-ivory",
           "audio": "/music/q1/soprano-ivory.wav",
           "score": "/music/q1/soprano-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "soprano-quill",
           "audio": "/music/q1/soprano-quill.wav",
           "score": "/music/q1/soprano-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 4 小节第 2 拍将 B4 改为 F#5，扰动局部旋律连接。"
         },
         {
           "id": "soprano-folio",
           "audio": "/music/q1/soprano-folio.wav",
           "score": "/music/q1/soprano-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 C#5 改为 C5，改变该拍的和声成员。"
         },
         {
           "id": "soprano-cadence",
           "audio": "/music/q1/soprano-cadence.wav",
           "score": "/music/q1/soprano-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 1 小节第 3 拍将 C#5 改为 C5 改变和声，并在第 4 小节第 2 拍将 B4 改为 F#5 扰动声部连接。"
         }
       ],
       "alto": [
@@ -42,25 +54,37 @@
           "id": "alto-ivory",
           "audio": "/music/q1/alto-ivory.wav",
           "score": "/music/q1/alto-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "alto-quill",
           "audio": "/music/q1/alto-quill.wav",
           "score": "/music/q1/alto-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 1 小节第 4 拍将 E4 改为 A4，扰动局部旋律连接。"
         },
         {
           "id": "alto-folio",
           "audio": "/music/q1/alto-folio.wav",
           "score": "/music/q1/alto-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 4 小节第 3 拍的稳定拍将 E-4 改为 D4，改变该拍的和声成员。"
         },
         {
           "id": "alto-cadence",
           "audio": "/music/q1/alto-cadence.wav",
           "score": "/music/q1/alto-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 4 小节第 3 拍将 E-4 改为 D4 改变和声，并在第 1 小节第 4 拍将 E4 改为 A4 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -68,25 +92,37 @@
           "id": "tenor-ivory",
           "audio": "/music/q1/tenor-ivory.wav",
           "score": "/music/q1/tenor-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "tenor-quill",
           "audio": "/music/q1/tenor-quill.wav",
           "score": "/music/q1/tenor-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 2 小节第 2.5 拍将 D4 改为 G3，扰动局部旋律连接。"
         },
         {
           "id": "tenor-folio",
           "audio": "/music/q1/tenor-folio.wav",
           "score": "/music/q1/tenor-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 C#4 改为 D4，改变该拍的和声成员。"
         },
         {
           "id": "tenor-cadence",
           "audio": "/music/q1/tenor-cadence.wav",
           "score": "/music/q1/tenor-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 1 小节第 1 拍将 C#4 改为 D4 改变和声，并在第 2 小节第 2.5 拍将 D4 改为 G3 扰动声部连接。"
         }
       ],
       "bass": [
@@ -94,25 +130,37 @@
           "id": "bass-ivory",
           "audio": "/music/q1/bass-ivory.wav",
           "score": "/music/q1/bass-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "bass-quill",
           "audio": "/music/q1/bass-quill.wav",
           "score": "/music/q1/bass-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 4 小节第 3.5 拍将 B2 改为 E2，扰动局部旋律连接。"
         },
         {
           "id": "bass-folio",
           "audio": "/music/q1/bass-folio.wav",
           "score": "/music/q1/bass-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 4 小节第 1 拍的稳定拍将 G#3 改为 E-3，改变该拍的和声成员。"
         },
         {
           "id": "bass-cadence",
           "audio": "/music/q1/bass-cadence.wav",
           "score": "/music/q1/bass-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 4 小节第 1 拍将 G#3 改为 E-3 改变和声，并在第 4 小节第 3.5 拍将 B2 改为 E2 扰动声部连接。"
         }
       ]
     }
@@ -134,25 +182,37 @@
           "id": "soprano-ivory",
           "audio": "/music/q2/soprano-ivory.wav",
           "score": "/music/q2/soprano-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "soprano-quill",
           "audio": "/music/q2/soprano-quill.wav",
           "score": "/music/q2/soprano-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 1 小节第 2 拍将 G4 改为 D5，扰动局部旋律连接。"
         },
         {
           "id": "soprano-folio",
           "audio": "/music/q2/soprano-folio.wav",
           "score": "/music/q2/soprano-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 2 小节第 3 拍的稳定拍将 C5 改为 B-4，改变该拍的和声成员。"
         },
         {
           "id": "soprano-cadence",
           "audio": "/music/q2/soprano-cadence.wav",
           "score": "/music/q2/soprano-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 2 小节第 3 拍将 C5 改为 B-4 改变和声，并在第 1 小节第 2 拍将 G4 改为 D5 扰动声部连接。"
         }
       ],
       "alto": [
@@ -160,25 +220,37 @@
           "id": "alto-ivory",
           "audio": "/music/q2/alto-ivory.wav",
           "score": "/music/q2/alto-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "alto-quill",
           "audio": "/music/q2/alto-quill.wav",
           "score": "/music/q2/alto-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 2 小节第 4 拍将 F4 改为 B-3，扰动局部旋律连接。"
         },
         {
           "id": "alto-folio",
           "audio": "/music/q2/alto-folio.wav",
           "score": "/music/q2/alto-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 G4 改为 F#4，改变该拍的和声成员。"
         },
         {
           "id": "alto-cadence",
           "audio": "/music/q2/alto-cadence.wav",
           "score": "/music/q2/alto-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 1 小节第 3 拍将 G4 改为 F#4 改变和声，并在第 2 小节第 4 拍将 F4 改为 B-3 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -186,25 +258,37 @@
           "id": "tenor-ivory",
           "audio": "/music/q2/tenor-ivory.wav",
           "score": "/music/q2/tenor-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "tenor-quill",
           "audio": "/music/q2/tenor-quill.wav",
           "score": "/music/q2/tenor-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 1 小节第 2 拍将 B-3 改为 F3，扰动局部旋律连接。"
         },
         {
           "id": "tenor-folio",
           "audio": "/music/q2/tenor-folio.wav",
           "score": "/music/q2/tenor-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 4 小节第 3 拍的稳定拍将 B-3 改为 C4，改变该拍的和声成员。"
         },
         {
           "id": "tenor-cadence",
           "audio": "/music/q2/tenor-cadence.wav",
           "score": "/music/q2/tenor-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 4 小节第 3 拍将 B-3 改为 C4 改变和声，并在第 1 小节第 2 拍将 B-3 改为 F3 扰动声部连接。"
         }
       ],
       "bass": [
@@ -212,25 +296,37 @@
           "id": "bass-ivory",
           "audio": "/music/q2/bass-ivory.wav",
           "score": "/music/q2/bass-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "bass-quill",
           "audio": "/music/q2/bass-quill.wav",
           "score": "/music/q2/bass-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 2 小节第 3.5 拍将 C3 改为 F2，扰动局部旋律连接。"
         },
         {
           "id": "bass-folio",
           "audio": "/music/q2/bass-folio.wav",
           "score": "/music/q2/bass-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 4 小节第 1 拍的稳定拍将 G3 改为 F#3，改变该拍的和声成员。"
         },
         {
           "id": "bass-cadence",
           "audio": "/music/q2/bass-cadence.wav",
           "score": "/music/q2/bass-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 4 小节第 1 拍将 G3 改为 F#3 改变和声，并在第 2 小节第 3.5 拍将 C3 改为 F2 扰动声部连接。"
         }
       ]
     }
@@ -252,25 +348,37 @@
           "id": "soprano-ivory",
           "audio": "/music/q3/soprano-ivory.wav",
           "score": "/music/q3/soprano-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "soprano-quill",
           "audio": "/music/q3/soprano-quill.wav",
           "score": "/music/q3/soprano-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 1 小节第 2 拍将 C5 改为 G5，扰动局部旋律连接。"
         },
         {
           "id": "soprano-folio",
           "audio": "/music/q3/soprano-folio.wav",
           "score": "/music/q3/soprano-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 2 小节第 1 拍的稳定拍将 G4 改为 D5，改变该拍的和声成员。"
         },
         {
           "id": "soprano-cadence",
           "audio": "/music/q3/soprano-cadence.wav",
           "score": "/music/q3/soprano-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 2 小节第 1 拍将 G4 改为 D5 改变和声，并在第 1 小节第 2 拍将 C5 改为 G5 扰动声部连接。"
         }
       ],
       "alto": [
@@ -278,25 +386,37 @@
           "id": "alto-ivory",
           "audio": "/music/q3/alto-ivory.wav",
           "score": "/music/q3/alto-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "alto-quill",
           "audio": "/music/q3/alto-quill.wav",
           "score": "/music/q3/alto-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 1 小节第 3.5 拍将 E4 改为 A3，扰动局部旋律连接。"
         },
         {
           "id": "alto-folio",
           "audio": "/music/q3/alto-folio.wav",
           "score": "/music/q3/alto-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 D4 改为 E-4，改变该拍的和声成员。"
         },
         {
           "id": "alto-cadence",
           "audio": "/music/q3/alto-cadence.wav",
           "score": "/music/q3/alto-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 1 小节第 3 拍将 D4 改为 E-4 改变和声，并在第 1 小节第 3.5 拍将 E4 改为 A3 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -304,25 +424,37 @@
           "id": "tenor-ivory",
           "audio": "/music/q3/tenor-ivory.wav",
           "score": "/music/q3/tenor-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "tenor-quill",
           "audio": "/music/q3/tenor-quill.wav",
           "score": "/music/q3/tenor-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 1 小节第 2 拍将 F4 改为 B-3，扰动局部旋律连接。"
         },
         {
           "id": "tenor-folio",
           "audio": "/music/q3/tenor-folio.wav",
           "score": "/music/q3/tenor-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 3 小节第 3 拍的稳定拍将 D4 改为 C#4，改变该拍的和声成员。"
         },
         {
           "id": "tenor-cadence",
           "audio": "/music/q3/tenor-cadence.wav",
           "score": "/music/q3/tenor-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 3 小节第 3 拍将 D4 改为 C#4 改变和声，并在第 1 小节第 2 拍将 F4 改为 B-3 扰动声部连接。"
         }
       ],
       "bass": [
@@ -330,25 +462,37 @@
           "id": "bass-ivory",
           "audio": "/music/q3/bass-ivory.wav",
           "score": "/music/q3/bass-ivory.musicxml",
-          "isOriginal": true
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "原作：该声部的音高、时值和节奏均未改写。"
         },
         {
           "id": "bass-quill",
           "audio": "/music/q3/bass-quill.wav",
           "score": "/music/q3/bass-quill.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：在第 3 小节第 4 拍将 A2 改为 D2，扰动局部旋律连接。"
         },
         {
           "id": "bass-folio",
           "audio": "/music/q3/bass-folio.wav",
           "score": "/music/q3/bass-folio.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 B-3 改为 F3，改变该拍的和声成员。"
         },
         {
           "id": "bass-cadence",
           "audio": "/music/q3/bass-cadence.wav",
           "score": "/music/q3/bass-cadence.musicxml",
-          "isOriginal": false
+          "isOriginal": false,
+          "variant": 3,
+          "decoyType": "mixed",
+          "explanation": "混合干扰：在第 1 小节第 1 拍将 B-3 改为 F3 改变和声，并在第 3 小节第 4 拍将 A2 改为 D2 扰动声部连接。"
         }
       ]
     }

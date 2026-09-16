@@ -19,21 +19,21 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="Pe3d29ecc78ab01963f1212bfa5f370b7">
+    <score-part id="P1">
       <part-name>女低音 候选 1</part-name>
       <part-abbreviation>Pno</part-abbreviation>
-      <score-instrument id="I0b9cc42ad403d646d6f5b3146c40b189">
+      <score-instrument id="I1">
         <instrument-name>Piano</instrument-name>
         <instrument-abbreviation>Pno</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I0b9cc42ad403d646d6f5b3146c40b189">
+      <midi-instrument id="I1">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="Pe3d29ecc78ab01963f1212bfa5f370b7">
+  <part id="P1">
     <!--========================= Measure 1 ==========================-->
     <measure number="1">
       <attributes>

@@ -19,21 +19,21 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="Pcff1db47e78fc8f08f45afbc813d57ec">
+    <score-part id="P1">
       <part-name>男低音 候选 4</part-name>
       <part-abbreviation>Pno</part-abbreviation>
-      <score-instrument id="Ia1fdb753045b7847ad38f94318b4106c">
+      <score-instrument id="I1">
         <instrument-name>Piano</instrument-name>
         <instrument-abbreviation>Pno</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="Ia1fdb753045b7847ad38f94318b4106c">
+      <midi-instrument id="I1">
         <midi-channel>1</midi-channel>
         <midi-program>1</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="Pcff1db47e78fc8f08f45afbc813d57ec">
+  <part id="P1">
     <!--========================= Measure 1 ==========================-->
     <measure number="1" width="300.72">
       <attributes>
@@ -41,8 +41,7 @@
       </attributes>
       <note default-x="36.13" default-y="-505">
         <pitch>
-          <step>B</step>
-          <alter>-1</alter>
+          <step>F</step>
           <octave>3</octave>
         </pitch>
         <duration>10080</duration>
@@ -52,7 +51,7 @@
       <note default-x="109.18" default-y="-510">
         <pitch>
           <step>A</step>
-          <octave>2</octave>
+          <octave>3</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
@@ -101,7 +100,7 @@
       <note default-x="131.34" default-y="-520">
         <pitch>
           <step>F</step>
-          <octave>2</octave>
+          <octave>3</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
@@ -157,7 +156,7 @@
       <note default-x="159.03" default-y="-515">
         <pitch>
           <step>G</step>
-          <octave>2</octave>
+          <octave>3</octave>
         </pitch>
         <duration>5040</duration>
         <type>eighth</type>
@@ -175,7 +174,7 @@
       </note>
       <note default-x="260.86" default-y="-545">
         <pitch>
-          <step>A</step>
+          <step>D</step>
           <octave>2</octave>
         </pitch>
         <duration>10080</duration>
