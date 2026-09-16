@@ -1,0 +1,356 @@
+[
+  {
+    "id": "q1",
+    "title": "Erfreut euch, ihr Herzen（终曲圣咏）",
+    "bwv": "BWV 66.6",
+    "measures": "第 1–4 小节",
+    "duration": 15.5,
+    "bpm": 62,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：Bach BWV 66.6",
+    "analysis": "原作在四分拍中以赞美诗式节律推进；外声部形成清晰轮廓，内声部以紧凑级进衔接和声。",
+    "licenseNote": "巴赫作品为公共领域；编码来自 music21 参考语料库，本项目自行渲染音频。",
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q1/soprano-ivory.wav",
+          "score": "/music/q1/soprano-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q1/soprano-quill.wav",
+          "score": "/music/q1/soprano-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q1/soprano-folio.wav",
+          "score": "/music/q1/soprano-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "soprano-cadence",
+          "audio": "/music/q1/soprano-cadence.wav",
+          "score": "/music/q1/soprano-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q1/alto-ivory.wav",
+          "score": "/music/q1/alto-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q1/alto-quill.wav",
+          "score": "/music/q1/alto-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q1/alto-folio.wav",
+          "score": "/music/q1/alto-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "alto-cadence",
+          "audio": "/music/q1/alto-cadence.wav",
+          "score": "/music/q1/alto-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q1/tenor-ivory.wav",
+          "score": "/music/q1/tenor-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q1/tenor-quill.wav",
+          "score": "/music/q1/tenor-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q1/tenor-folio.wav",
+          "score": "/music/q1/tenor-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "tenor-cadence",
+          "audio": "/music/q1/tenor-cadence.wav",
+          "score": "/music/q1/tenor-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q1/bass-ivory.wav",
+          "score": "/music/q1/bass-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q1/bass-quill.wav",
+          "score": "/music/q1/bass-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q1/bass-folio.wav",
+          "score": "/music/q1/bass-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "bass-cadence",
+          "audio": "/music/q1/bass-cadence.wav",
+          "score": "/music/q1/bass-cadence.musicxml",
+          "isOriginal": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "q2",
+    "title": "Gloria sei dir gesungen",
+    "bwv": "BWV 140.7",
+    "measures": "第 1–4 小节",
+    "duration": 15.5,
+    "bpm": 62,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：Bach BWV 140.7",
+    "analysis": "这是康塔塔《醒来吧，声音在呼唤》的终曲圣咏，外声部轮廓坚定，内声部以级进和反向进行丰富和声。",
+    "licenseNote": "巴赫作品为公共领域；编码来自 music21 参考语料库，本项目自行渲染音频。",
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q2/soprano-ivory.wav",
+          "score": "/music/q2/soprano-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q2/soprano-quill.wav",
+          "score": "/music/q2/soprano-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q2/soprano-folio.wav",
+          "score": "/music/q2/soprano-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "soprano-cadence",
+          "audio": "/music/q2/soprano-cadence.wav",
+          "score": "/music/q2/soprano-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q2/alto-ivory.wav",
+          "score": "/music/q2/alto-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q2/alto-quill.wav",
+          "score": "/music/q2/alto-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q2/alto-folio.wav",
+          "score": "/music/q2/alto-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "alto-cadence",
+          "audio": "/music/q2/alto-cadence.wav",
+          "score": "/music/q2/alto-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q2/tenor-ivory.wav",
+          "score": "/music/q2/tenor-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q2/tenor-quill.wav",
+          "score": "/music/q2/tenor-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q2/tenor-folio.wav",
+          "score": "/music/q2/tenor-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "tenor-cadence",
+          "audio": "/music/q2/tenor-cadence.wav",
+          "score": "/music/q2/tenor-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q2/bass-ivory.wav",
+          "score": "/music/q2/bass-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q2/bass-quill.wav",
+          "score": "/music/q2/bass-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q2/bass-folio.wav",
+          "score": "/music/q2/bass-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "bass-cadence",
+          "audio": "/music/q2/bass-cadence.wav",
+          "score": "/music/q2/bass-cadence.musicxml",
+          "isOriginal": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "q3",
+    "title": "O Haupt voll Blut und Wunden",
+    "bwv": "BWV 244.54",
+    "measures": "第 1–4 小节",
+    "duration": 15.5,
+    "bpm": 62,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：Bach BWV 244.54",
+    "analysis": "这首《马太受难曲》圣咏以紧凑的和声节奏前进，弱拍经过音和终止前的声部趋向构成了关键辨识线索。",
+    "licenseNote": "巴赫作品为公共领域；编码来自 music21 参考语料库，本项目自行渲染音频。",
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q3/soprano-ivory.wav",
+          "score": "/music/q3/soprano-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q3/soprano-quill.wav",
+          "score": "/music/q3/soprano-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q3/soprano-folio.wav",
+          "score": "/music/q3/soprano-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "soprano-cadence",
+          "audio": "/music/q3/soprano-cadence.wav",
+          "score": "/music/q3/soprano-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q3/alto-ivory.wav",
+          "score": "/music/q3/alto-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q3/alto-quill.wav",
+          "score": "/music/q3/alto-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q3/alto-folio.wav",
+          "score": "/music/q3/alto-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "alto-cadence",
+          "audio": "/music/q3/alto-cadence.wav",
+          "score": "/music/q3/alto-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q3/tenor-ivory.wav",
+          "score": "/music/q3/tenor-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q3/tenor-quill.wav",
+          "score": "/music/q3/tenor-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q3/tenor-folio.wav",
+          "score": "/music/q3/tenor-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "tenor-cadence",
+          "audio": "/music/q3/tenor-cadence.wav",
+          "score": "/music/q3/tenor-cadence.musicxml",
+          "isOriginal": false
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q3/bass-ivory.wav",
+          "score": "/music/q3/bass-ivory.musicxml",
+          "isOriginal": true
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q3/bass-quill.wav",
+          "score": "/music/q3/bass-quill.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q3/bass-folio.wav",
+          "score": "/music/q3/bass-folio.musicxml",
+          "isOriginal": false
+        },
+        {
+          "id": "bass-cadence",
+          "audio": "/music/q3/bass-cadence.wav",
+          "score": "/music/q3/bass-cadence.musicxml",
+          "isOriginal": false
+        }
+      ]
+    }
+  }
+]
