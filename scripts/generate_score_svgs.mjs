@@ -18,9 +18,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const QUESTIONS_PATH = path.join(ROOT, "app", "questions.generated.json");
 const MUSIC_ROOT = path.join(ROOT, "public", "music");
 const OUTPUT_ROOT = path.join(ROOT, "public", "generated-scores");
-const VOICES = ["soprano", "alto", "tenor", "bass"];
-const VOICE_NAMES = ["女高音", "女低音", "男高音", "男低音"];
-const VOICE_CLEFS = [["G", "2"], ["G", "2"], ["F", "4"], ["F", "4"]];
+const CLEF_XML = { treble: ["G", "2"], "treble-8": ["G", "2", "-1"], alto: ["C", "3"], bass: ["F", "4"] };
 const SAFE_ID = /^[A-Za-z0-9_-]+$/;
 
 function assertSafeId(value, label) {
@@ -31,8 +29,8 @@ function assertSafeId(value, label) {
 
 function scorePath(questionId, candidateIds) {
   assertSafeId(questionId, "题目");
-  if (!Array.isArray(candidateIds) || candidateIds.length < 3 || candidateIds.length > VOICES.length) {
-    throw new Error(`${questionId} 的声部数量必须在 3–${VOICES.length} 之间`);
+  if (!Array.isArray(candidateIds) || candidateIds.length < 2 || candidateIds.length > 8) {
+    throw new Error(`${questionId} 的声部数量必须在 2–8 之间`);
   }
   candidateIds.forEach((id) => assertSafeId(id, "候选项"));
   return path.join(OUTPUT_ROOT, questionId, `${candidateIds.join("--")}.svg`);
@@ -62,18 +60,17 @@ function parseXml(xml, filePath) {
   return document;
 }
 
-function verifyNotation(document, filePath, voiceIndex) {
+function verifyNotation(document, filePath, expectedClef) {
   const parts = document.getElementsByTagName("part");
   const attributes = parts[0]?.getElementsByTagName("attributes")[0];
   const key = attributes?.getElementsByTagName("key")[0];
   const clef = attributes?.getElementsByTagName("clef")[0];
-  const [expectedSign, expectedLine] = VOICE_CLEFS[voiceIndex] || [];
+  const [expectedSign, expectedLine] = CLEF_XML[expectedClef] || [];
   const actualSign = clef?.getElementsByTagName("sign")[0]?.textContent;
   const actualLine = clef?.getElementsByTagName("line")[0]?.textContent;
   if (!key) throw new Error(`MusicXML 缺少调号：${filePath}`);
-  const tenorTreble = voiceIndex === 2 && actualSign === "G" && actualLine === "2";
-  if (!clef || (actualSign !== expectedSign || actualLine !== expectedLine) && !tenorTreble) {
-    throw new Error(`MusicXML 谱号错误：${filePath}，期望 ${expectedSign}${expectedLine}（男高音也允许原作 G2 低八度谱号）`);
+  if (!clef || actualSign !== expectedSign || actualLine !== expectedLine) {
+    throw new Error(`MusicXML 谱号错误：${filePath}，期望 ${expectedSign}${expectedLine}`);
   }
 }
 
@@ -97,7 +94,7 @@ function createClef(document, sign, line, octaveChange = null) {
   return clef;
 }
 
-function normalizePart(document, index) {
+function normalizePart(document, index, voiceName, expectedClef) {
   const scorePart = document.getElementsByTagName("score-part")[0];
   const part = document.getElementsByTagName("part")[0];
   if (!scorePart || !part) throw new Error("MusicXML 缺少 score-part 或 part");
@@ -107,7 +104,7 @@ function normalizePart(document, index) {
   replaceId(scorePart, id);
   if (partName) {
     while (partName.firstChild) partName.removeChild(partName.firstChild);
-    partName.appendChild(document.createTextNode(VOICE_NAMES[index]));
+    partName.appendChild(document.createTextNode(voiceName));
   }
   replaceId(part, id);
 
@@ -126,12 +123,12 @@ function normalizePart(document, index) {
     attributes = document.createElement("attributes");
     part.insertBefore(attributes, part.firstChild);
   }
-  const [fallbackSign, fallbackLine] = VOICE_CLEFS[index];
+  const [fallbackSign, fallbackLine] = CLEF_XML[expectedClef] || ["G", "2"];
   attributes.appendChild(createClef(document, sourceSign || fallbackSign, sourceLine || fallbackLine, sourceOctaveChange));
   return { scorePart, part };
 }
 
-function combineParts(documents) {
+function combineParts(documents, voiceNames, clefs) {
   const output = documents[0].cloneNode(true);
   const root = output.documentElement;
   const partList = root.getElementsByTagName("part-list")[0];
@@ -144,7 +141,7 @@ function combineParts(documents) {
   while (partList.firstChild) partList.removeChild(partList.firstChild);
 
   documents.forEach((document, index) => {
-    const { scorePart, part } = normalizePart(document, index);
+    const { scorePart, part } = normalizePart(document, index, voiceNames[index], clefs[index]);
     partList.appendChild(output.importNode(scorePart, true));
     root.appendChild(output.importNode(part, true));
   });
@@ -175,10 +172,10 @@ async function renderCombination(toolkit, question, candidates) {
   const paths = candidates.map((candidate) => resourcePath(candidate.score));
   const documents = await Promise.all(paths.map(async (filePath, index) => {
     const document = parseXml(await readFile(filePath, "utf8"), filePath);
-    verifyNotation(document, filePath, index);
+    verifyNotation(document, filePath, question.clefs[question.voiceOrder[index]]);
     return document;
   }));
-  const xml = combineParts(documents);
+  const xml = combineParts(documents, question.voiceOrder.map((voice) => question.voiceLabels?.[voice] || voice), question.voiceOrder.map((voice) => question.clefs[voice]));
   if (!toolkit.loadData(xml)) throw new Error(`${question.id} 的组合无法交给 Verovio`);
 
   const pages = [];
@@ -215,8 +212,8 @@ async function removeStaleSvgFiles(expected) {
 
 async function main() {
   const questions = JSON.parse(await readFile(QUESTIONS_PATH, "utf8"));
-  if (!Array.isArray(questions) || questions.length < 15 || questions.length > 20) {
-    throw new Error("题库必须包含 15–20 道题");
+  if (!Array.isArray(questions) || questions.length !== 30) {
+    throw new Error("题库必须恰好包含 30 道题");
   }
 
   const wasm = await import("verovio/wasm");
@@ -239,7 +236,10 @@ async function main() {
   try {
     for (const question of questions) {
       assertSafeId(question.id, "题目");
-      const voiceCandidates = VOICES.map((voice) => {
+      if (!Array.isArray(question.voiceOrder) || question.voiceOrder.length !== question.voiceCount) {
+        throw new Error(`${question.id} 的 voiceOrder 与 voiceCount 不一致`);
+      }
+      const voiceCandidates = question.voiceOrder.map((voice) => {
         const candidates = question.voices?.[voice];
         if (!Array.isArray(candidates) || candidates.length < 3 || candidates.length > 4) {
           throw new Error(`${question.id}/${voice} 必须有三个或四个候选项`);

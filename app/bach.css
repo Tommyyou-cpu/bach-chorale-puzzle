@@ -21,3 +21,6 @@ button:focus-visible,a:focus-visible,[tabindex="-1"]:focus-visible{outline:3px s
 .audio-progress>span:first-child{display:block;height:100%;border-radius:inherit;background:#d9bd7c;transition:width .12s linear}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:760px){.option-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.score-breakdown{grid-template-columns:1fr}.ensemble-title .audio-progress{width:min(150px,42vw)}}
+
+/* 管理页模拟播放同样使用视觉进度条，不显示百分比数字。 */
+.audio-progress{display:inline-block;width:180px;height:5px;margin-left:8px;overflow:hidden;border-radius:999px;vertical-align:middle;background:#cfc6b4}

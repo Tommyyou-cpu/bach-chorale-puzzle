@@ -1,0 +1,26 @@
+name = "bach-chorale-puzzle-api"
+main = "index.ts"
+compatibility_date = "2026-09-17"
+compatibility_flags = ["nodejs_compat"]
+
+# 复制为部署环境的 wrangler 配置，并填入真实资源 ID。
+# 生产部署请通过 GitHub Actions secrets 提供 CLOUDFLARE_ACCOUNT_ID、
+# CLOUDFLARE_API_TOKEN、ADMIN_BOOTSTRAP_PASSWORD 和 SESSION_SECRET。
+
+[vars]
+ALLOWED_ORIGINS = "https://tommyyou-cpu.github.io"
+PUBLIC_APP_ORIGIN = "https://tommyyou-cpu.github.io/bach-chorale-puzzle"
+SESSION_TTL_SECONDS = "7200"
+AUTH_RATE_LIMIT = "5"
+AUTH_RATE_WINDOW_SECONDS = "60"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "bach-chorale-puzzle"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "bach-chorale-puzzle-assets"
+

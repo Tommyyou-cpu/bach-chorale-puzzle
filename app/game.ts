@@ -1,5 +1,9 @@
 export const VOICES = ["soprano", "alto", "tenor", "bass"] as const;
-export type VoiceKey = (typeof VOICES)[number];
+/**
+ * 圣咏使用 soprano/alto/tenor/bass；键盘赋格与三声部创意曲可以使用
+ * voice1/voice2/voice3/voice4。题库接口负责提供实际顺序与显示名称。
+ */
+export type VoiceKey = string;
 
 export type DecoyType = "original" | "voice-leading" | "harmony" | "mixed";
 
@@ -17,6 +21,12 @@ export type Candidate = {
 export type Question = {
   id: string;
   title: string;
+  genre?: string;
+  voiceCount?: 3 | 4;
+  voiceOrder?: VoiceKey[];
+  voiceLabels?: Record<string, string>;
+  clefs?: Record<string, string>;
+  keySignature?: string;
   bwv: string;
   measures: string;
   duration: number;
@@ -102,9 +112,12 @@ export function questionsForGame(questions: Question[], state: Pick<GameState, "
 }
 
 export function voicesForQuestion(question: Question): VoiceKey[] {
+  const orderedVoices = question.voiceOrder?.filter((voice) => (question.voices[voice]?.length ?? 0) > 0);
+  if (orderedVoices && orderedVoices.length > 0) return [...new Set(orderedVoices)];
   const listedVoices = question.activeVoices?.filter((voice) => (question.voices[voice]?.length ?? 0) > 0);
   if (listedVoices && listedVoices.length > 0) return [...new Set(listedVoices)];
-  return VOICES.filter((voice) => (question.voices[voice]?.length ?? 0) > 0);
+  const keys = Object.keys(question.voices);
+  return keys.length > 0 ? keys : VOICES.filter((voice) => (question.voices[voice]?.length ?? 0) > 0);
 }
 
 export function buildOrders(questions: Question[], seed: number, previousOrders?: Orders): Orders {
@@ -282,7 +295,11 @@ export function isOriginalSelection(question: Question, voice: VoiceKey, selecte
   return selectedId !== undefined && selectedId === originalCandidateFor(question, voice)?.id;
 }
 
-export function scoreGame(questions: Question[], selections: Selections) {
+export function scoreGame(
+  questions: Question[],
+  selections: Selections,
+  weights: { completeQuestion?: number; voiceAccuracy?: number } = {},
+) {
   let voices = 0;
   let questionsCorrect = 0;
   let totalVoices = 0;
@@ -305,8 +322,10 @@ export function scoreGame(questions: Question[], selections: Selections) {
   const totalQuestions = questions.length;
   const questionRatio = totalQuestions > 0 ? questionsCorrect / totalQuestions : 0;
   const voiceRatio = totalVoices > 0 ? voices / totalVoices : 0;
-  const questionPoints = questionRatio * 40;
-  const voicePoints = voiceRatio * 60;
+  const completeQuestionWeight = weights.completeQuestion ?? 40;
+  const voiceAccuracyWeight = weights.voiceAccuracy ?? 60;
+  const questionPoints = questionRatio * completeQuestionWeight;
+  const voicePoints = voiceRatio * voiceAccuracyWeight;
 
   return {
     voices,

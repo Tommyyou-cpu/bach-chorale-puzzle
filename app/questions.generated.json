@@ -188,7 +188,31 @@
           "explanation": "混合干扰：在第 4 小节第 1 拍将 G#3 改为 E-3 改变和声，并在第 4 小节第 3.5 拍将 B2 改为 E2 扰动声部连接。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 66.6",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q2",
@@ -379,7 +403,31 @@
           "explanation": "混合干扰：在第 4 小节第 1 拍将 G3 改为 F#3 改变和声，并在第 2 小节第 3.5 拍将 C3 改为 F2 扰动声部连接。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 140.7",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 1.0,
+      "alto": 1.0,
+      "tenor": 1.0,
+      "bass": 1.0
+    },
+    "revision": 1
   },
   {
     "id": "q3",
@@ -570,7 +618,31 @@
           "explanation": "混合干扰：在第 1 小节第 1 拍将 B-3 改为 F3 改变和声，并在第 3 小节第 4 拍将 A2 改为 D2 扰动声部连接。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 244.54",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q4",
@@ -721,7 +793,31 @@
           "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 A3 改为 G#3，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 10.7",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q5",
@@ -872,7 +968,31 @@
           "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 C#3 改为 A2，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 101.7",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q6",
@@ -1023,7 +1143,31 @@
           "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 F#3 改为 D3，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 103.6",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q7",
@@ -1174,7 +1318,31 @@
           "explanation": "和声干扰：在第 3 小节第 3 拍的稳定拍将 B2 改为 D3，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 104.6",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q8",
@@ -1325,7 +1493,31 @@
           "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 A3 改为 G3，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "3/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 122.6",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q9",
@@ -1476,7 +1668,31 @@
           "explanation": "和声干扰：在第 2 小节第 3 拍的稳定拍将 F3 改为 E3，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "3/2",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 123.6",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q10",
@@ -1627,7 +1843,31 @@
           "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 E3 改为 E-3，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 111.6",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q11",
@@ -1778,7 +2018,31 @@
           "explanation": "和声干扰：在第 4 小节第 1 拍的稳定拍将 B2 改为 G2，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 113.8",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q12",
@@ -1929,7 +2193,31 @@
           "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 G3 改为 F#3，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 114.7",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q13",
@@ -2080,7 +2368,31 @@
           "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 F#3 改为 F3，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 115.6",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q14",
@@ -2231,7 +2543,31 @@
           "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 D3 改为 A2，改变该拍的和声成员。"
         }
       ]
-    }
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 116.6",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
   },
   {
     "id": "q15",
@@ -2380,6 +2716,2295 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 F#3 改为 F3，改变该拍的和声成员。"
+        }
+      ]
+    },
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "sourceEdition": "music21 参考语料库：Bach BWV 117.4",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1
+  },
+  {
+    "id": "q16",
+    "title": "《十二平均律》第一册 C 小调赋格",
+    "bwv": "BWV 847",
+    "measures": "第 20–25 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "3 flats",
+    "timeSignature": "4/4",
+    "measureStart": 20,
+    "measureEnd": 25,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-2-bwv-847-parts.ily（LilyPond 转 MusicXML，节选第 20–25 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.5,
+      "voice2": 1.0,
+      "voice3": 1.25
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q16/voice1-ivory.mp3",
+          "audioFallback": "/music/q16/voice1-ivory.wav",
+          "score": "/music/q16/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q16/voice1-quill.mp3",
+          "audioFallback": "/music/q16/voice1-quill.wav",
+          "score": "/music/q16/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q16/voice1-folio.mp3",
+          "audioFallback": "/music/q16/voice1-folio.wav",
+          "score": "/music/q16/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q16/voice2-ivory.mp3",
+          "audioFallback": "/music/q16/voice2-ivory.wav",
+          "score": "/music/q16/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q16/voice2-quill.mp3",
+          "audioFallback": "/music/q16/voice2-quill.wav",
+          "score": "/music/q16/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q16/voice2-folio.mp3",
+          "audioFallback": "/music/q16/voice2-folio.wav",
+          "score": "/music/q16/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q16/voice3-ivory.mp3",
+          "audioFallback": "/music/q16/voice3-ivory.wav",
+          "score": "/music/q16/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q16/voice3-quill.mp3",
+          "audioFallback": "/music/q16/voice3-quill.wav",
+          "score": "/music/q16/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q16/voice3-folio.mp3",
+          "audioFallback": "/music/q16/voice3-folio.wav",
+          "score": "/music/q16/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q17",
+    "title": "《十二平均律》第一册 C♯ 大调赋格",
+    "bwv": "BWV 848",
+    "measures": "第 45–50 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "7 sharps",
+    "timeSignature": "4/4",
+    "measureStart": 45,
+    "measureEnd": 50,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-3-bwv-848-parts.ily（LilyPond 转 MusicXML，节选第 45–50 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.0,
+      "voice2": 0.5,
+      "voice3": 0.5
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q17/voice1-ivory.mp3",
+          "audioFallback": "/music/q17/voice1-ivory.wav",
+          "score": "/music/q17/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q17/voice1-quill.mp3",
+          "audioFallback": "/music/q17/voice1-quill.wav",
+          "score": "/music/q17/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q17/voice1-folio.mp3",
+          "audioFallback": "/music/q17/voice1-folio.wav",
+          "score": "/music/q17/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q17/voice2-ivory.mp3",
+          "audioFallback": "/music/q17/voice2-ivory.wav",
+          "score": "/music/q17/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q17/voice2-quill.mp3",
+          "audioFallback": "/music/q17/voice2-quill.wav",
+          "score": "/music/q17/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q17/voice2-folio.mp3",
+          "audioFallback": "/music/q17/voice2-folio.wav",
+          "score": "/music/q17/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q17/voice3-ivory.mp3",
+          "audioFallback": "/music/q17/voice3-ivory.wav",
+          "score": "/music/q17/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q17/voice3-quill.mp3",
+          "audioFallback": "/music/q17/voice3-quill.wav",
+          "score": "/music/q17/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q17/voice3-folio.mp3",
+          "audioFallback": "/music/q17/voice3-folio.wav",
+          "score": "/music/q17/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q18",
+    "title": "《十二平均律》第一册 D 大调赋格",
+    "bwv": "BWV 850",
+    "measures": "第 17–20 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3",
+      "voice4"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部",
+      "voice4": "第 4 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass",
+      "voice4": "bass"
+    },
+    "keySignature": "2 sharps",
+    "timeSignature": "4/4",
+    "measureStart": 17,
+    "measureEnd": 20,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-5-bwv-850-parts.ily（LilyPond 转 MusicXML，节选第 17–20 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "第 17—20 小节的四条复调声部均持续活动；按原始 MIDI 事件顺序重建为严格单旋律，避免相邻三十二分音符被错误合并为纵向和弦。每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 2.5,
+      "voice2": 2.0,
+      "voice3": 2.0,
+      "voice4": 1.0
+    },
+    "revision": 2,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q18/voice1-ivory.mp3",
+          "audioFallback": "/music/q18/voice1-ivory.wav",
+          "score": "/music/q18/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q18/voice1-quill.mp3",
+          "audioFallback": "/music/q18/voice1-quill.wav",
+          "score": "/music/q18/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，保持四条旋律的节奏骨架。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q18/voice1-folio.mp3",
+          "audioFallback": "/music/q18/voice1-folio.wav",
+          "score": "/music/q18/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q18/voice2-ivory.mp3",
+          "audioFallback": "/music/q18/voice2-ivory.wav",
+          "score": "/music/q18/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q18/voice2-quill.mp3",
+          "audioFallback": "/music/q18/voice2-quill.wav",
+          "score": "/music/q18/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，保持四条旋律的节奏骨架。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q18/voice2-folio.mp3",
+          "audioFallback": "/music/q18/voice2-folio.wav",
+          "score": "/music/q18/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q18/voice3-ivory.mp3",
+          "audioFallback": "/music/q18/voice3-ivory.wav",
+          "score": "/music/q18/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q18/voice3-quill.mp3",
+          "audioFallback": "/music/q18/voice3-quill.wav",
+          "score": "/music/q18/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，保持四条旋律的节奏骨架。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q18/voice3-folio.mp3",
+          "audioFallback": "/music/q18/voice3-folio.wav",
+          "score": "/music/q18/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice4": [
+        {
+          "id": "voice4-ivory",
+          "audio": "/music/q18/voice4-ivory.mp3",
+          "audioFallback": "/music/q18/voice4-ivory.wav",
+          "score": "/music/q18/voice4-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice4-quill",
+          "audio": "/music/q18/voice4-quill.mp3",
+          "audioFallback": "/music/q18/voice4-quill.wav",
+          "score": "/music/q18/voice4-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，保持四条旋律的节奏骨架。"
+        },
+        {
+          "id": "voice4-folio",
+          "audio": "/music/q18/voice4-folio.mp3",
+          "audioFallback": "/music/q18/voice4-folio.wav",
+          "score": "/music/q18/voice4-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q19",
+    "title": "《十二平均律》第一册 E♭ 大调赋格",
+    "bwv": "BWV 852",
+    "measures": "第 32–37 小节",
+    "duration": 21.2,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "3 flats",
+    "timeSignature": "4/4",
+    "measureStart": 32,
+    "measureEnd": 37,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-7-bwv-852-parts.ily（LilyPond 转 MusicXML，节选第 32–37 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 1.25,
+      "voice2": 2.0,
+      "voice3": 0.75
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q19/voice1-ivory.mp3",
+          "audioFallback": "/music/q19/voice1-ivory.wav",
+          "score": "/music/q19/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q19/voice1-quill.mp3",
+          "audioFallback": "/music/q19/voice1-quill.wav",
+          "score": "/music/q19/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q19/voice1-folio.mp3",
+          "audioFallback": "/music/q19/voice1-folio.wav",
+          "score": "/music/q19/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q19/voice2-ivory.mp3",
+          "audioFallback": "/music/q19/voice2-ivory.wav",
+          "score": "/music/q19/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q19/voice2-quill.mp3",
+          "audioFallback": "/music/q19/voice2-quill.wav",
+          "score": "/music/q19/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q19/voice2-folio.mp3",
+          "audioFallback": "/music/q19/voice2-folio.wav",
+          "score": "/music/q19/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q19/voice3-ivory.mp3",
+          "audioFallback": "/music/q19/voice3-ivory.wav",
+          "score": "/music/q19/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q19/voice3-quill.mp3",
+          "audioFallback": "/music/q19/voice3-quill.wav",
+          "score": "/music/q19/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q19/voice3-folio.mp3",
+          "audioFallback": "/music/q19/voice3-folio.wav",
+          "score": "/music/q19/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q20",
+    "title": "《十二平均律》第一册 F 小调赋格",
+    "bwv": "BWV 857",
+    "measures": "第 53–58 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3",
+      "voice4"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部",
+      "voice4": "第 4 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass",
+      "voice4": "bass"
+    },
+    "keySignature": "4 flats",
+    "timeSignature": "4/4",
+    "measureStart": 53,
+    "measureEnd": 58,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-12-bwv-857-parts.ily（LilyPond 转 MusicXML，节选第 53–58 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.25,
+      "voice2": 0.5,
+      "voice3": 0.5,
+      "voice4": 1.0
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q20/voice1-ivory.mp3",
+          "audioFallback": "/music/q20/voice1-ivory.wav",
+          "score": "/music/q20/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q20/voice1-quill.mp3",
+          "audioFallback": "/music/q20/voice1-quill.wav",
+          "score": "/music/q20/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q20/voice1-folio.mp3",
+          "audioFallback": "/music/q20/voice1-folio.wav",
+          "score": "/music/q20/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q20/voice2-ivory.mp3",
+          "audioFallback": "/music/q20/voice2-ivory.wav",
+          "score": "/music/q20/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q20/voice2-quill.mp3",
+          "audioFallback": "/music/q20/voice2-quill.wav",
+          "score": "/music/q20/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q20/voice2-folio.mp3",
+          "audioFallback": "/music/q20/voice2-folio.wav",
+          "score": "/music/q20/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q20/voice3-ivory.mp3",
+          "audioFallback": "/music/q20/voice3-ivory.wav",
+          "score": "/music/q20/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q20/voice3-quill.mp3",
+          "audioFallback": "/music/q20/voice3-quill.wav",
+          "score": "/music/q20/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q20/voice3-folio.mp3",
+          "audioFallback": "/music/q20/voice3-folio.wav",
+          "score": "/music/q20/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice4": [
+        {
+          "id": "voice4-ivory",
+          "audio": "/music/q20/voice4-ivory.mp3",
+          "audioFallback": "/music/q20/voice4-ivory.wav",
+          "score": "/music/q20/voice4-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice4-quill",
+          "audio": "/music/q20/voice4-quill.mp3",
+          "audioFallback": "/music/q20/voice4-quill.wav",
+          "score": "/music/q20/voice4-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice4-folio",
+          "audio": "/music/q20/voice4-folio.mp3",
+          "audioFallback": "/music/q20/voice4-folio.wav",
+          "score": "/music/q20/voice4-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q21",
+    "title": "《十二平均律》第一册 F♯ 大调赋格",
+    "bwv": "BWV 858",
+    "measures": "第 22–27 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "6 sharps",
+    "timeSignature": "4/4",
+    "measureStart": 22,
+    "measureEnd": 27,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-13-bwv-858-parts.ily（LilyPond 转 MusicXML，节选第 22–27 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.25,
+      "voice2": 2.0,
+      "voice3": 0.5
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q21/voice1-ivory.mp3",
+          "audioFallback": "/music/q21/voice1-ivory.wav",
+          "score": "/music/q21/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q21/voice1-quill.mp3",
+          "audioFallback": "/music/q21/voice1-quill.wav",
+          "score": "/music/q21/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q21/voice1-folio.mp3",
+          "audioFallback": "/music/q21/voice1-folio.wav",
+          "score": "/music/q21/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q21/voice2-ivory.mp3",
+          "audioFallback": "/music/q21/voice2-ivory.wav",
+          "score": "/music/q21/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q21/voice2-quill.mp3",
+          "audioFallback": "/music/q21/voice2-quill.wav",
+          "score": "/music/q21/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q21/voice2-folio.mp3",
+          "audioFallback": "/music/q21/voice2-folio.wav",
+          "score": "/music/q21/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q21/voice3-ivory.mp3",
+          "audioFallback": "/music/q21/voice3-ivory.wav",
+          "score": "/music/q21/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q21/voice3-quill.mp3",
+          "audioFallback": "/music/q21/voice3-quill.wav",
+          "score": "/music/q21/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q21/voice3-folio.mp3",
+          "audioFallback": "/music/q21/voice3-folio.wav",
+          "score": "/music/q21/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q22",
+    "title": "《十二平均律》第一册 G 小调赋格",
+    "bwv": "BWV 861",
+    "measures": "第 15–18 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3",
+      "voice4"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部",
+      "voice4": "第 4 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass",
+      "voice4": "bass"
+    },
+    "keySignature": "2 flats",
+    "timeSignature": "4/4",
+    "measureStart": 15,
+    "measureEnd": 18,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-16-bwv-861-parts.ily（LilyPond 转 MusicXML，节选第 15–18 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 1.5,
+      "voice2": 0.5,
+      "voice3": 1.5,
+      "voice4": 0.5
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q22/voice1-ivory.mp3",
+          "audioFallback": "/music/q22/voice1-ivory.wav",
+          "score": "/music/q22/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q22/voice1-quill.mp3",
+          "audioFallback": "/music/q22/voice1-quill.wav",
+          "score": "/music/q22/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q22/voice1-folio.mp3",
+          "audioFallback": "/music/q22/voice1-folio.wav",
+          "score": "/music/q22/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q22/voice2-ivory.mp3",
+          "audioFallback": "/music/q22/voice2-ivory.wav",
+          "score": "/music/q22/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q22/voice2-quill.mp3",
+          "audioFallback": "/music/q22/voice2-quill.wav",
+          "score": "/music/q22/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q22/voice2-folio.mp3",
+          "audioFallback": "/music/q22/voice2-folio.wav",
+          "score": "/music/q22/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q22/voice3-ivory.mp3",
+          "audioFallback": "/music/q22/voice3-ivory.wav",
+          "score": "/music/q22/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q22/voice3-quill.mp3",
+          "audioFallback": "/music/q22/voice3-quill.wav",
+          "score": "/music/q22/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q22/voice3-folio.mp3",
+          "audioFallback": "/music/q22/voice3-folio.wav",
+          "score": "/music/q22/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice4": [
+        {
+          "id": "voice4-ivory",
+          "audio": "/music/q22/voice4-ivory.mp3",
+          "audioFallback": "/music/q22/voice4-ivory.wav",
+          "score": "/music/q22/voice4-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice4-quill",
+          "audio": "/music/q22/voice4-quill.mp3",
+          "audioFallback": "/music/q22/voice4-quill.wav",
+          "score": "/music/q22/voice4-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice4-folio",
+          "audio": "/music/q22/voice4-folio.mp3",
+          "audioFallback": "/music/q22/voice4-folio.wav",
+          "score": "/music/q22/voice4-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q23",
+    "title": "《十二平均律》第一册 A 大调赋格",
+    "bwv": "BWV 864",
+    "measures": "第 7–12 小节",
+    "duration": 22.5,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "3 sharps",
+    "timeSignature": "9/8",
+    "measureStart": 7,
+    "measureEnd": 12,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-19-bwv-864-parts.ily（LilyPond 转 MusicXML，节选第 7–12 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 1.5,
+      "voice2": 0.0,
+      "voice3": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q23/voice1-ivory.mp3",
+          "audioFallback": "/music/q23/voice1-ivory.wav",
+          "score": "/music/q23/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q23/voice1-quill.mp3",
+          "audioFallback": "/music/q23/voice1-quill.wav",
+          "score": "/music/q23/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q23/voice1-folio.mp3",
+          "audioFallback": "/music/q23/voice1-folio.wav",
+          "score": "/music/q23/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q23/voice2-ivory.mp3",
+          "audioFallback": "/music/q23/voice2-ivory.wav",
+          "score": "/music/q23/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q23/voice2-quill.mp3",
+          "audioFallback": "/music/q23/voice2-quill.wav",
+          "score": "/music/q23/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q23/voice2-folio.mp3",
+          "audioFallback": "/music/q23/voice2-folio.wav",
+          "score": "/music/q23/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q23/voice3-ivory.mp3",
+          "audioFallback": "/music/q23/voice3-ivory.wav",
+          "score": "/music/q23/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q23/voice3-quill.mp3",
+          "audioFallback": "/music/q23/voice3-quill.wav",
+          "score": "/music/q23/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q23/voice3-folio.mp3",
+          "audioFallback": "/music/q23/voice3-folio.wav",
+          "score": "/music/q23/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q24",
+    "title": "《十二平均律》第一册 B 大调赋格",
+    "bwv": "BWV 865",
+    "measures": "第 57–62 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3",
+      "voice4"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部",
+      "voice4": "第 4 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass",
+      "voice4": "bass"
+    },
+    "keySignature": "no accidentals",
+    "timeSignature": "4/4",
+    "measureStart": 57,
+    "measureEnd": 62,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-20-bwv-865-parts.ily（LilyPond 转 MusicXML，节选第 57–62 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.5,
+      "voice2": 0.75,
+      "voice3": 2.0,
+      "voice4": 0.5
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q24/voice1-ivory.mp3",
+          "audioFallback": "/music/q24/voice1-ivory.wav",
+          "score": "/music/q24/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q24/voice1-quill.mp3",
+          "audioFallback": "/music/q24/voice1-quill.wav",
+          "score": "/music/q24/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q24/voice1-folio.mp3",
+          "audioFallback": "/music/q24/voice1-folio.wav",
+          "score": "/music/q24/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q24/voice2-ivory.mp3",
+          "audioFallback": "/music/q24/voice2-ivory.wav",
+          "score": "/music/q24/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q24/voice2-quill.mp3",
+          "audioFallback": "/music/q24/voice2-quill.wav",
+          "score": "/music/q24/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q24/voice2-folio.mp3",
+          "audioFallback": "/music/q24/voice2-folio.wav",
+          "score": "/music/q24/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q24/voice3-ivory.mp3",
+          "audioFallback": "/music/q24/voice3-ivory.wav",
+          "score": "/music/q24/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q24/voice3-quill.mp3",
+          "audioFallback": "/music/q24/voice3-quill.wav",
+          "score": "/music/q24/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q24/voice3-folio.mp3",
+          "audioFallback": "/music/q24/voice3-folio.wav",
+          "score": "/music/q24/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice4": [
+        {
+          "id": "voice4-ivory",
+          "audio": "/music/q24/voice4-ivory.mp3",
+          "audioFallback": "/music/q24/voice4-ivory.wav",
+          "score": "/music/q24/voice4-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice4-quill",
+          "audio": "/music/q24/voice4-quill.mp3",
+          "audioFallback": "/music/q24/voice4-quill.wav",
+          "score": "/music/q24/voice4-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice4-folio",
+          "audio": "/music/q24/voice4-folio.mp3",
+          "audioFallback": "/music/q24/voice4-folio.wav",
+          "score": "/music/q24/voice4-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q25",
+    "title": "《十二平均律》第一册 C 大调赋格",
+    "bwv": "BWV 846",
+    "measures": "第 21–26 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "fugue",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3",
+      "voice4"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部",
+      "voice4": "第 4 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass",
+      "voice4": "bass"
+    },
+    "keySignature": "no accidentals",
+    "timeSignature": "4/4",
+    "measureStart": 21,
+    "measureEnd": 26,
+    "source": "https://github.com/ksnortum/bach-well-tempered-1",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "fugue-1-bwv-846-parts.ily（LilyPond 转 MusicXML，节选第 21–26 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.25,
+      "voice2": 0.0,
+      "voice3": 0.0,
+      "voice4": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q25/voice1-ivory.mp3",
+          "audioFallback": "/music/q25/voice1-ivory.wav",
+          "score": "/music/q25/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q25/voice1-quill.mp3",
+          "audioFallback": "/music/q25/voice1-quill.wav",
+          "score": "/music/q25/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q25/voice1-folio.mp3",
+          "audioFallback": "/music/q25/voice1-folio.wav",
+          "score": "/music/q25/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q25/voice2-ivory.mp3",
+          "audioFallback": "/music/q25/voice2-ivory.wav",
+          "score": "/music/q25/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q25/voice2-quill.mp3",
+          "audioFallback": "/music/q25/voice2-quill.wav",
+          "score": "/music/q25/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q25/voice2-folio.mp3",
+          "audioFallback": "/music/q25/voice2-folio.wav",
+          "score": "/music/q25/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q25/voice3-ivory.mp3",
+          "audioFallback": "/music/q25/voice3-ivory.wav",
+          "score": "/music/q25/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q25/voice3-quill.mp3",
+          "audioFallback": "/music/q25/voice3-quill.wav",
+          "score": "/music/q25/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q25/voice3-folio.mp3",
+          "audioFallback": "/music/q25/voice3-folio.wav",
+          "score": "/music/q25/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice4": [
+        {
+          "id": "voice4-ivory",
+          "audio": "/music/q25/voice4-ivory.mp3",
+          "audioFallback": "/music/q25/voice4-ivory.wav",
+          "score": "/music/q25/voice4-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice4-quill",
+          "audio": "/music/q25/voice4-quill.mp3",
+          "audioFallback": "/music/q25/voice4-quill.wav",
+          "score": "/music/q25/voice4-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice4-folio",
+          "audio": "/music/q25/voice4-folio.mp3",
+          "audioFallback": "/music/q25/voice4-folio.wav",
+          "score": "/music/q25/voice4-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q26",
+    "title": "三声部创意曲第一首 C 大调",
+    "bwv": "BWV 787",
+    "measures": "第 5–10 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "other",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "no accidentals",
+    "timeSignature": "4/4",
+    "measureStart": 5,
+    "measureEnd": 10,
+    "source": "https://github.com/ksnortum/bach-15-sinfonias",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "sinfonia-no1-C-maj-parts.ily（LilyPond 转 MusicXML，节选第 5–10 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.0,
+      "voice2": 0.5,
+      "voice3": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q26/voice1-ivory.mp3",
+          "audioFallback": "/music/q26/voice1-ivory.wav",
+          "score": "/music/q26/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q26/voice1-quill.mp3",
+          "audioFallback": "/music/q26/voice1-quill.wav",
+          "score": "/music/q26/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q26/voice1-folio.mp3",
+          "audioFallback": "/music/q26/voice1-folio.wav",
+          "score": "/music/q26/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q26/voice2-ivory.mp3",
+          "audioFallback": "/music/q26/voice2-ivory.wav",
+          "score": "/music/q26/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q26/voice2-quill.mp3",
+          "audioFallback": "/music/q26/voice2-quill.wav",
+          "score": "/music/q26/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q26/voice2-folio.mp3",
+          "audioFallback": "/music/q26/voice2-folio.wav",
+          "score": "/music/q26/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q26/voice3-ivory.mp3",
+          "audioFallback": "/music/q26/voice3-ivory.wav",
+          "score": "/music/q26/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q26/voice3-quill.mp3",
+          "audioFallback": "/music/q26/voice3-quill.wav",
+          "score": "/music/q26/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q26/voice3-folio.mp3",
+          "audioFallback": "/music/q26/voice3-folio.wav",
+          "score": "/music/q26/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q27",
+    "title": "三声部创意曲第二首 C 小调",
+    "bwv": "BWV 788",
+    "measures": "第 23–28 小节",
+    "duration": 30.0,
+    "bpm": 72,
+    "genre": "other",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "3 flats",
+    "timeSignature": "12/8",
+    "measureStart": 23,
+    "measureEnd": 28,
+    "source": "https://github.com/ksnortum/bach-15-sinfonias",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "sinfonia-no2-C-min-parts.ily（LilyPond 转 MusicXML，节选第 23–28 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.0,
+      "voice2": 2.5,
+      "voice3": 1.0
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q27/voice1-ivory.mp3",
+          "audioFallback": "/music/q27/voice1-ivory.wav",
+          "score": "/music/q27/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q27/voice1-quill.mp3",
+          "audioFallback": "/music/q27/voice1-quill.wav",
+          "score": "/music/q27/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q27/voice1-folio.mp3",
+          "audioFallback": "/music/q27/voice1-folio.wav",
+          "score": "/music/q27/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q27/voice2-ivory.mp3",
+          "audioFallback": "/music/q27/voice2-ivory.wav",
+          "score": "/music/q27/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q27/voice2-quill.mp3",
+          "audioFallback": "/music/q27/voice2-quill.wav",
+          "score": "/music/q27/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q27/voice2-folio.mp3",
+          "audioFallback": "/music/q27/voice2-folio.wav",
+          "score": "/music/q27/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q27/voice3-ivory.mp3",
+          "audioFallback": "/music/q27/voice3-ivory.wav",
+          "score": "/music/q27/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q27/voice3-quill.mp3",
+          "audioFallback": "/music/q27/voice3-quill.wav",
+          "score": "/music/q27/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q27/voice3-folio.mp3",
+          "audioFallback": "/music/q27/voice3-folio.wav",
+          "score": "/music/q27/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q28",
+    "title": "三声部创意曲第三首 D 大调",
+    "bwv": "BWV 789",
+    "measures": "第 5–10 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "other",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "2 sharps",
+    "timeSignature": "4/4",
+    "measureStart": 5,
+    "measureEnd": 10,
+    "source": "https://github.com/ksnortum/bach-15-sinfonias",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "sinfonia-no3-D-maj-parts.ily（LilyPond 转 MusicXML，节选第 5–10 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.0,
+      "voice2": 0.0,
+      "voice3": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q28/voice1-ivory.mp3",
+          "audioFallback": "/music/q28/voice1-ivory.wav",
+          "score": "/music/q28/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q28/voice1-quill.mp3",
+          "audioFallback": "/music/q28/voice1-quill.wav",
+          "score": "/music/q28/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q28/voice1-folio.mp3",
+          "audioFallback": "/music/q28/voice1-folio.wav",
+          "score": "/music/q28/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q28/voice2-ivory.mp3",
+          "audioFallback": "/music/q28/voice2-ivory.wav",
+          "score": "/music/q28/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q28/voice2-quill.mp3",
+          "audioFallback": "/music/q28/voice2-quill.wav",
+          "score": "/music/q28/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q28/voice2-folio.mp3",
+          "audioFallback": "/music/q28/voice2-folio.wav",
+          "score": "/music/q28/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q28/voice3-ivory.mp3",
+          "audioFallback": "/music/q28/voice3-ivory.wav",
+          "score": "/music/q28/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q28/voice3-quill.mp3",
+          "audioFallback": "/music/q28/voice3-quill.wav",
+          "score": "/music/q28/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q28/voice3-folio.mp3",
+          "audioFallback": "/music/q28/voice3-folio.wav",
+          "score": "/music/q28/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q29",
+    "title": "三声部创意曲第四首 D 小调",
+    "bwv": "BWV 790",
+    "measures": "第 18–23 小节",
+    "duration": 20.0,
+    "bpm": 72,
+    "genre": "other",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "1 flat",
+    "timeSignature": "4/4",
+    "measureStart": 18,
+    "measureEnd": 23,
+    "source": "https://github.com/ksnortum/bach-15-sinfonias",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "sinfonia-no4-D-min-parts.ily（LilyPond 转 MusicXML，节选第 18–23 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.0,
+      "voice2": 0.0,
+      "voice3": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q29/voice1-ivory.mp3",
+          "audioFallback": "/music/q29/voice1-ivory.wav",
+          "score": "/music/q29/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q29/voice1-quill.mp3",
+          "audioFallback": "/music/q29/voice1-quill.wav",
+          "score": "/music/q29/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q29/voice1-folio.mp3",
+          "audioFallback": "/music/q29/voice1-folio.wav",
+          "score": "/music/q29/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q29/voice2-ivory.mp3",
+          "audioFallback": "/music/q29/voice2-ivory.wav",
+          "score": "/music/q29/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q29/voice2-quill.mp3",
+          "audioFallback": "/music/q29/voice2-quill.wav",
+          "score": "/music/q29/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q29/voice2-folio.mp3",
+          "audioFallback": "/music/q29/voice2-folio.wav",
+          "score": "/music/q29/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q29/voice3-ivory.mp3",
+          "audioFallback": "/music/q29/voice3-ivory.wav",
+          "score": "/music/q29/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q29/voice3-quill.mp3",
+          "audioFallback": "/music/q29/voice3-quill.wav",
+          "score": "/music/q29/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q29/voice3-folio.mp3",
+          "audioFallback": "/music/q29/voice3-folio.wav",
+          "score": "/music/q29/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q30",
+    "title": "三声部创意曲第五首 E♭ 大调",
+    "bwv": "BWV 791",
+    "measures": "第 33–38 小节",
+    "duration": 15.0,
+    "bpm": 72,
+    "genre": "other",
+    "voiceCount": 3,
+    "voiceOrder": [
+      "voice1",
+      "voice2",
+      "voice3"
+    ],
+    "voiceLabels": {
+      "voice1": "第 1 声部",
+      "voice2": "第 2 声部",
+      "voice3": "第 3 声部"
+    },
+    "clefs": {
+      "voice1": "treble",
+      "voice2": "treble",
+      "voice3": "bass"
+    },
+    "keySignature": "3 flats",
+    "timeSignature": "3/4",
+    "measureStart": 33,
+    "measureEnd": 38,
+    "source": "https://github.com/ksnortum/bach-15-sinfonias",
+    "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
+    "sourceEdition": "sinfonia-no5-Eb-maj-parts.ily（LilyPond 转 MusicXML，节选第 33–38 小节）",
+    "sourceLicense": "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/",
+    "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；数字谱源按 CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/ 发布。",
+    "maxRestByVoice": {
+      "voice1": 0.0,
+      "voice2": 0.0,
+      "voice3": 0.25
+    },
+    "revision": 1,
+    "voices": {
+      "voice1": [
+        {
+          "id": "voice1-ivory",
+          "audio": "/music/q30/voice1-ivory.mp3",
+          "audioFallback": "/music/q30/voice1-ivory.wav",
+          "score": "/music/q30/voice1-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice1-quill",
+          "audio": "/music/q30/voice1-quill.mp3",
+          "audioFallback": "/music/q30/voice1-quill.wav",
+          "score": "/music/q30/voice1-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice1-folio",
+          "audio": "/music/q30/voice1-folio.mp3",
+          "audioFallback": "/music/q30/voice1-folio.wav",
+          "score": "/music/q30/voice1-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice2": [
+        {
+          "id": "voice2-ivory",
+          "audio": "/music/q30/voice2-ivory.mp3",
+          "audioFallback": "/music/q30/voice2-ivory.wav",
+          "score": "/music/q30/voice2-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice2-quill",
+          "audio": "/music/q30/voice2-quill.mp3",
+          "audioFallback": "/music/q30/voice2-quill.wav",
+          "score": "/music/q30/voice2-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice2-folio",
+          "audio": "/music/q30/voice2-folio.mp3",
+          "audioFallback": "/music/q30/voice2-folio.wav",
+          "score": "/music/q30/voice2-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "voice3": [
+        {
+          "id": "voice3-ivory",
+          "audio": "/music/q30/voice3-ivory.mp3",
+          "audioFallback": "/music/q30/voice3-ivory.wav",
+          "score": "/music/q30/voice3-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "voice3-quill",
+          "audio": "/music/q30/voice3-quill.mp3",
+          "audioFallback": "/music/q30/voice3-quill.wav",
+          "score": "/music/q30/voice3-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "voice3-folio",
+          "audio": "/music/q30/voice3-folio.mp3",
+          "audioFallback": "/music/q30/voice3-folio.wav",
+          "score": "/music/q30/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
         }
       ]
     }

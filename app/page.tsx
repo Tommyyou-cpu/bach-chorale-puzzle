@@ -15,40 +15,25 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
-import rawQuestions from "./questions.generated.json";
 import {
-  candidateFor,
-  type Candidate,
-  type DecoyType,
-  type GameState,
-  isComplete,
-  isOriginalSelection,
-  newGame,
-  questionsForGame,
-  type Question,
-  restoreGame,
-  scoreGame,
-  voicesForQuestion,
-  type VoiceKey,
-} from "./game";
+  ApiError,
+  createGameSession,
+  type GameRules,
+  type GameScore,
+  type GameSession,
+  type PublicCandidate,
+  type PublicQuestion,
+  type RevealCandidate,
+  type SubmitResult,
+  submitGameSession,
+} from "./lib/api-client";
 import { useAudioPlayer } from "./use-audio-player";
 import { VerovioScore } from "./verovio-score";
 
-const fallbackQuestions = rawQuestions as Question[];
-const STORAGE_KEY = "bach-puzzle-state-v4";
-const LEGACY_STORAGE_KEYS = ["bach-puzzle-state-v3", "bach-puzzle-state-v2"];
-const VOICE_META: Record<VoiceKey, { name: string; short: string }> = {
-  soprano: { name: "女高音", short: "S" },
-  alto: { name: "女低音", short: "A" },
-  tenor: { name: "男高音", short: "T" },
-  bass: { name: "男低音", short: "B" },
-};
-const DECOY_LABELS: Record<DecoyType, string> = {
-  original: "巴赫原作",
-  "voice-leading": "声部进行干扰",
-  harmony: "和声走向干扰",
-  mixed: "和声与声部进行混合干扰",
-};
+type Selections = Record<string, Record<string, string>>;
+type RevealState = SubmitResult;
+const EMPTY_QUESTIONS: PublicQuestion[] = [];
+
 const AUDIO_ERROR_LABELS = {
   network: "网络加载失败",
   decode: "音频解码失败",
@@ -60,236 +45,241 @@ function optionLetter(index: number) {
   return index >= 0 ? String.fromCharCode("A".charCodeAt(0) + index) : "";
 }
 
-function emptyMuted(): Record<VoiceKey, boolean> {
-  return { soprano: false, alto: false, tenor: false, bass: false };
+function voicesForQuestion(question: PublicQuestion) {
+  const listed = question.voiceOrder?.filter((voice) => (question.voices[voice]?.length ?? 0) > 0);
+  if (listed && listed.length > 0) return [...new Set(listed)];
+  return Object.keys(question.voices);
 }
 
-function savedState() {
-  try {
-    for (const key of [STORAGE_KEY, ...LEGACY_STORAGE_KEYS]) {
-      const raw = localStorage.getItem(key);
-      if (!raw) continue;
-      const parsed: unknown = JSON.parse(raw);
-      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) return parsed;
-    }
-  } catch {
-    // 存储空间被禁用或数据损坏时，从新局开始即可。
-  }
-  return undefined;
+function voiceLabel(question: PublicQuestion, voice: string, index = 0) {
+  return question.voiceLabels?.[voice] || (voice === "soprano" ? "女高音" : voice === "alto" ? "女低音" : voice === "tenor" ? "男高音" : voice === "bass" ? "男低音" : `第 ${index + 1} 声部`);
 }
 
-function safeState(questions: Question[]): GameState {
-  if (typeof window === "undefined") return newGame(questions, 20260916);
-  return restoreGame(questions, savedState());
+function voiceShort(question: PublicQuestion, voice: string, index: number) {
+  const label = voiceLabel(question, voice, index);
+  if (voice === "soprano") return "S";
+  if (voice === "alto") return "A";
+  if (voice === "tenor") return "T";
+  if (voice === "bass") return "B";
+  return label.replace(/\s+/g, "").slice(0, 1) || String(index + 1);
 }
 
-function publicQuestionsUrl() {
-  return new URL("api/questions/", document.baseURI).toString();
+function candidateFor(question: PublicQuestion, voice: string, id?: string) {
+  return question.voices[voice]?.find((candidate) => candidate.id === id);
 }
 
-function revealDetails(candidate: Candidate | undefined) {
-  if (!candidate) return { type: "未找到所选项", reason: "该选项已不在当前题目中。" };
-  const explanation = candidate.explanation?.trim();
+function formatPoints(value: number | undefined) {
+  const safe = Number(value ?? 0);
+  return Number.isInteger(safe) ? String(safe) : safe.toFixed(1);
+}
+
+function emptyMuted(question?: PublicQuestion): Record<string, boolean> {
+  return Object.fromEntries(question ? voicesForQuestion(question).map((voice) => [voice, false]) : []);
+}
+
+function errorMessage(error: unknown) {
+  if (error instanceof ApiError) return error.message;
+  return error instanceof Error ? error.message : "题目服务暂时不可用，请稍后重试。";
+}
+
+function rulesText(rules: GameRules | undefined) {
+  if (!rules) return "当前规则加载中";
+  return `每局 ${rules.questionsPerGame} 题 · 完整猜中 ${rules.scoreWeights.completeQuestion}% · 声部比例 ${rules.scoreWeights.voiceAccuracy}%`;
+}
+
+function revealedCandidate(
+  question: PublicQuestion,
+  reveal: RevealState | null,
+  voice: string,
+  mode: "selected" | "original",
+  selections: Selections,
+) {
+  const result = reveal?.results?.find((item) => item.questionId === question.id);
+  const resultCandidate = result?.[mode === "selected" ? "selected" : "originals"]?.[voice];
+  if (resultCandidate) return resultCandidate;
+  const serverResult = reveal?.score.questionResults?.find((item) => item.id === question.id)?.voices?.[voice];
+  const candidateId = mode === "selected" ? serverResult?.selectedId : serverResult?.correctId;
+  const candidate = candidateFor(question, voice, candidateId || (mode === "selected" ? selections[question.id]?.[voice] : undefined));
+  if (!candidate) return undefined;
   return {
-    type: DECOY_LABELS[candidate.decoyType] || "干扰声部",
-    reason: explanation || (candidate.isOriginal ? "这条声部属于本题的巴赫原作。" : "这是一条为听辨设置的替代声部。"),
+    ...candidate,
+    isOriginal: mode === "original" || Boolean(serverResult?.correct && mode === "selected"),
+    decoyType: serverResult?.decoyType || (mode === "original" ? "original" : undefined),
+    explanation: serverResult?.explanation || undefined,
+  } as RevealCandidate;
+}
+
+function revealInfo(candidate: RevealCandidate | PublicCandidate | undefined) {
+  if (!candidate) return { type: "未找到所选项", reason: "该选项已不在当前题目中。" };
+  if (!("isOriginal" in candidate)) return { type: "所选声部", reason: "已提交的声部候选。" };
+  const labels: Record<string, string> = {
+    original: "巴赫原作",
+    "voice-leading": "声部进行干扰",
+    harmony: "和声走向干扰",
+    mixed: "和声与声部进行混合干扰",
+  };
+  return {
+    type: labels[candidate.decoyType || (candidate.isOriginal ? "original" : "mixed")] || "干扰声部",
+    reason: candidate.explanation?.trim() || (candidate.isOriginal ? "这条声部属于巴赫原作。" : "这是一条为听辨设置的替代声部。"),
   };
 }
 
-function formatPoints(value: number) {
-  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+function publicQuestionFromReveal(question: PublicQuestion, reveal: RevealState | null): PublicQuestion {
+  return reveal?.questions?.find((item) => item.id === question.id) || question;
 }
 
 export default function Home() {
-  const [questions, setQuestions] = useState<Question[]>(fallbackQuestions);
-  const [state, setState] = useState<GameState>(() => newGame(fallbackQuestions, 20260916));
-  const [ready, setReady] = useState(false);
+  const [session, setSession] = useState<GameSession | null>(null);
+  const [current, setCurrent] = useState(0);
+  const [selections, setSelections] = useState<Selections>({});
+  const [reveal, setReveal] = useState<RevealState | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [loop, setLoop] = useState(false);
-  const [muted, setMuted] = useState<Record<VoiceKey, boolean>>(() => emptyMuted());
+  const [muted, setMuted] = useState<Record<string, boolean>>({});
   const [scoreMode, setScoreMode] = useState<"chosen" | "original">("chosen");
   const headingRef = useRef<HTMLHeadingElement>(null);
   const player = useAudioPlayer();
   const stopAudio = player.stop;
   const preloadAudio = player.preload;
 
+  const startSession = async () => {
+    setLoading(true);
+    setMessage("");
+    setReveal(null);
+    setSelections({});
+    setCurrent(0);
+    stopAudio({ clearCache: true });
+    try {
+      const next = await createGameSession();
+      if (!next.questions?.length) throw new Error("服务端没有返回可用题目。");
+      setSession(next);
+      setMuted(emptyMuted(next.questions[0]));
+    } catch (error) {
+      setSession(null);
+      setMessage(errorMessage(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    let cancelled = false;
-    const loadQuestions = async () => {
-      let available = fallbackQuestions;
-      try {
-        const response = await fetch(publicQuestionsUrl(), { cache: "no-cache" });
-        if (response.ok) {
-          const payload = await response.json() as { questions?: unknown };
-          if (Array.isArray(payload.questions) && payload.questions.length >= 3) {
-            available = payload.questions as Question[];
-          }
-        }
-      } catch {
-        // GitHub Pages 等静态部署没有题库接口，继续使用构建时题库。
-      }
-      if (cancelled) return;
-      setQuestions(available);
-      setState(safeState(available));
-      setReady(true);
-    };
-    void loadQuestions();
-    return () => {
-      cancelled = true;
-    };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void startSession();
+    // 只在页面首次加载时创建一局。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (ready) localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }, [ready, state]);
+  const questions = session?.questions ?? EMPTY_QUESTIONS;
+  const question = questions[current] ?? questions[0];
+  const questionVoices = question ? voicesForQuestion(question) : [];
+  const currentSelections = question ? selections[question.id] || {} : {};
+  const selectedVoiceKeys = questionVoices.filter((voice) => Boolean(currentSelections[voice]));
+  const complete = questions.length > 0 && questions.every((item) => voicesForQuestion(item).every((voice) => Boolean(selections[item.id]?.[voice])));
+  const activeResult = question ? reveal?.score.questionResults?.find((item) => item.id === question.id) : undefined;
+  const resultQuestion = question ? publicQuestionFromReveal(question, reveal) : undefined;
+  const resultVoices = resultQuestion ? voicesForQuestion(resultQuestion) : [];
 
-  const playbackKey = `${state.current}:${state.submitted}`;
+  const preloadRequest = useMemo(() => {
+    const tracks = questions.flatMap((item) => voicesForQuestion(item).flatMap((voice) => (item.voices[voice] || []).map((candidate) => ({ path: candidate.audio, fallback: candidate.audioFallback }))));
+    return { paths: tracks.map((track) => track.path), fallbackPaths: tracks.map((track) => track.fallback) };
+  }, [questions]);
+
+  useEffect(() => {
+    if (!loading && questions.length > 0) preloadAudio(preloadRequest);
+  }, [loading, preloadAudio, preloadRequest, questions.length]);
+
   useEffect(() => {
     stopAudio();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMuted(emptyMuted());
-  }, [playbackKey, stopAudio]);
+    if (question) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setMuted(emptyMuted(question));
+    }
+  }, [current, question, reveal, stopAudio]);
 
-  const activeQuestions = useMemo(() => questionsForGame(questions, state), [questions, state]);
-  const preloadRequest = useMemo(() => {
-    const tracks = activeQuestions.flatMap((item) =>
-      voicesForQuestion(item).flatMap((voice) => (item.voices[voice] ?? []).map((candidate) => ({ path: candidate.audio, fallback: candidate.audioFallback }))),
-    );
-    return {
-      paths: tracks.map((track) => track.path),
-      fallbackPaths: tracks.map((track) => track.fallback),
-    };
-  }, [activeQuestions]);
-
-  useEffect(() => {
-    if (ready) preloadAudio(preloadRequest);
-  }, [preloadAudio, preloadRequest, ready]);
-
-  const question = activeQuestions[state.current] ?? activeQuestions[0];
-  const selections = question ? state.selections[question.id] || {} : {};
-  const questionVoices = question ? voicesForQuestion(question) : [];
-  const selectedVoiceKeys = questionVoices.filter((voice) => Boolean(selections[voice]));
-  const selectedCount = selectedVoiceKeys.length;
-  const complete = isComplete(state, activeQuestions);
-  const score = useMemo(() => scoreGame(activeQuestions, state.selections), [activeQuestions, state.selections]);
+  if (loading && !question) return <main className="site-shell"><p className="status-message">正在从题库抽取本局题目……</p></main>;
 
   if (!question) {
-    return <main className="site-shell"><p className="status-message">题库暂时为空，请稍后再试。</p></main>;
+    return <main className="site-shell"><header className="masthead"><div className="brand-mark" aria-hidden="true">♩</div><div><p className="eyebrow">THE BACH PUZZLE</p><h1>拼出巴赫</h1></div></header><section className="status-message" role="alert"><p>{message || "题目服务暂时不可用。"}</p><button className="reset-button" onClick={() => void startSession()}><RefreshCw size={17} />重新连接</button></section></main>;
   }
 
-  const ordered = (voice: VoiceKey) => {
-    const candidates = state.orders[question.id]?.[voice]
-      ?.map((id) => candidateFor(question, voice, id))
-      .filter((candidate): candidate is Candidate => Boolean(candidate));
-    const available = question.voices[voice] ?? [];
-    return candidates?.length === available.length ? candidates : available;
-  };
-
-  const selectedCandidates = selectedVoiceKeys
-    .map((voice) => candidateFor(question, voice, selections[voice]))
-    .filter((candidate): candidate is Candidate => Boolean(candidate));
-  const originalCandidates = questionVoices
-    .map((voice) => (question.voices[voice] ?? []).find((candidate) => candidate.isOriginal))
-    .filter((candidate): candidate is Candidate => Boolean(candidate));
-  const allOriginal = questionVoices.every((voice) => isOriginalSelection(question, voice, selections[voice]));
-
-  const playPaths = (
-    paths: string[],
-    label: string,
-    withMute = false,
-    fallbackPaths?: Array<string | undefined>,
-    voiceKeys: VoiceKey[] = [],
-  ) => {
+  const playPaths = (paths: string[], label: string, withMute = false, fallbackPaths?: Array<string | undefined>, voiceKeys: string[] = []) => {
     if (paths.length === 0) return;
-    const keys = voiceKeys.length === paths.length ? voiceKeys : paths.map((_, index) => selectedVoiceKeys[index] ?? questionVoices[index]);
-    player.play({
-      paths,
-      fallbackPaths,
-      label,
-      loop,
-      voiceKeys: keys,
-      muted: withMute ? keys.map((voice) => muted[voice]) : undefined,
-    });
+    const keys = voiceKeys.length === paths.length ? voiceKeys : paths.map((_, index) => selectedVoiceKeys[index] || questionVoices[index]);
+    player.play({ paths, fallbackPaths, label, loop, voiceKeys: keys, muted: withMute ? keys.map((voice) => Boolean(muted[voice])) : undefined });
   };
 
-  const choose = (voice: VoiceKey, id: string) => {
+  const choose = (voice: string, id: string) => {
     player.stop();
     setMessage("");
-    setState((current) => ({
-      ...current,
-      selections: {
-        ...current.selections,
-        [question.id]: { ...current.selections[question.id], [voice]: id },
-      },
-    }));
+    setSelections((previous) => ({ ...previous, [question.id]: { ...(previous[question.id] || {}), [voice]: id } }));
   };
 
   const go = (index: number) => {
-    if (index < 0 || index >= activeQuestions.length) return;
-    setState((current) => ({ ...current, current: index }));
+    if (index < 0 || index >= questions.length) return;
+    setCurrent(index);
     requestAnimationFrame(() => headingRef.current?.focus());
   };
 
-  const submit = () => {
-    if (!complete) {
-      setMessage(`还有声部没有选择。完成全部 ${score.totalVoices} 个选择后才能揭晓。`);
+  const submit = async () => {
+    if (!complete || !session) {
+      setMessage(`还有声部没有选择。完成全部 ${questions.reduce((total, item) => total + voicesForQuestion(item).length, 0)} 个选择后才能揭晓。`);
       return;
     }
-    player.stop();
-    setState((current) => ({ ...current, submitted: true, current: 0 }));
+    setSubmitting(true);
     setMessage("");
-    setTimeout(() => headingRef.current?.focus(), 0);
+    stopAudio();
+    try {
+      const result = await submitGameSession(session.sessionId, selections);
+      setReveal(result);
+      setCurrent(0);
+      setScoreMode("chosen");
+      setTimeout(() => headingRef.current?.focus(), 0);
+    } catch (error) {
+      setMessage(errorMessage(error));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
-  const reset = () => {
-    player.stop({ clearCache: true });
-    setState((previous) => newGame(questions, Date.now(), previous.orders));
-    setMessage("已重新抽取题目并洗牌，开始新的挑战。");
-    setScoreMode("chosen");
-  };
-
-  const currentScoreCandidates = scoreMode === "chosen" ? selectedCandidates : originalCandidates;
-  const currentScorePaths = currentScoreCandidates.map((candidate) => candidate.score);
-  const currentScoreCandidateIds = currentScoreCandidates.map((candidate) => candidate.id);
-  const playerVoiceKeys = player.voiceKeys.filter((voice): voice is VoiceKey => Object.hasOwn(VOICE_META, voice));
-  const visibleMuteVoices = state.submitted ? [] : playerVoiceKeys.length > 0 ? playerVoiceKeys : selectedVoiceKeys;
+  const score: GameScore | undefined = reveal?.score;
+  const reset = () => void startSession();
+  const scoreCandidates = resultQuestion ? resultVoices.map((voice) => revealedCandidate(resultQuestion, reveal, voice, scoreMode === "chosen" ? "selected" : "original", selections)).filter((candidate): candidate is RevealCandidate => Boolean(candidate)) : [];
+  const scorePaths = scoreCandidates.map((candidate) => candidate.score);
+  const scoreCandidateIds = scoreCandidates.map((candidate) => candidate.id);
+  const playerVoiceKeys = player.voiceKeys.filter((voice) => questionVoices.includes(voice));
+  const visibleMuteVoices = reveal ? [] : playerVoiceKeys.length > 0 ? playerVoiceKeys : selectedVoiceKeys;
   const progressValue = Math.min(1, Math.max(0, player.progress));
-  const progressStatus = player.loading
-    ? "正在准备音频"
-    : player.playing
-      ? "正在播放"
-      : progressValue >= 1
-        ? "播放完成"
-        : player.label
-          ? "已暂停"
-          : "尚未播放";
+  const progressStatus = player.loading ? "正在准备音频" : player.playing ? "正在播放" : progressValue >= 1 ? "播放完成" : player.label ? "已暂停" : "尚未播放";
+  const scoreLabels = reveal?.rules || session?.rules;
 
   return (
     <main className="site-shell">
-      <header className="masthead"><div className="brand-mark" aria-hidden="true">♩</div><div><p className="eyebrow">THE BACH PUZZLE</p><h1>拼出巴赫</h1></div><p className="byline">一场声部盲听实验<br />田清新 · 制作</p></header>
-      {!state.submitted && <section className="intro"><div><p className="kicker">每局抽取 3 题 · 每题按实际声部数量作答 · 每个选项独立试听</p><h2>你能听出，哪几条旋律<br />曾在三百年前同时响起吗？</h2></div><div className="listening-note"><Headphones size={22} strokeWidth={1.5} /><span>建议佩戴耳机<br /><small>3 道题 · 约 6 分钟</small></span></div></section>}
+      <header className="masthead"><div className="brand-mark" aria-hidden="true">♩</div><div><p className="eyebrow">THE BACH PUZZLE</p><h1>拼出巴赫</h1></div><p className="byline">三/四声部盲听实验<br /><small>{rulesText(session?.rules)}</small></p></header>
+      {!reveal && <section className="intro"><div><p className="kicker">每局按规则抽取 · 每题按实际声部数量作答 · 每个选项独立试听</p><h2>你能听出，哪几条旋律<br />曾在三百年前同时响起吗？</h2></div><div className="listening-note"><Headphones size={22} strokeWidth={1.5} /><span>建议佩戴耳机<br /><small>{questions.length} 道题 · 只加载本局资源</small></span></div></section>}
 
-      {state.submitted ? <>
-        <section className="results-hero"><p className="kicker">挑战结果</p><h2 ref={headingRef} tabIndex={-1}>总分 <em>{formatPoints(score.totalScore)}</em> / 100</h2><p>你完整拼对了 <strong>{score.questions}</strong> / {score.totalQuestions} 首作品，找到了 <strong>{score.voices}</strong> / {score.totalVoices} 条巴赫原作声部。</p><div className="score-breakdown" aria-label="评分构成"><div><span>完整猜中曲目（40%）</span><strong>{score.questions} / {score.totalQuestions} · {formatPoints(score.questionPoints)} 分</strong></div><div><span>声部选项猜中比例（60%）</span><strong>{score.voices} / {score.totalVoices} · {formatPoints(score.voicePoints)} 分</strong></div></div><button className="reset-button" onClick={reset}><RotateCcw size={17} />重新挑战</button></section>
-        <div className="result-tabs" role="tablist" aria-label="选择结果题目">{activeQuestions.map((item, index) => <button role="tab" aria-selected={state.current === index} className={state.current === index ? "active" : ""} onClick={() => go(index)} key={item.id}>第 {index + 1} 题</button>)}</div>
+      {reveal && score ? <>
+        <section className="results-hero"><p className="kicker">挑战结果</p><h2 ref={headingRef} tabIndex={-1}>总分 <em>{formatPoints(score.totalScore)}</em> / 100</h2><p>你完整拼对了 <strong>{score.questions}</strong> / {score.totalQuestions} 首作品，找到了 <strong>{score.voices}</strong> / {score.totalVoices} 条巴赫原作声部。</p><div className="score-breakdown" aria-label="评分构成"><div><span>完整猜中曲目（{scoreLabels?.scoreWeights.completeQuestion ?? 40}%）</span><strong>{score.questions} / {score.totalQuestions} · {formatPoints(score.questionPoints)} 分</strong></div><div><span>声部选项猜中比例（{scoreLabels?.scoreWeights.voiceAccuracy ?? 60}%）</span><strong>{score.voices} / {score.totalVoices} · {formatPoints(score.voicePoints)} 分</strong></div></div><button className="reset-button" onClick={reset}><RotateCcw size={17} />重新挑战</button></section>
+        <div className="result-tabs" role="tablist" aria-label="选择结果题目">{questions.map((item, index) => <button role="tab" aria-selected={current === index} className={current === index ? "active" : ""} onClick={() => go(index)} key={item.id}>第 {index + 1} 题</button>)}</div>
         <article className="reveal-card">
-          <div className="reveal-heading"><div><p>{question.bwv} · {question.measures}</p><h3>{question.title}</h3></div><span className={allOriginal ? "seal correct" : "seal"}>{allOriginal ? "完整拼对" : "查看差异"}</span></div>
-          <div className="answer-grid">{questionVoices.map((voice) => { const order = ordered(voice); const chosen = selections[voice]; const chosenCandidate = candidateFor(question, voice, chosen); const correct = (question.voices[voice] ?? []).find((candidate) => candidate.isOriginal); const chosenIndex = order.findIndex((candidate) => candidate.id === chosen); const chosenLetter = optionLetter(chosenIndex); const correctIndex = correct ? order.findIndex((candidate) => candidate.id === correct.id) : -1; const correctLetter = optionLetter(correctIndex) || "—"; const ok = Boolean(correct && chosen === correct.id); const details = revealDetails(chosenCandidate); return <div className={`answer-row ${ok ? "right" : "wrong"}`} key={voice}><span className="answer-voice" aria-hidden="true">{VOICE_META[voice].short}</span><div className="answer-copy"><strong>{VOICE_META[voice].name}</strong><p>你选 {chosenLetter || "—"} · 原作 {correctLetter}</p><dl className="answer-explanation"><div><dt>所选类型</dt><dd>{details.type}</dd></div><div><dt>选择原因</dt><dd>{details.reason}</dd></div>{!ok && <div className="answer-original"><dt>正确项</dt><dd>巴赫原作（选项 {correctLetter}）</dd></div>}</dl></div><span className="answer-status" role="img" aria-label={ok ? "回答正确" : "回答不正确"}>{ok ? <Check aria-hidden="true" size={16} /> : <span aria-hidden="true">×</span>}</span></div>; })}</div>
-          <div className="compare-controls"><button onClick={() => playPaths(selectedCandidates.map((candidate) => candidate.audio), "你的组合", true, selectedCandidates.map((candidate) => candidate.audioFallback), selectedVoiceKeys)} disabled={player.loading}><Play size={16} fill="currentColor" />听你的组合</button><button onClick={() => playPaths(originalCandidates.map((candidate) => candidate.audio), "巴赫原作", true, originalCandidates.map((candidate) => candidate.audioFallback), questionVoices)} disabled={player.loading}><Play size={16} fill="currentColor" />听巴赫原作</button></div>
+          <div className="reveal-heading"><div><p>{resultQuestion?.bwv} · {resultQuestion?.measures} · {resultQuestion?.genre}</p><h3>{resultQuestion?.title}</h3></div><span className={activeResult?.correct ? "seal correct" : "seal"}>{activeResult?.correct ? "完整拼对" : "查看差异"}</span></div>
+          <div className="answer-grid">{resultVoices.map((voice, voiceIndex) => { const selected = revealedCandidate(resultQuestion!, reveal, voice, "selected", selections); const original = revealedCandidate(resultQuestion!, reveal, voice, "original", selections); const ok = Boolean(selected && "isOriginal" in selected && selected.isOriginal); const details = revealInfo(selected); return <div className={`answer-row ${ok ? "right" : "wrong"}`} key={voice}><span className="answer-voice" aria-hidden="true">{voiceShort(resultQuestion!, voice, voiceIndex)}</span><div className="answer-copy"><strong>{voiceLabel(resultQuestion!, voice, voiceIndex)}</strong><p>{ok ? "你选中了巴赫原作" : "需要对照原作声部"}</p><dl className="answer-explanation"><div><dt>所选类型</dt><dd>{details.type}</dd></div><div><dt>选择原因</dt><dd>{details.reason}</dd></div>{!ok && original && <div className="answer-original"><dt>正确项</dt><dd>巴赫原作已在提交结果中标出</dd></div>}</dl></div><span className="answer-status" role="img" aria-label={ok ? "回答正确" : "回答不正确"}>{ok ? <Check aria-hidden="true" size={16} /> : <span aria-hidden="true">×</span>}</span></div>; })}</div>
+          <div className="compare-controls"><button onClick={() => { const selected = resultVoices.map((voice) => revealedCandidate(resultQuestion!, reveal, voice, "selected", selections)).filter((candidate): candidate is RevealCandidate => Boolean(candidate)); playPaths(selected.map((candidate) => candidate.audio), "你的组合", true, selected.map((candidate) => candidate.audioFallback), resultVoices); }} disabled={player.loading}><Play size={16} fill="currentColor" />听你的组合</button><button onClick={() => { const originals = resultVoices.map((voice) => revealedCandidate(resultQuestion!, reveal, voice, "original", selections)).filter((candidate): candidate is RevealCandidate => Boolean(candidate)); playPaths(originals.map((candidate) => candidate.audio), "巴赫原作", true, originals.map((candidate) => candidate.audioFallback), resultVoices); }} disabled={player.loading}><Play size={16} fill="currentColor" />听巴赫原作</button></div>
           <div className="score-tabs" role="tablist" aria-label="乐谱对照"><button role="tab" aria-selected={scoreMode === "chosen"} onClick={() => setScoreMode("chosen")} className={scoreMode === "chosen" ? "active" : ""}>你的组合谱</button><button role="tab" aria-selected={scoreMode === "original"} onClick={() => setScoreMode("original")} className={scoreMode === "original" ? "active" : ""}>巴赫原谱</button></div>
-          <VerovioScore paths={currentScorePaths} title={scoreMode === "chosen" ? "你的组合" : "巴赫原谱"} questionId={question.id} candidateIds={currentScoreCandidateIds} />
-          <div className="analysis"><h4>听辨线索</h4><p>{question.analysis}</p><p className="source-note">{question.licenseNote} <a href={question.source} target="_blank" rel="noreferrer">{question.sourceLabel} ↗</a></p></div>
+          {scorePaths.length > 0 && <VerovioScore paths={scorePaths} title={scoreMode === "chosen" ? "你的组合" : "巴赫原谱"} questionId={resultQuestion?.id} candidateIds={scoreCandidateIds} voiceLabels={resultVoices.map((voice, index) => voiceLabel(resultQuestion!, voice, index))} clefs={resultVoices.map((voice) => resultQuestion?.clefs?.[voice] || "")} />}
+          <div className="analysis"><h4>听辨线索</h4><p>{resultQuestion?.analysis || "提交后可对照每个声部的原作与候选。"}</p><p className="source-note">{resultQuestion?.licenseNote} {resultQuestion?.source && <a href={resultQuestion.source} target="_blank" rel="noreferrer">{resultQuestion.sourceLabel} ↗</a>}</p></div>
         </article>
       </> : <section className="quiz-card" aria-label="声部拼图">
-        <div className="quiz-topline"><span>QUESTION <strong>{String(state.current + 1).padStart(2, "0")}</strong> / {String(activeQuestions.length).padStart(2, "0")}</span><span>本题已选 {selectedCount} / {questionVoices.length}</span></div><div className="rule" style={{ "--progress": `${((state.current + selectedCount / Math.max(questionVoices.length, 1)) / Math.max(activeQuestions.length, 1)) * 100}%` } as CSSProperties} />
-        <div className="question-copy"><p>第 {state.current + 1} 题</p><h3 ref={headingRef} tabIndex={-1}>从每个声部中，选出你认为属于巴赫的旋律</h3><span>点击 ▶ 单独试听；点击字母区域做出选择。选择至少两个声部后即可听合奏。</span></div>
-        <div className="voice-stack">{questionVoices.map((voice, voiceIndex) => <fieldset className="voice-row" key={voice}><legend><span>{String(voiceIndex + 1).padStart(2, "0")}</span>{VOICE_META[voice].name}</legend><div className="option-grid">{ordered(voice).map((candidate, index) => { const selected = selections[voice] === candidate.id; const letter = optionLetter(index); return <div className={`option-card ${selected ? "selected" : ""}`} key={candidate.id}><button className="listen-button" onClick={() => playPaths([candidate.audio], `${VOICE_META[voice].name}选项 ${letter}`, false, [candidate.audioFallback], [voice])} aria-label={`试听${VOICE_META[voice].name}选项 ${letter}`}><Play size={16} fill="currentColor" /></button><button className="choose-button" role="radio" aria-checked={selected} onClick={() => choose(voice, candidate.id)}><span>{letter}</span><small>{selected ? <><Check size={13} />已选择</> : "选择此旋律"}</small></button></div>; })}</div></fieldset>)}</div>
-        <div className="question-nav"><button disabled={state.current === 0} onClick={() => go(state.current - 1)}><ChevronLeft size={17} />上一题</button><div aria-label="题目进度">{activeQuestions.map((item, index) => <button aria-label={`第 ${index + 1} 题${voicesForQuestion(item).every((voice) => state.selections[item.id]?.[voice]) ? "，已完成" : ""}`} className={index === state.current ? "active" : ""} onClick={() => go(index)} key={item.id}>{index + 1}</button>)}</div>{state.current < activeQuestions.length - 1 ? <button onClick={() => go(state.current + 1)}>下一题<ChevronRight size={17} /></button> : <button className="submit-button" onClick={submit} disabled={!complete}>提交并揭晓</button>}</div>
-        <p className="status-message" aria-live="polite">{message || (!complete ? `完成全部 ${activeQuestions.length} 题后即可揭晓，提交前可随时修改。` : "全部声部已选齐，可以提交。")}</p>
+        <div className="quiz-topline"><span>QUESTION <strong>{String(current + 1).padStart(2, "0")}</strong> / {String(questions.length).padStart(2, "0")}</span><span>本题已选 {selectedVoiceKeys.length} / {questionVoices.length}</span></div><div className="rule" style={{ "--progress": `${((current + selectedVoiceKeys.length / Math.max(questionVoices.length, 1)) / Math.max(questions.length, 1)) * 100}%` } as CSSProperties} />
+        <div className="question-copy"><p>第 {current + 1} 题 · {question.genre || "音乐片段"}</p><h3 ref={headingRef} tabIndex={-1}>从每个声部中，选出你认为属于巴赫的旋律</h3><span>{question.bwv} · {question.measures} · {question.keySignature || "调号见谱面"}<br />选择至少两个声部后即可听合奏。</span></div>
+        <div className="voice-stack">{questionVoices.map((voice, voiceIndex) => <fieldset className="voice-row" key={voice}><legend><span>{String(voiceIndex + 1).padStart(2, "0")}</span>{voiceLabel(question, voice, voiceIndex)}<small>{question.clefs?.[voice] || ""}</small></legend><div className="option-grid">{(question.voices[voice] || []).map((candidate, index) => { const selected = currentSelections[voice] === candidate.id; const letter = optionLetter(index); return <div className={`option-card ${selected ? "selected" : ""}`} key={candidate.id}><button className="listen-button" onClick={() => playPaths([candidate.audio], `${voiceLabel(question, voice, voiceIndex)}选项 ${letter}`, false, [candidate.audioFallback], [voice])} aria-label={`试听${voiceLabel(question, voice, voiceIndex)}选项 ${letter}`}><Play size={16} fill="currentColor" /></button><button className="choose-button" role="radio" aria-checked={selected} onClick={() => choose(voice, candidate.id)}><span>{letter}</span><small>{selected ? <><Check size={13} />已选择</> : "选择此旋律"}</small></button></div>; })}</div></fieldset>)}</div>
+        <div className="question-nav"><button disabled={current === 0} onClick={() => go(current - 1)}><ChevronLeft size={17} />上一题</button><div aria-label="题目进度">{questions.map((item, index) => <button aria-label={`第 ${index + 1} 题${voicesForQuestion(item).every((voice) => Boolean(selections[item.id]?.[voice])) ? "，已完成" : ""}`} className={index === current ? "active" : ""} onClick={() => go(index)} key={item.id}>{index + 1}</button>)}</div>{current < questions.length - 1 ? <button onClick={() => go(current + 1)}>下一题<ChevronRight size={17} /></button> : <button className="submit-button" onClick={() => void submit()} disabled={!complete || submitting}>{submitting ? "提交中…" : "提交并揭晓"}</button>}</div>
+        <p className="status-message" aria-live="polite">{message || (!complete ? `完成全部 ${questions.length} 题后即可揭晓，提交前可随时修改。` : "全部声部已选齐，可以提交。")}</p>
       </section>}
 
-      <footer>© 2026 田清新 · 乐谱由 Verovio 渲染 · 音乐素材与方法说明见揭晓页</footer>
-      {((!state.submitted && selectedCount >= 2) || player.label) && <div className="ensemble-bar"><div className="ensemble-title">{player.loading ? <LoaderCircle className="spin" size={20} /> : <Volume2 size={20} />}<span>{player.label || "当前合奏"}<small role={player.error ? "alert" : "status"} aria-live="polite">{player.error ? `${AUDIO_ERROR_LABELS[player.error.kind]}：${player.error.message}` : loop ? "循环开启" : "单次播放"}</small><span className="audio-progress" role="progressbar" aria-label="音频播放进度" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progressValue * 100)} aria-valuetext={progressStatus}><span style={{ width: `${progressValue * 100}%` }} /><span className="sr-only">{progressStatus}</span></span></span></div><div className="bar-actions"><button className={loop ? "active" : ""} onClick={() => setLoop((value) => !value)} aria-pressed={loop}><RefreshCw size={16} /><span>循环</span></button>{visibleMuteVoices.map((voice) => { const isMuted = muted[voice]; return <button key={voice} className={isMuted ? "muted" : ""} aria-label={`${isMuted ? "取消静音" : "静音"}${VOICE_META[voice].name}`} onClick={() => { const next = { ...muted, [voice]: !isMuted }; setMuted(next); player.updateMuted(visibleMuteVoices.map((item) => next[item])); }}>{isMuted ? <VolumeX size={15} /> : VOICE_META[voice].short}</button>; })}{player.loading ? <button className="primary" disabled><LoaderCircle className="spin" size={17} />准备中</button> : player.playing ? <button className="primary" onClick={player.pause}><Pause size={17} fill="currentColor" />暂停</button> : player.error ? <button className="primary" onClick={player.retry} disabled={player.loading}><RefreshCw size={17} />重试音频</button> : player.label ? <button className="primary" onClick={player.resume}><Play size={17} fill="currentColor" />继续</button> : !state.submitted && selectedCount >= 2 ? <button className="primary" onClick={() => playPaths(selectedCandidates.map((candidate) => candidate.audio), "当前合奏", true, selectedCandidates.map((candidate) => candidate.audioFallback), selectedVoiceKeys)}><Play size={17} fill="currentColor" />播放合奏</button> : null}</div></div>}
+      <footer>© 2026 · 音乐素材与方法说明见揭晓页</footer>
+      {((!reveal && selectedVoiceKeys.length >= 2) || player.label) && <div className="ensemble-bar"><div className="ensemble-title">{player.loading ? <LoaderCircle className="spin" size={20} /> : <Volume2 size={20} />}<span>{player.label || "当前合奏"}<small role={player.error ? "alert" : "status"} aria-live="polite">{player.error ? `${AUDIO_ERROR_LABELS[player.error.kind]}：${player.error.message}` : loop ? "循环开启" : "单次播放"}</small><span className="audio-progress" role="progressbar" aria-label="音频播放进度" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(progressValue * 100)} aria-valuetext={progressStatus}><span style={{ width: `${progressValue * 100}%` }} /><span className="sr-only">{progressStatus}</span></span></span></div><div className="bar-actions"><button className={loop ? "active" : ""} onClick={() => setLoop((value) => !value)} aria-pressed={loop}><RefreshCw size={16} /><span>循环</span></button>{visibleMuteVoices.map((voice) => { const isMuted = Boolean(muted[voice]); return <button key={voice} className={isMuted ? "muted" : ""} aria-label={`${isMuted ? "取消静音" : "静音"}${voiceLabel(question, voice, questionVoices.indexOf(voice))}`} onClick={() => { const next = { ...muted, [voice]: !isMuted }; setMuted(next); player.updateMuted(visibleMuteVoices.map((item) => Boolean(next[item]))); }}>{isMuted ? <VolumeX size={15} /> : voiceShort(question, voice, questionVoices.indexOf(voice))}</button>; })}{player.loading ? <button className="primary" disabled><LoaderCircle className="spin" size={17} />准备中</button> : player.playing ? <button className="primary" onClick={player.pause}><Pause size={17} fill="currentColor" />暂停</button> : player.error ? <button className="primary" onClick={player.retry} disabled={player.loading}><RefreshCw size={17} />重试音频</button> : player.label ? <button className="primary" onClick={player.resume}><Play size={17} fill="currentColor" />继续</button> : !reveal && selectedVoiceKeys.length >= 2 ? <button className="primary" onClick={() => playPaths(selectedVoiceKeys.map((voice) => candidateFor(question, voice, currentSelections[voice])?.audio).filter((path): path is string => Boolean(path)), "当前合奏", true, selectedVoiceKeys.map((voice) => candidateFor(question, voice, currentSelections[voice])?.audioFallback), selectedVoiceKeys)}><Play size={17} fill="currentColor" />播放合奏</button> : null}</div></div>}
     </main>
   );
 }

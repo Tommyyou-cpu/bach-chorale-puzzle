@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy Worker and GitHub Pages
 
 on:
   push:
@@ -11,11 +11,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: bach-chorale-puzzle-production
   cancel-in-progress: true
 
 jobs:
-  build:
+  test:
+    name: Test and validate source
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,33 +24,187 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm run test
+      - name: Type check
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Check the 30-question manifest
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const questions = JSON.parse(fs.readFileSync("app/questions.generated.json", "utf8"));
+          if (questions.length !== 30) throw new Error(`题目数量必须为 30，当前为 ${questions.length}`);
+          const counts = Object.fromEntries(["chorale", "fugue", "other"].map((genre) => [genre, questions.filter((question) => question.genre === genre).length]));
+          if (JSON.stringify(counts) !== JSON.stringify({ chorale: 15, fugue: 10, other: 5 })) {
+            throw new Error(`题目分类必须为 15/10/5：${JSON.stringify(counts)}`);
+          }
+          const seed = fs.readFileSync("worker/migrations/0002_seed_questions.sql", "utf8");
+          const seedHeader = seed.match(/Questions:\s*(\d+)/i);
+          if (!seedHeader || Number(seedHeader[1]) !== 30) throw new Error("D1 seed migration 必须包含最终 30 道题");
+          const seededIds = [...seed.matchAll(/VALUES\s*\('([^']+)'/g)].map((match) => match[1]);
+          if (new Set(seededIds).size !== 30) throw new Error(`D1 seed migration 的题目 INSERT 数量必须为 30，当前为 ${new Set(seededIds).size}`);
+          for (const question of questions) {
+            const voices = question.voiceOrder || Object.keys(question.voices || {});
+            if (voices.length !== question.voiceCount) throw new Error(`${question.id} 声部数量与 voiceCount 不一致`);
+            for (const voice of voices) {
+              const candidates = question.voices?.[voice];
+              if (!Array.isArray(candidates) || candidates.length < 3 || candidates.length > 4) throw new Error(`${question.id}/${voice} 候选数量不在 3—4 范围`);
+            }
+          }
+          console.log(JSON.stringify({ questions: questions.length, counts }, null, 2));
+          NODE
+
+  worker:
+    name: Migrate D1 and deploy Worker
+    runs-on: ubuntu-latest
+    needs: test
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_D1_DATABASE_ID: ${{ secrets.CLOUDFLARE_D1_DATABASE_ID }}
+      CLOUDFLARE_R2_BUCKET_NAME: ${{ secrets.CLOUDFLARE_R2_BUCKET_NAME }}
+      ADMIN_BOOTSTRAP_USERNAME: ${{ secrets.ADMIN_BOOTSTRAP_USERNAME }}
+      ADMIN_BOOTSTRAP_PASSWORD: ${{ secrets.ADMIN_BOOTSTRAP_PASSWORD }}
+      SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+      WORKER_API_URL: ${{ vars.WORKER_API_URL }}
+      NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Check Cloudflare deployment configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=()
+          for name in CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN CLOUDFLARE_D1_DATABASE_ID CLOUDFLARE_R2_BUCKET_NAME ADMIN_BOOTSTRAP_USERNAME ADMIN_BOOTSTRAP_PASSWORD SESSION_SECRET; do
+            if [[ -z "${!name:-}" ]]; then missing+=("$name"); fi
+          done
+          if [[ -z "${WORKER_API_URL:-}" && -z "${NEXT_PUBLIC_API_BASE_URL:-}" ]]; then
+            missing+=("WORKER_API_URL or NEXT_PUBLIC_API_BASE_URL (Actions Variable)")
+          fi
+          if (( ${#missing[@]} )); then
+            printf '缺少 Cloudflare/GitHub 配置：%s\n' "${missing[*]}" >&2
+            exit 1
+          fi
+      - name: Prepare CI Wrangler configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp worker/wrangler.toml worker/wrangler.ci.toml
+          sed -i "s/00000000-0000-0000-0000-000000000000/${CLOUDFLARE_D1_DATABASE_ID}/" worker/wrangler.ci.toml
+          sed -i "s/bach-chorale-puzzle-assets/${CLOUDFLARE_R2_BUCKET_NAME}/" worker/wrangler.ci.toml
+          cat > "$RUNNER_TEMP/worker-secrets.env" <<EOF
+          ADMIN_BOOTSTRAP_USERNAME=$ADMIN_BOOTSTRAP_USERNAME
+          ADMIN_BOOTSTRAP_PASSWORD=$ADMIN_BOOTSTRAP_PASSWORD
+          SESSION_SECRET=$SESSION_SECRET
+          EOF
+      - name: Apply remote D1 migrations
+        run: npx wrangler d1 migrations apply DB --remote --config worker/wrangler.ci.toml
+      - name: Deploy Cloudflare Worker
+        run: npx wrangler deploy --config worker/wrangler.ci.toml --secrets-file "$RUNNER_TEMP/worker-secrets.env" --keep-vars
+      - name: Verify Worker health, default rules, and inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          API_URL="${WORKER_API_URL:-${NEXT_PUBLIC_API_BASE_URL}}"
+          API_URL="${API_URL%/}"
+          curl --fail --silent --show-error "$API_URL/api/health" | jq -e '.ok == true' >/dev/null
+          session_json="$(curl --fail --silent --show-error -X POST "$API_URL/api/game/sessions" -H 'Content-Type: application/json' -d '{}')"
+          printf '%s' "$session_json" | jq -e '.rules.questionsPerGame == 3 and .rules.allocation.chorale == 1 and .rules.allocation.fugue == 1 and .rules.allocation.other == 1 and (.questions | length) == 3' >/dev/null
+          printf '%s' "$session_json" | jq -e '([.questions[] | .voices | to_entries[] | .value[] | has("isOriginal")] | any) | not' >/dev/null
+          login_json="$(curl --fail --silent --show-error -X POST "$API_URL/api/auth/login" -H 'Content-Type: application/json' -d "$(jq -n --arg username "$ADMIN_BOOTSTRAP_USERNAME" --arg password "$ADMIN_BOOTSTRAP_PASSWORD" '{username:$username,password:$password}')")"
+          token="$(printf '%s' "$login_json" | jq -er '.token')"
+          questions_json="$(curl --fail --silent --show-error "$API_URL/api/admin/questions" -H "Authorization: Bearer $token")"
+          printf '%s' "$questions_json" | jq -e '(.questions | length) == 30' >/dev/null
+          printf '%s' "$questions_json" | jq -e '([.questions[] | select(.genre == "chorale")] | length) == 15 and ([.questions[] | select(.genre == "fugue")] | length) == 10 and ([.questions[] | select(.genre == "other")] | length) == 5' >/dev/null
+          printf 'Worker health, default rules, public answer stripping, and 30-question inventory passed.\n'
+      - name: Remove CI-only configuration
+        if: always()
+        run: rm -f worker/wrangler.ci.toml "$RUNNER_TEMP/worker-secrets.env"
+
+  build:
+    name: Build and verify GitHub Pages site
+    runs-on: ubuntu-latest
+    needs: worker
+    env:
+      WORKER_API_URL: ${{ vars.WORKER_API_URL }}
+      NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
       - name: Build static site
         shell: bash
         run: |
-          REPO_NAME="${GITHUB_REPOSITORY#*/}"
-          if [[ "$REPO_NAME" == *.github.io ]]; then
+          set -euo pipefail
+          export NEXT_PUBLIC_API_BASE_URL="${NEXT_PUBLIC_API_BASE_URL:-${WORKER_API_URL}}"
+          if [[ -z "$NEXT_PUBLIC_API_BASE_URL" ]]; then
+            echo '缺少 WORKER_API_URL 或 NEXT_PUBLIC_API_BASE_URL Actions Variable' >&2
+            exit 1
+          fi
+          repository_name="${GITHUB_REPOSITORY#*/}"
+          if [[ "$repository_name" == *.github.io ]]; then
             export BASE_PATH=""
           else
-            export BASE_PATH="/$REPO_NAME"
+            export BASE_PATH="/$repository_name"
           fi
           npm run build
-          if [[ -d "dist/client/$REPO_NAME/_next" ]]; then
-            mv "dist/client/$REPO_NAME/_next" "dist/client/_next"
-          fi
-      - name: Verify mobile assets
+          test -s out/index.html
+          test -s out/admin/index.html
+          touch out/.nojekyll
+      - name: Verify all 30 question resources in static output
         shell: bash
         run: |
-          test "$(find dist/client/music -type f -name '*.mp3' | wc -l | tr -d ' ')" = "192"
-          test "$(find dist/client/generated-scores -type f -name '*.svg' | wc -l | tr -d ' ')" = "1740"
-          test -s "dist/client/generated-scores/q1/soprano-ivory--alto-ivory--tenor-ivory--bass-ivory.svg"
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          const questions = JSON.parse(fs.readFileSync("app/questions.generated.json", "utf8"));
+          const expectedAudio = questions.reduce((total, question) => total + Object.values(question.voices).reduce((count, candidates) => count + candidates.length, 0), 0);
+          const expectedScores = questions.reduce((total, question) => total + Object.values(question.voices).reduce((count, candidates) => count * candidates.length, 1), 0);
+          const count = (root, extension) => {
+            let total = 0;
+            const visit = (directory) => {
+              for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+                const full = `${directory}/${entry.name}`;
+                if (entry.isDirectory()) visit(full);
+                else if (entry.name.endsWith(extension)) total += 1;
+              }
+            };
+            visit(root);
+            return total;
+          };
+          const mp3 = count("out/music", ".mp3");
+          const wav = count("out/music", ".wav");
+          const musicxml = count("out/music", ".musicxml");
+          const svg = count("out/generated-scores", ".svg");
+          if (mp3 !== expectedAudio || wav !== expectedAudio || musicxml !== expectedAudio || svg !== expectedScores) {
+            throw new Error(`静态资源数量错误：预期音频/XML=${expectedAudio}、SVG=${expectedScores}；实际 MP3=${mp3} WAV=${wav} MusicXML=${musicxml} SVG=${svg}`);
+          }
+          console.log(JSON.stringify({ questions: questions.length, expectedAudio, expectedScores, mp3, wav, musicxml, svg }, null, 2));
+          NODE
       - uses: actions/configure-pages@v5
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
-  deploy:
+          path: out
+
+  deploy-pages:
+    name: Publish GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

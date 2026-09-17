@@ -6,10 +6,9 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const QUESTIONS_PATH = path.join(ROOT, "app", "questions.generated.json");
 const MUSIC_DIR = path.join(ROOT, "public", "music");
 const GENERATED_SCORES_DIR = path.join(ROOT, "public", "generated-scores");
-const VOICES = ["soprano", "alto", "tenor", "bass"];
 const DECOY_TYPES = ["voice-leading", "harmony", "mixed"];
-const MIN_QUESTIONS = 15;
-const MAX_QUESTIONS = 20;
+const EXPECTED_QUESTIONS = 30;
+const EXPECTED_GENRES = { chorale: 15, fugue: 10, other: 5 };
 
 const errors = [];
 const referenced = { mp3: new Set(), wav: new Set(), musicxml: new Set() };
@@ -65,6 +64,14 @@ function musicXmlClef(markup) {
   return `${sign}${line}${octaveChange > 0 ? "+" : ""}${octaveChange || ""}`;
 }
 
+function musicXmlTimeSignature(markup) {
+  const timeBlock = markup.match(/<time\b[^>]*>([\s\S]*?)<\/time>/i);
+  if (!timeBlock) return null;
+  const beats = timeBlock[1].match(/<beats>\s*([^<]+?)\s*<\/beats>/i)?.[1]?.trim();
+  const beatType = timeBlock[1].match(/<beat-type>\s*([^<]+?)\s*<\/beat-type>/i)?.[1]?.trim();
+  return beats && beatType ? `${beats}/${beatType}` : null;
+}
+
 function localAssetPath(route) {
   if (!route.startsWith("/music/")) return null;
   const filePath = path.resolve(ROOT, "public", `.${route}`);
@@ -115,6 +122,15 @@ function verifyAsset({ question, questionId, voice, variant, candidate, field, e
       } else if (isNonEmptyString(expectedClef) && actualClef !== expectedClef) {
         fail(`${label} 谱号与题目元数据不一致：JSON=${display(expectedClef)}，MusicXML=${display(actualClef)}`);
       }
+      const actualTimeSignature = musicXmlTimeSignature(markup);
+      if (!actualTimeSignature) {
+        fail(`${label} 缺少拍号：${route}`);
+      } else if (isNonEmptyString(question.timeSignature) && actualTimeSignature !== question.timeSignature) {
+        fail(`${label} 拍号与题目元数据不一致：JSON=${display(question.timeSignature)}，MusicXML=${display(actualTimeSignature)}`);
+      }
+      if (/<chord\s*\/>/i.test(markup)) fail(`${label} 必须是单旋律声部，不能包含 chord 节点：${route}`);
+      const logicalVoices = new Set([...markup.matchAll(/<voice>\s*([^<]+?)\s*<\/voice>/gi)].map((match) => match[1].trim()));
+      if (logicalVoices.size > 1) fail(`${label} 包含多个逻辑声部：${[...logicalVoices].join("、")}`);
     }
   } catch {
     fail(`${label} 缺少资源：${route}`);
@@ -149,7 +165,8 @@ function verifyGeneratedScores(questions) {
   const expected = new Set();
   for (const question of questions) {
     if (!isRecord(question) || !isNonEmptyString(question.id) || !isRecord(question.voices)) continue;
-    const candidates = VOICES.map((voice) => question.voices[voice]);
+    const voiceOrder = Array.isArray(question.voiceOrder) ? question.voiceOrder : Object.keys(question.voices);
+    const candidates = voiceOrder.map((voice) => question.voices[voice]);
     if (candidates.some((items) => !Array.isArray(items))) continue;
     const collect = (voiceIndex, selected) => {
       if (voiceIndex === candidates.length) {
@@ -168,7 +185,7 @@ function verifyGeneratedScores(questions) {
       const markup = fs.readFileSync(filePath, "utf8");
       if (!/<svg(?:\s|>)/i.test(markup)) {
         fail(`预生成乐谱不是有效 SVG：${path.relative(ROOT, filePath)}`);
-      } else if ((markup.match(/class="clef"/g) || []).length < VOICES.length) {
+      } else if ((markup.match(/class="clef"/g) || []).length < voiceOrder.length) {
         fail(`预生成乐谱缺少声部谱号：${path.relative(ROOT, filePath)}`);
       } else verified += 1;
     } catch {
@@ -203,8 +220,10 @@ if (!Array.isArray(questions)) {
   questions = [];
 }
 
-if (questions.length < MIN_QUESTIONS || questions.length > MAX_QUESTIONS) {
-  fail(`题目数应为 ${MIN_QUESTIONS}–${MAX_QUESTIONS}，当前为 ${questions.length}`);
+if (questions.length !== EXPECTED_QUESTIONS) fail(`题目数应为 ${EXPECTED_QUESTIONS}，当前为 ${questions.length}`);
+for (const [genre, expected] of Object.entries(EXPECTED_GENRES)) {
+  const actual = questions.filter((question) => question?.genre === genre).length;
+  if (actual !== expected) fail(`${genre} 题目数应为 ${expected}，当前为 ${actual}`);
 }
 
 const seenQuestionIds = new Map();
@@ -229,11 +248,17 @@ for (const question of questions) {
   if (!isRecord(question) || !isNonEmptyString(question.id)) continue;
   const questionId = question.id;
   const voices = question.voices;
+  const voiceOrder = question.voiceOrder;
   if (!isNonEmptyString(question.genre)) {
     fail(`${questionId}.genre 必须是非空字符串`);
   }
-  if (question.voiceCount !== VOICES.length) {
-    fail(`${questionId}.voiceCount 必须为 ${VOICES.length}，当前为 ${display(question.voiceCount)}`);
+  if (!Array.isArray(voiceOrder) || voiceOrder.length < 2 || voiceOrder.some((voice) => !isNonEmptyString(voice))) {
+    fail(`${questionId}.voiceOrder 必须是至少包含两个有效声部的数组`);
+    continue;
+  }
+  if (new Set(voiceOrder).size !== voiceOrder.length) fail(`${questionId}.voiceOrder 不得包含重复声部`);
+  if (question.voiceCount !== voiceOrder.length) {
+    fail(`${questionId}.voiceCount 必须为 voiceOrder.length（${voiceOrder.length}），当前为 ${display(question.voiceCount)}`);
   }
   if (!isNonEmptyString(question.keySignature)) {
     fail(`${questionId}.keySignature 必须是非空字符串`);
@@ -241,26 +266,26 @@ for (const question of questions) {
   if (!isRecord(question.clefs)) {
     fail(`${questionId}.clefs 必须是包含各声部谱号的对象`);
   } else {
-    for (const voice of VOICES) {
+    for (const voice of voiceOrder) {
       if (!isNonEmptyString(question.clefs[voice])) {
         fail(`${questionId}.clefs.${voice} 必须是非空字符串`);
       }
     }
   }
   if (!isRecord(voices)) {
-    fail(`${questionId}.voices 必须是包含四个声部的对象`);
+    fail(`${questionId}.voices 必须是包含 voiceOrder 中各声部的对象`);
     continue;
   }
 
   const voiceKeys = Object.keys(voices);
-  for (const voice of VOICES) {
+  for (const voice of voiceOrder) {
     if (!(voice in voices)) fail(`${questionId}.voices 缺少 ${voice} 声部`);
   }
   for (const voice of voiceKeys) {
-    if (!VOICES.includes(voice)) fail(`${questionId}.voices 包含非预期声部：${voice}`);
+    if (!voiceOrder.includes(voice)) fail(`${questionId}.voices 包含非预期声部：${voice}`);
   }
 
-  for (const voice of VOICES) {
+  for (const voice of voiceOrder) {
     const candidates = voices[voice];
     if (!Array.isArray(candidates)) {
       fail(`${questionId}/${voice} 必须是变体数组`);
@@ -337,10 +362,10 @@ for (const question of questions) {
 
 const musicAssets = collectMusicAssets();
 const generatedScores = verifyGeneratedScores(questions);
-const candidateCounts = questions.flatMap((question) => VOICES.map((voice) => question?.voices?.[voice]?.length || 0));
+const candidateCounts = questions.flatMap((question) => (question.voiceOrder || []).map((voice) => question?.voices?.[voice]?.length || 0));
 const dynamicExpectedAssets = candidateCounts.reduce((total, count) => total + count, 0);
 const combinations = questions.reduce(
-  (total, question) => total + VOICES.reduce((product, voice) => product * (question.voices?.[voice]?.length || 0), 1),
+  (total, question) => total + (question.voiceOrder || []).reduce((product, voice) => product * (question.voices?.[voice]?.length || 0), 1),
   0,
 );
 if (!candidateCounts.includes(3)) fail("题库至少应包含一题三选项声部");

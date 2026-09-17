@@ -75,4 +75,15 @@ assert.equal(score.totalVoices, 11);
 assert.ok(Math.abs(score.questionPoints - 40 / 3) < 1e-9);
 assert.ok(Math.abs(score.voicePoints - (5 / 11) * 60) < 1e-9);
 
+const fugue = makeQuestion("fugue", ["voice1", "voice2", "voice3"]);
+fugue.voiceOrder = ["voice1", "voice2", "voice3"];
+fugue.voiceLabels = { voice1: "第一声部", voice2: "第二声部", voice3: "第三声部" };
+assert.deepEqual(voicesForQuestion(fugue), ["voice1", "voice2", "voice3"]);
+const weighted = scoreGame([fugue], {
+  fugue: Object.fromEntries(["voice1", "voice2", "voice3"].map((voice) => [voice, fugue.voices[voice][0].id])),
+}, { completeQuestion: 25, voiceAccuracy: 75 });
+assert.equal(weighted.questions, 1);
+assert.equal(weighted.questionPoints, 25);
+assert.equal(weighted.voicePoints, 75);
+
 console.log("game.test.mjs passed");

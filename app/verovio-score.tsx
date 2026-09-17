@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { generatedScorePath, scoreSelectionFromPaths } from "./score-assets";
 
-const VOICE_NAMES = ["女高音", "女低音", "男高音", "男低音"] as const;
-const VOICE_CLEFS = [["G", "2"], ["G", "2"], ["F", "4"], ["F", "4"]] as const;
+const FALLBACK_VOICE_NAMES = ["女高音", "女低音", "男高音", "男低音"] as const;
+const FALLBACK_VOICE_CLEFS = [["G", "2"], ["G", "2"], ["F", "4"], ["F", "4"]] as const;
 
 type VerovioToolkit = {
   setOptions(options: Record<string, unknown>): void;
@@ -21,7 +21,21 @@ type VerovioScoreProps = {
   questionId?: string;
   /** 按女高音、女低音、男高音、男低音顺序排列的稳定候选项 ID。 */
   candidateIds?: readonly string[];
+  /** 按 paths 顺序提供声部显示名称；赋格题不再假设 SATB。 */
+  voiceLabels?: readonly string[];
+  /** 按 paths 顺序提供题库谱号。 */
+  clefs?: readonly string[];
 };
+
+function clefToVerovio(value: string | undefined, index: number) {
+  const normalized = (value ?? "").toLowerCase();
+  if (normalized.includes("bass") || normalized === "f" || normalized === "f4") return ["F", "4"] as const;
+  if (normalized.includes("alto") || normalized.includes("c3")) return ["C", "3"] as const;
+  if (normalized.includes("tenor") || normalized.includes("c4")) return ["C", "4"] as const;
+  if (normalized.includes("treble-8") || normalized.includes("g-8") || normalized.includes("g8")) return ["G", "2"] as const;
+  if (normalized.includes("treble") || normalized === "g" || normalized === "g2") return ["G", "2"] as const;
+  return FALLBACK_VOICE_CLEFS[index] ?? ["G", "2"] as const;
+}
 
 function resolveAsset(path: string) {
   return new URL(path.replace(/^\//, ""), document.baseURI).toString();
@@ -36,7 +50,12 @@ function getErrorMessage(error: unknown, fallback: string) {
   return error instanceof Error && error.message ? error.message : fallback;
 }
 
-async function combineParts(paths: readonly string[], signal?: AbortSignal) {
+async function combineParts(
+  paths: readonly string[],
+  signal?: AbortSignal,
+  voiceLabels: readonly string[] = [],
+  clefs: readonly string[] = [],
+) {
   const texts = await Promise.all(
     paths.map(async (path) => {
       const response = await fetch(resolveAsset(path), signal ? { signal } : undefined);
@@ -61,10 +80,10 @@ async function combineParts(paths: readonly string[], signal?: AbortSignal) {
     if (!scorePart || !part) throw new Error("MusicXML 缺少声部数据");
 
     const id = `P${index + 1}`;
-    const [sign, line] = VOICE_CLEFS[index];
+    const [sign, line] = clefToVerovio(clefs[index], index);
     scorePart.setAttribute("id", id);
     const partName = scorePart.querySelector("part-name");
-    if (partName) partName.textContent = VOICE_NAMES[index];
+    if (partName) partName.textContent = voiceLabels[index] || FALLBACK_VOICE_NAMES[index] || `声部 ${index + 1}`;
     part.setAttribute("id", id);
 
     part.querySelectorAll("clef").forEach((node) => node.remove());
@@ -100,15 +119,26 @@ async function fetchStaticScore(path: string, signal?: AbortSignal) {
   return markup;
 }
 
-async function renderDynamicScore(paths: readonly string[], signal?: AbortSignal) {
-  // 只在桌面路径执行动态导入；移动端不会请求 Verovio 的 WebAssembly（网页汇编）模块。
+async function renderDynamicScore(
+  paths: readonly string[],
+  signal?: AbortSignal,
+  voiceLabels: readonly string[] = [],
+  clefs: readonly string[] = [],
+) {
+  // 只在没有预生成组合谱、且用户打开揭晓页时加载。远程 ESM（ECMAScript 模块）
+  // 导入留在浏览器运行时，避免 Next.js 静态构建解析 Verovio 中仅供 Node.js 使用的分支。
+  const externalImport = (url: string) => import(/* webpackIgnore: true */ url) as Promise<Record<string, unknown>>;
+  const verovioBase = "https://cdn.jsdelivr.net/npm/verovio@6.2.0/dist";
   const [wasm, esm, xml] = await Promise.all([
-    import("verovio/wasm"),
-    import("verovio/esm"),
-    combineParts(paths, signal),
+    externalImport(`${verovioBase}/verovio-module.mjs`),
+    externalImport(`${verovioBase}/verovio.mjs`),
+    combineParts(paths, signal, voiceLabels, clefs),
   ]);
-  const verovioModule = await wasm.default();
-  const toolkit: VerovioToolkit = new esm.VerovioToolkit(verovioModule);
+  const createModule = wasm.default as () => Promise<unknown>;
+  const Toolkit = esm.VerovioToolkit as new (module: unknown) => VerovioToolkit;
+  if (typeof createModule !== "function" || typeof Toolkit !== "function") throw new Error("Verovio 动态模块加载失败");
+  const verovioModule = await createModule();
+  const toolkit = new Toolkit(verovioModule);
   try {
     toolkit.setOptions({
       scale: 36,
@@ -119,11 +149,11 @@ async function renderDynamicScore(paths: readonly string[], signal?: AbortSignal
       footer: "none",
       header: "none",
     });
-    if (!toolkit.loadData(xml)) throw new Error("MusicXML 数据无法交给 Verovio 雕刻");
+    if (!toolkit.loadData(xml)) throw new Error("MusicXML 数据无法生成乐谱");
 
     let pages = "";
     for (let page = 1; page <= toolkit.getPageCount(); page += 1) pages += toolkit.renderToSVG(page);
-    if (!pages) throw new Error("Verovio 没有生成乐谱页面");
+    if (!pages) throw new Error("没有生成乐谱页面");
     return pages;
   } finally {
     toolkit.destroy();
@@ -137,12 +167,14 @@ function scoreSelection(
 ) {
   const inferred = scoreSelectionFromPaths(paths);
   const resolvedQuestionId = questionId || inferred?.questionId;
-  const resolvedCandidateIds = candidateIds?.length === paths.length ? [...candidateIds] : inferred?.candidateIds;
+  // Worker（边缘函数）会为公开题目的选项生成一次性 ID；MusicXML 路径仍保留构建阶段
+  // 的稳定候选 ID，因此静态组合谱优先从资源路径恢复候选 ID。
+  const resolvedCandidateIds = inferred?.candidateIds || (candidateIds?.length === paths.length ? [...candidateIds] : undefined);
   if (!resolvedQuestionId || !resolvedCandidateIds) return null;
   return { questionId: resolvedQuestionId, candidateIds: resolvedCandidateIds };
 }
 
-export function VerovioScore({ paths, title, questionId, candidateIds }: VerovioScoreProps) {
+export function VerovioScore({ paths, title, questionId, candidateIds, voiceLabels = [], clefs = [] }: VerovioScoreProps) {
   const pathsKey = paths.join("|");
   const candidateIdsKey = candidateIds?.join("|") || "";
   // 数组由页面渲染时重新创建；只在实际资源键变化时替换稳定副本。
@@ -196,7 +228,7 @@ export function VerovioScore({ paths, title, questionId, candidateIds }: Verovio
       }
 
       try {
-        const markup = await renderDynamicScore(stablePaths, controller?.signal);
+        const markup = await renderDynamicScore(stablePaths, controller?.signal, voiceLabels, clefs);
         if (!cancelled) {
           setSvg(markup);
           setLoading(false);
@@ -206,7 +238,7 @@ export function VerovioScore({ paths, title, questionId, candidateIds }: Verovio
         if (cancelled) return;
         console.error("动态乐谱雕刻失败", dynamicError);
         if (!staticPath) {
-          setError(`动态乐谱雕刻失败：${getErrorMessage(dynamicError, "Verovio 渲染失败")}`);
+          setError(`动态乐谱雕刻失败：${getErrorMessage(dynamicError, "乐谱渲染失败")}`);
           setLoading(false);
           return;
         }
@@ -220,7 +252,7 @@ export function VerovioScore({ paths, title, questionId, candidateIds }: Verovio
           if (!cancelled) {
             console.error("静态乐谱回退失败", staticError);
             setError(
-              `动态乐谱雕刻失败：${getErrorMessage(dynamicError, "Verovio 渲染失败")}；静态乐谱加载失败：${getErrorMessage(staticError, "资源读取失败")}`,
+              `动态乐谱雕刻失败：${getErrorMessage(dynamicError, "乐谱渲染失败")}；静态乐谱加载失败：${getErrorMessage(staticError, "资源读取失败")}`,
             );
             setLoading(false);
           }
@@ -233,11 +265,11 @@ export function VerovioScore({ paths, title, questionId, candidateIds }: Verovio
       cancelled = true;
       controller?.abort();
     };
-  }, [pathsKey, retry, stablePaths, staticPath]);
+  }, [clefs, pathsKey, retry, stablePaths, staticPath, voiceLabels]);
 
   const downloadLinks = paths.map((path, index) => (
     <a key={path} href={resolveAsset(path)} download>
-      下载{VOICE_NAMES[index] || "声部"} MusicXML
+      下载{voiceLabels[index] || FALLBACK_VOICE_NAMES[index] || `声部 ${index + 1}`} MusicXML
     </a>
   ));
 
