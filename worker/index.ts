@@ -31,6 +31,7 @@ const PBKDF2_ITERATIONS = 120_000;
 const DEFAULT_SESSION_TTL = 7_200;
 const DEFAULT_RATE_LIMIT = 5;
 const DEFAULT_RATE_WINDOW = 60;
+const STATIC_ASSET_STORAGE_WARNING = "当前部署未启用 R2 对象存储；内置题目资源由 GitHub Pages 静态文件提供。若需新增资源，请将文件提交到仓库并重新部署。";
 const MAX_UPLOAD_BYTES = 30 * 1024 * 1024;
 const ALLOWED_ASSET_EXTENSIONS = new Set(["mp3", "wav", "musicxml", "xml", "svg"]);
 const ALLOWED_ASSET_MIME_TYPES: Record<string, Set<string>> = {
@@ -666,6 +667,8 @@ async function questionListResponse(request: Request, env: Env, includeDisabled:
       return includeDisabled ? adminQuestion(resolved) : publicQuestion(resolved);
     }),
     count: questions.length,
+    storage: "static",
+    warning: STATIC_ASSET_STORAGE_WARNING,
   });
 }
 
@@ -864,7 +867,7 @@ function contentType(key: string) {
 
 async function handleAssetGet(request: Request, env: Env, rawKey: string) {
   const store = bucket(env);
-  if (!store) return fail(request, env, 503, "R2 资源桶未配置");
+  if (!store) return fail(request, env, 503, STATIC_ASSET_STORAGE_WARNING);
   const key = assetKey(rawKey);
   if (!key) return fail(request, env, 400, "资源路径不合法");
   const item = await store.get(key);
@@ -879,7 +882,7 @@ async function handleAssetUpload(request: Request, env: Env) {
   const auth = await requireAdmin(request, env);
   if (!auth.ok) return auth.response;
   const store = bucket(env);
-  if (!store) return fail(request, env, 503, "R2 资源桶未配置");
+  if (!store) return fail(request, env, 503, STATIC_ASSET_STORAGE_WARNING);
   let form: FormData;
   try {
     form = await request.formData();
@@ -923,7 +926,7 @@ async function handleAssetDelete(request: Request, env: Env, rawKey: string) {
   const auth = await requireAdmin(request, env);
   if (!auth.ok) return auth.response;
   const store = bucket(env);
-  if (!store) return fail(request, env, 503, "R2 资源桶未配置");
+  if (!store) return fail(request, env, 503, STATIC_ASSET_STORAGE_WARNING);
   const key = assetKey(rawKey);
   if (!key) return fail(request, env, 400, "资源路径不合法");
   const references = await rows<JsonObject>(env.DB, "SELECT id FROM questions WHERE voices_json LIKE ? LIMIT 5", [`%${key}%`]);
@@ -944,6 +947,8 @@ async function route(request: Request, env: Env) {
       timestamp: isoNow(),
       rules: await getRules(env),
       inventory: await inventory(env),
+      storage: "static",
+      warning: STATIC_ASSET_STORAGE_WARNING,
     });
   }
   if (path === "/api/auth/login" && request.method === "POST") return handleLogin(request, env);

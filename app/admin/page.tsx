@@ -17,7 +17,6 @@ import {
   submitGameSession,
   updateAdminQuestion,
   updateAdminRules,
-  uploadAdminAsset,
   type AdminQuestion,
   type AdminRulesResponse,
   type DrawSimulation,
@@ -162,7 +161,6 @@ export default function AdminPage() {
   const [voiceCountFilter, setVoiceCountFilter] = useState("");
   const [enabledFilter, setEnabledFilter] = useState<"" | "enabled" | "disabled">("");
   const [sourceFilter, setSourceFilter] = useState("");
-  const [upload, setUpload] = useState({ questionId: "", revision: "1", voice: "voice1", candidateId: "", file: null as File | null });
   const [newPassword, setNewPassword] = useState("");
   const audioPlayer = useAudioPlayer();
   const player = {
@@ -285,7 +283,6 @@ export default function AdminPage() {
   };
   const beginSimulation = async () => { setBusy(true); setError(""); try { const next = await requestJson<GameSession>("/game/sessions", { method: "POST", body: JSON.stringify({}) }, token || undefined); setSimulateSession(next); setSimulateSelections({}); setSimulateResult(null); } catch (caught) { setError(displayError(caught)); } finally { setBusy(false); } };
   const submitSimulation = async () => { if (!simulateSession) return; setBusy(true); try { setSimulateResult(await submitGameSession(simulateSession.sessionId, simulateSelections)); } catch (caught) { setError(displayError(caught)); } finally { setBusy(false); } };
-  const uploadFile = async () => { const revision = Number(upload.revision); if (!token || !upload.file) return; if (!Number.isInteger(revision) || revision < 1) { setError("题目版本必须是正整数。"); return; } setBusy(true); setError(""); try { const result = await uploadAdminAsset(token, upload.file, upload.questionId, upload.voice, upload.candidateId, revision); setMessage(`资源上传成功：${result.url || result.path || result.key || "已写入资源桶"}`); } catch (caught) { setError(displayError(caught)); } finally { setBusy(false); } };
   const doChangePassword = async () => { if (!token || newPassword.length < 8) { setError("新密码至少需要 8 个字符。"); return; } const currentPassword = window.prompt("请输入当前密码"); if (!currentPassword) return; try { await changePassword(token, currentPassword, newPassword); setNewPassword(""); setMessage("密码已更新。"); } catch (caught) { setError(displayError(caught)); } };
 
   if (checking) return <main style={panelStyle}><p className="status-message">正在验证管理员会话……</p></main>;
@@ -313,6 +310,6 @@ export default function AdminPage() {
 
     {tab === "answer" && simulateSession && <section style={{ ...cardStyle, marginTop: 12 }}><label style={{ display: "flex", gap: 8, alignItems: "center" }}><input type="checkbox" checked={showAnswers} onChange={(event) => setShowAnswers(event.target.checked)} />显示答案辅助模式（仅管理员可见）</label>{showAnswers && <div style={{ marginTop: 14 }}><p style={{ color: "var(--muted)", fontSize: 13 }}>答案通过已加载的管理员题库按音频与乐谱资源路径匹配，不会改变公开游戏接口。</p>{simulateSession.questions.map((question) => <details key={question.id} open><summary>{question.id} · {question.title}</summary><ul>{question.voiceOrder.map((voice) => { const managed = question.voices[voice].map((candidate) => adminCandidateForPublic(questions, question, voice, candidate)).find((candidate) => candidate?.isOriginal); return <li key={voice}>{question.voiceLabels[voice] || voice}：{managed?.id || "未找到对应管理员候选"}</li>; })}</ul></details>)}</div>}</section>}
 
-    {tab === "upload" && <section style={cardStyle}><h2 style={{ marginTop: 0 }}>R2（对象存储）资源上传</h2><p style={{ color: "var(--muted)" }}>上传音频、MusicXML（音乐交换格式）或静态乐谱；服务端会校验文件类型和题目引用，并按题目版本生成不可变资源路径。</p><div style={{ display: "grid", gap: 12, maxWidth: 650 }}><label>题目 ID<input value={upload.questionId} onChange={(event) => setUpload((current) => ({ ...current, questionId: event.target.value }))} style={inputStyle} /></label><label>题目版本<input type="number" min={1} step={1} value={upload.revision} onChange={(event) => setUpload((current) => ({ ...current, revision: event.target.value }))} style={inputStyle} /></label><label>声部<input value={upload.voice} onChange={(event) => setUpload((current) => ({ ...current, voice: event.target.value }))} style={inputStyle} /></label><label>候选 ID<input value={upload.candidateId} onChange={(event) => setUpload((current) => ({ ...current, candidateId: event.target.value }))} style={inputStyle} /></label><label>文件<input type="file" accept="audio/mpeg,audio/wav,audio/wave,.mp3,.wav,application/xml,text/xml,.musicxml,.xml,image/svg+xml,.svg" onChange={(event) => setUpload((current) => ({ ...current, file: event.target.files?.[0] || null }))} style={inputStyle} /></label><button type="button" disabled={busy || !upload.file || !upload.questionId || !upload.candidateId} onClick={() => void uploadFile()} style={buttonStyle}>上传到 R2</button></div></section>}
+    {tab === "upload" && <section style={cardStyle}><h2 style={{ marginTop: 0 }}>资源管理</h2><p style={{ color: "var(--muted)", lineHeight: 1.8 }}>当前生产部署未启用 R2（对象存储），因此后台不会上传或删除资源。内置题目的 MP3、WAV、MusicXML（音乐交换格式）和 SVG 文件随 GitHub Pages 静态站点发布。</p><p style={{ color: "var(--muted)", lineHeight: 1.8 }}>如需新增或替换资源，请把文件放入仓库的静态资源目录，更新题目资源路径后提交到 <code>main</code> 分支，GitHub Actions 会重新构建并发布。题库与规则仍可在本页通过 Worker 和 D1（边缘数据库）维护。</p><div role="status" style={{ border: "1px solid #e8cc8a", background: "#fff5d7", padding: "12px 14px", color: "#8a5a18" }}>资源上传接口已明确返回“未启用对象存储”，不会产生任何订阅或存储费用。</div></section>}
   </main>;
 }

@@ -8,7 +8,7 @@
 - 管理后台：[https://tommyyou-cpu.github.io/bach-chorale-puzzle/admin/](https://tommyyou-cpu.github.io/bach-chorale-puzzle/admin/)
 - Worker 接口：部署后将 `WORKER_API_URL` 写入 GitHub Actions Variables；仓库不预设无法从代码推断的 Cloudflare 域名。
 
-GitHub Pages（GitHub 静态页面托管）只提供前端静态文件。管理员登录、题库维护、抽题、判分和资源上传均由 Cloudflare Worker（Cloudflare 边缘函数）处理，D1（边缘数据库）保存题库与会话，R2（对象存储）保存后台上传的资源。
+GitHub Pages（GitHub 静态页面托管）只提供前端静态文件。管理员登录、题库维护、抽题和判分由 Cloudflare Worker（Cloudflare 边缘函数）处理，D1（边缘数据库）保存题库与会话。当前生产部署不启用 R2（对象存储），内置题目的音频、MusicXML（音乐交换格式）和 SVG（可缩放矢量图）随 GitHub Pages 一起发布，因此不会产生对象存储订阅费用。
 
 ## 题库与规则
 
@@ -47,21 +47,19 @@ npm run validate
 
 ## Cloudflare 初始化
 
-首次部署前，在 Cloudflare 创建一个 D1 数据库和一个 R2 桶。数据库、桶名称与 Worker 配置中的绑定保持一致：
+首次部署前，在 Cloudflare 创建一个 D1 数据库。Worker 配置只绑定 D1，静态题目资源由仓库和 GitHub Pages 管理：
 
 ```bash
 npx wrangler d1 create bach-chorale-puzzle
-npx wrangler r2 bucket create bach-chorale-puzzle-assets
 ```
 
-将 D1 返回的真实 `database_id` 写入部署环境的 `CLOUDFLARE_D1_DATABASE_ID`。R2 桶名写入 `CLOUDFLARE_R2_BUCKET_NAME`。Worker 的迁移位于 [worker/migrations](./worker/migrations)，GitHub Actions 会在部署 Worker 前运行远程 D1 迁移，随后部署 Worker 和健康检查。
+将 D1 返回的真实 `database_id` 写入部署环境的 `CLOUDFLARE_D1_DATABASE_ID`。Worker 的迁移位于 [worker/migrations](./worker/migrations)，GitHub Actions 会在部署 Worker 前运行远程 D1 迁移，随后部署 Worker 和健康检查。
 
 生产 Worker 需要以下 GitHub Secrets（GitHub 加密变量）：
 
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_D1_DATABASE_ID`
-- `CLOUDFLARE_R2_BUCKET_NAME`
 - `ADMIN_BOOTSTRAP_USERNAME`
 - `ADMIN_BOOTSTRAP_PASSWORD`
 - `SESSION_SECRET`
@@ -73,7 +71,7 @@ npx wrangler r2 bucket create bach-chorale-puzzle-assets
 - `WORKER_API_URL`：Worker 根地址，例如 `https://bach-chorale-puzzle-api.example.workers.dev`，不要带末尾 `/api`。
 - `NEXT_PUBLIC_API_BASE_URL`：通常与 `WORKER_API_URL` 相同；工作流会把它传给静态构建。
 
-上述 Cloudflare 账号、真实 D1 `database_id`、R2 桶名、Worker 域名和 GitHub Secret 均无法从仓库内容安全推断，缺少任一项时工作流会在部署前明确失败。
+上述 Cloudflare 账号、真实 D1 `database_id`、Worker 域名和 GitHub Secret 均无法从仓库内容安全推断，缺少任一项时工作流会在部署前明确失败。当前工作流不读取、不要求 `CLOUDFLARE_R2_BUCKET_NAME`，也不会创建或使用 R2 资源。
 
 ## GitHub Actions 发布顺序
 
@@ -100,7 +98,7 @@ npx wrangler r2 bucket create bach-chorale-puzzle-assets
 - 模拟抽取：用当前规则和可选随机种子检查分类分配。
 - 模拟答题：复用正式页面的试听、两声部起播、静音、视觉进度条、提交和评分结果。
 
-上传资源时，Worker 会检查文件扩展名、MIME 类型、大小和 MusicXML 基本结构，并使用不可变的题目版本路径写入 R2。被题目引用的对象不能直接删除。
+资源管理：当前部署不提供上传和删除对象接口。后台的“资源管理”页会明确提示这一点；新增或替换 MP3、WAV、MusicXML 和 SVG 时，应将文件提交到仓库静态资源目录，更新题目资源路径后重新运行 GitHub Actions。Worker 的资源接口在未绑定对象存储时统一返回 503 和静态资源说明，避免误以为资源已写入云端。
 
 ## 接口概览
 

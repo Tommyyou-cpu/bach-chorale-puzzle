@@ -163,6 +163,7 @@ function collectMusicAssets() {
 
 function verifyGeneratedScores(questions) {
   const expected = new Set();
+  const expectedVoiceCounts = new Map();
   for (const question of questions) {
     if (!isRecord(question) || !isNonEmptyString(question.id) || !isRecord(question.voices)) continue;
     const voiceOrder = Array.isArray(question.voiceOrder) ? question.voiceOrder : Object.keys(question.voices);
@@ -171,7 +172,9 @@ function verifyGeneratedScores(questions) {
     const collect = (voiceIndex, selected) => {
       if (voiceIndex === candidates.length) {
         if (selected.some((candidate) => !isRecord(candidate) || !isNonEmptyString(candidate.id))) return;
-        expected.add(path.join(GENERATED_SCORES_DIR, question.id, `${selected.map((candidate) => candidate.id).join("--")}.svg`));
+        const filePath = path.join(GENERATED_SCORES_DIR, question.id, `${selected.map((candidate) => candidate.id).join("--")}.svg`);
+        expected.add(filePath);
+        expectedVoiceCounts.set(filePath, voiceOrder.length);
         return;
       }
       for (const candidate of candidates[voiceIndex]) collect(voiceIndex + 1, [...selected, candidate]);
@@ -185,7 +188,7 @@ function verifyGeneratedScores(questions) {
       const markup = fs.readFileSync(filePath, "utf8");
       if (!/<svg(?:\s|>)/i.test(markup)) {
         fail(`预生成乐谱不是有效 SVG：${path.relative(ROOT, filePath)}`);
-      } else if ((markup.match(/class="clef"/g) || []).length < voiceOrder.length) {
+      } else if ((markup.match(/class="clef"/g) || []).length < (expectedVoiceCounts.get(filePath) || 0)) {
         fail(`预生成乐谱缺少声部谱号：${path.relative(ROOT, filePath)}`);
       } else verified += 1;
     } catch {
