@@ -22,9 +22,7 @@
       <part-name>voice2</part-name>
     </score-part>
   </part-list>
-  
   <part id="P14f25a7196af9dc097d2c9a79fa1ecce">
-    
     <measure number="1">
       <attributes>
         <divisions>10080</divisions>
@@ -94,7 +92,6 @@
         <beam number="2">backward hook</beam>
       </note>
     </measure>
-    
     <measure number="2">
       <note>
         <pitch>
@@ -163,7 +160,6 @@
         <beam number="2">backward hook</beam>
       </note>
     </measure>
-    
     <measure number="3">
       <note>
         <pitch>
@@ -230,7 +226,6 @@
         <beam number="2">backward hook</beam>
       </note>
     </measure>
-    
     <measure number="4">
       <note>
         <pitch>

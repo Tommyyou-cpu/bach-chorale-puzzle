@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE score-partwise  PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.1">
   <work>
     <work-title>Bach BWV 850 q18 corrected</work-title>
@@ -23,9 +22,7 @@
       <part-name>voice1</part-name>
     </score-part>
   </part-list>
-  <!--=========================== Part 1 ===========================-->
   <part id="Pf804a520c67e837dff88fa4027f4ae2b">
-    <!--========================= Measure 1 ==========================-->
     <measure number="1">
       <attributes>
         <divisions>10080</divisions>
@@ -165,7 +162,6 @@
         <type>eighth</type>
       </note>
     </measure>
-    <!--========================= Measure 2 ==========================-->
     <measure number="2">
       <note>
         <pitch>
@@ -294,7 +290,6 @@
         <type>eighth</type>
       </note>
     </measure>
-    <!--========================= Measure 3 ==========================-->
     <measure number="3">
       <note>
         <pitch>
@@ -425,7 +420,6 @@
         <type>eighth</type>
       </note>
     </measure>
-    <!--========================= Measure 4 ==========================-->
     <measure number="4">
       <note>
         <pitch>

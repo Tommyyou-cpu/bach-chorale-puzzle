@@ -31,9 +31,7 @@
       </midi-instrument>
     </score-part>
   </part-list>
-  
   <part id="P1">
-    
     <measure number="1">
       <attributes>
         <divisions>10080</divisions>
@@ -53,7 +51,8 @@
       <note dynamics="100.00">
         <pitch>
           <step>B</step>
-          <alter>-1</alter><octave>2</octave>
+          <alter>-1</alter>
+          <octave>2</octave>
         </pitch>
         <duration>10080</duration>
         <type>quarter</type>
@@ -118,7 +117,6 @@
         <type>16th</type>
       </note>
     </measure>
-    
     <measure number="2">
       <note dynamics="100.00">
         <pitch>
@@ -175,7 +173,6 @@
         </notations>
       </note>
     </measure>
-    
     <measure number="3">
       <note dynamics="100.00">
         <pitch>
@@ -242,7 +239,6 @@
         <accidental>flat</accidental>
       </note>
     </measure>
-    
     <measure number="4">
       <note>
         <rest />

@@ -6,7 +6,6 @@ import itertools
 import json
 import math
 import re
-import shutil
 import wave
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
@@ -136,6 +135,11 @@ def parse(path: Path) -> Part:
                 continue
             duration = float(txt(item, "duration", "0")) / divisions
             is_chord = first(item, "chord") is not None
+            # 每个候选文件代表一个独立旋律声部。源谱偶尔把同一声部的
+            # 纵向重复音写成带 <chord/> 的附加 note；跳过附加音，避免
+            # 音频出现纵向音程，也让导出的 MusicXML 保持单旋律结构。
+            if is_chord:
+                continue
             onset = previous if is_chord else local
             absolute_onset = absolute + onset
             rest = first(item, "rest") is not None
@@ -367,14 +371,15 @@ def mutate_node(node: ET.Element, value: int, flats: bool):
 
 def write_xml(part: Part, mutations: list[tuple[int, int]], output: Path, flats: bool):
     output.parent.mkdir(parents=True, exist_ok=True)
-    if not mutations:
-        if part.path.resolve() != output.resolve():
-            shutil.copyfile(part.path, output)
-        return
     tree = ET.parse(part.path)
     nodes = [node for node in tree.getroot().iter() if tn(node) == "note"]
     for index, value in mutations:
         mutate_node(nodes[part.events[index].node_index], value, flats)
+    for parent in tree.getroot().iter():
+        for node in list(parent):
+            if tn(node) == "note" and first(node, "chord") is not None:
+                parent.remove(node)
+    ET.indent(tree, space="  ")
     output.write_text('<?xml version="1.0" encoding="utf-8"?>\n' + ET.tostring(tree.getroot(), encoding="unicode"), encoding="utf-8")
 
 
@@ -494,7 +499,8 @@ def build(qid: str, spec):
             if variant == 0:
                 explanation, kind = "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。", "original"
             elif variant == 1:
-                explanation, kind = "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。", "voice-leading"
+                explanation = "声部进行干扰：改写非稳定拍的局部音级，保持四条旋律的节奏骨架。" if qid == "q18" else "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+                kind = "voice-leading"
             else:
                 explanation, kind = "和声干扰：改写稳定拍音级，改变局部和声成员。", "harmony"
             entries.append({"id": stem, "audio": f"/music/{qid}/{stem}.mp3", "audioFallback": f"/music/{qid}/{stem}.wav", "score": f"/music/{qid}/{stem}.musicxml", "isOriginal": variant == 0, "variant": variant, "decoyType": kind, "explanation": explanation})
@@ -505,7 +511,7 @@ def build(qid: str, spec):
         "clefs": {voice: part.clef for voice, part in zip(order, parts)}, "keySignature": parts[0].key, "timeSignature": parts[0].time,
         "measureStart": start, "measureEnd": end, "source": source_url, "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
         "sourceEdition": f"{source_file}（LilyPond 转 MusicXML，节选第 {start}–{end} 小节）", "sourceLicense": LICENSE,
-        "analysis": "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
+        "analysis": "第 17—20 小节的四条复调声部均持续活动；按原始 MIDI 事件顺序重建为严格单旋律，避免相邻三十二分音符被错误合并为纵向和弦。每声部提供原作、声部进行干扰和和声干扰。" if qid == "q18" else "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
         "licenseNote": f"巴赫作品为公共领域；数字谱源按 {LICENSE} 发布。", "maxRestByVoice": {voice: max_rest(part) for voice, part in zip(order, parts)}, "revision": 2 if qid == "q18" else 1, "voices": voices,
     }
     return question, report

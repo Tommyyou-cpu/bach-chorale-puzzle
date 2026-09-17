@@ -22,9 +22,7 @@
       <part-name>voice1</part-name>
     </score-part>
   </part-list>
-  
   <part id="Pf804a520c67e837dff88fa4027f4ae2b">
-    
     <measure number="1">
       <attributes>
         <divisions>10080</divisions>
@@ -164,7 +162,6 @@
         <type>eighth</type>
       </note>
     </measure>
-    
     <measure number="2">
       <note>
         <pitch>
@@ -292,7 +289,6 @@
         <type>eighth</type>
       </note>
     </measure>
-    
     <measure number="3">
       <note>
         <pitch>
@@ -423,7 +419,6 @@
         <type>eighth</type>
       </note>
     </measure>
-    
     <measure number="4">
       <note>
         <pitch>

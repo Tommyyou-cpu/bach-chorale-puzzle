@@ -22,9 +22,7 @@
       <part-name>voice4</part-name>
     </score-part>
   </part-list>
-  
   <part id="Pd868a03cc2578f9fe2d9a86157c18fc0">
-    
     <measure number="1">
       <attributes>
         <divisions>10080</divisions>
@@ -196,7 +194,6 @@
         <beam number="2">end</beam>
       </note>
     </measure>
-    
     <measure number="2">
       <note>
         <pitch>
@@ -357,7 +354,6 @@
         <beam number="2">end</beam>
       </note>
     </measure>
-    
     <measure number="3">
       <note>
         <pitch>
@@ -518,7 +514,6 @@
         <beam number="2">end</beam>
       </note>
     </measure>
-    
     <measure number="4">
       <note>
         <pitch>

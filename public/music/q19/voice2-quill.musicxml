@@ -31,9 +31,7 @@
       </midi-instrument>
     </score-part>
   </part-list>
-  
   <part id="P1">
-    
     <measure number="1">
       <attributes>
         <divisions>10080</divisions>
@@ -68,7 +66,8 @@
       <note dynamics="100.00">
         <pitch>
           <step>E</step>
-          <alter>-1</alter><octave>5</octave>
+          <alter>-1</alter>
+          <octave>5</octave>
         </pitch>
         <duration>2520</duration>
         <type>16th</type>
@@ -132,7 +131,6 @@
         <dot />
       </note>
     </measure>
-    
     <measure number="2">
       <note>
         <rest />
@@ -186,7 +184,6 @@
         </notations>
       </note>
     </measure>
-    
     <measure number="3">
       <note dynamics="100.00">
         <pitch>
@@ -341,7 +338,6 @@
         <beam number="2">end</beam>
       </note>
     </measure>
-    
     <measure number="4">
       <note dynamics="100.00">
         <pitch>
@@ -397,7 +393,6 @@
         <type>eighth</type>
       </note>
     </measure>
-    
     <measure number="5">
       <note dynamics="100.00">
         <pitch>
@@ -495,7 +490,6 @@
         </notations>
       </note>
     </measure>
-    
     <measure number="6">
       <note dynamics="100.00">
         <pitch>
@@ -581,17 +575,6 @@
         </pitch>
         <duration>20160</duration>
         <type>half</type>
-      </note>
-      <note>
-        <chord />
-        <pitch>
-          <step>B</step>
-          <alter>-1</alter>
-          <octave>3</octave>
-        </pitch>
-        <duration>20160</duration>
-        <type>half</type>
-        <accidental>flat</accidental>
       </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>

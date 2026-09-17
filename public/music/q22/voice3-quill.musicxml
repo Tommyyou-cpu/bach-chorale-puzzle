@@ -31,9 +31,7 @@
       </midi-instrument>
     </score-part>
   </part-list>
-  
   <part id="P1">
-    
     <measure number="1">
       <attributes>
         <divisions>10080</divisions>
@@ -102,7 +100,6 @@
         <type>16th</type>
       </note>
     </measure>
-    
     <measure number="2">
       <note dynamics="100.00">
         <pitch>
@@ -163,7 +160,6 @@
         <beam number="2">end</beam>
       </note>
     </measure>
-    
     <measure number="3">
       <note dynamics="100.00">
         <pitch>
@@ -250,7 +246,6 @@
         <beam number="1">end</beam>
       </note>
     </measure>
-    
     <measure number="4">
       <note dynamics="100.00">
         <pitch>
