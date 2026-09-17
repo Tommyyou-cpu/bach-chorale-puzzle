@@ -4,6 +4,11 @@
 
 制作：田清新。
 
+## 线上地址
+
+- 游戏网站：[https://tommyyou-cpu.github.io/bach-chorale-puzzle/](https://tommyyou-cpu.github.io/bach-chorale-puzzle/)
+- 题库维护后台：[https://bach-chorale-puzzle-admin.lienqi026.chatgpt.site/admin](https://bach-chorale-puzzle-admin.lienqi026.chatgpt.site/admin)（仅站点所有者可访问）
+
 ## 本地运行
 
 ```bash
