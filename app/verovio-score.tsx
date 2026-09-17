@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { generatedScorePath, scoreSelectionFromPaths, SCORE_VOICES } from "./score-assets";
+import { generatedScorePath, scoreSelectionFromPaths } from "./score-assets";
 
 const VOICE_NAMES = ["女高音", "女低音", "男高音", "男低音"] as const;
 const VOICE_CLEFS = [["G", "2"], ["G", "2"], ["F", "4"], ["F", "4"]] as const;
@@ -137,7 +137,7 @@ function scoreSelection(
 ) {
   const inferred = scoreSelectionFromPaths(paths);
   const resolvedQuestionId = questionId || inferred?.questionId;
-  const resolvedCandidateIds = candidateIds?.length === SCORE_VOICES.length ? [...candidateIds] : inferred?.candidateIds;
+  const resolvedCandidateIds = candidateIds?.length === paths.length ? [...candidateIds] : inferred?.candidateIds;
   if (!resolvedQuestionId || !resolvedCandidateIds) return null;
   return { questionId: resolvedQuestionId, candidateIds: resolvedCandidateIds };
 }

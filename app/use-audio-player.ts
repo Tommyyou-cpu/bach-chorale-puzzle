@@ -14,12 +14,17 @@ export type AudioPlayRequest = {
   paths: string[];
   /** 与 paths 按下标对应的 WAV（波形音频）回退地址。 */
   fallbackPaths?: Array<string | undefined>;
+  /** 与 paths 按下标对应的声部标识，用于只显示有效的静音控制。 */
+  voiceKeys?: string[];
   label: string;
   loop?: boolean;
   muted?: boolean[];
 };
 
-const MAX_AUDIO_CACHE_SIZE = 8;
+export type AudioPreloadRequest = Pick<AudioPlayRequest, "paths" | "fallbackPaths">;
+
+// 本局最多预加载 3 题 × 4 声部 × 4 选项，预留 WAV 回退资源的空间。
+const MAX_AUDIO_CACHE_SIZE = 128;
 const START_DELAY_SECONDS = 0.04;
 const RESUME_TIMEOUT_MS = 2500;
 
@@ -142,6 +147,7 @@ export function useAudioPlayer() {
   const resumePromise = useRef<Promise<void> | null>(null);
   const resumeError = useRef<unknown | null>(null);
   const cache = useRef(new Map<string, AudioBuffer>());
+  const pendingBuffers = useRef(new Map<string, Promise<AudioBuffer>>());
   const sources = useRef<AudioBufferSourceNode[]>([]);
   const gains = useRef<GainNode[]>([]);
   const started = useRef(0);
@@ -150,6 +156,7 @@ export function useAudioPlayer() {
   const request = useRef<AudioPlayRequest | null>(null);
   const timer = useRef<number | null>(null);
   const abortController = useRef<AbortController | null>(null);
+  const preloadAbortController = useRef<AbortController | null>(null);
   const requestGeneration = useRef(0);
   const status = useRef<PlayerStatus>("idle");
   const needsUnlock = useRef(false);
@@ -159,6 +166,7 @@ export function useAudioPlayer() {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [label, setLabel] = useState("");
+  const [voiceKeys, setVoiceKeys] = useState<string[]>([]);
   const [error, setError] = useState<AudioPlayerError | null>(null);
 
   const clearTimer = useCallback(() => {
@@ -288,46 +296,59 @@ export function useAudioPlayer() {
   }, []);
 
   const loadBuffer = useCallback(
-    async (path: string, audioContext: AudioContext, signal: AbortSignal) => {
+    (path: string, audioContext: AudioContext, signal: AbortSignal) => {
       const url = resolveAsset(path);
       const cached = cache.current.get(url);
       if (cached) {
         // Map（映射）按访问顺序维护，重新插入即可更新 LRU（最近最少使用）顺序。
         touchCache(url, cached);
-        return cached;
+        return Promise.resolve(cached);
       }
 
-      let response: Response;
-      try {
-        response = await fetch(url, { signal });
-      } catch (cause) {
-        if (isAbortError(cause) || signal.aborted) throw new RequestAborted();
-        throw new AudioFailure("network", `音频资源加载失败，请检查网络后重试（${errorMessage(cause)}）。`, path);
-      }
+      const pending = pendingBuffers.current.get(url);
+      if (pending) return pending;
 
-      if (!response.ok) {
-        throw new AudioFailure("network", `音频资源加载失败（HTTP ${response.status}），请重试。`, path);
-      }
+      const loading = (async () => {
+        let response: Response;
+        try {
+          response = await fetch(url, { signal });
+        } catch (cause) {
+          if (isAbortError(cause) || signal.aborted) throw new RequestAborted();
+          throw new AudioFailure("network", `音频资源加载失败，请检查网络后重试（${errorMessage(cause)}）。`, path);
+        }
 
-      let data: ArrayBuffer;
-      try {
-        data = await response.arrayBuffer();
-      } catch (cause) {
-        if (isAbortError(cause) || signal.aborted) throw new RequestAborted();
-        throw new AudioFailure("network", `音频数据读取失败，请检查网络后重试（${errorMessage(cause)}）。`, path);
-      }
+        if (!response.ok) {
+          throw new AudioFailure("network", `音频资源加载失败（HTTP ${response.status}），请重试。`, path);
+        }
 
-      let buffer: AudioBuffer;
-      try {
-        buffer = await decodeAudioData(audioContext, data);
-      } catch (cause) {
+        let data: ArrayBuffer;
+        try {
+          data = await response.arrayBuffer();
+        } catch (cause) {
+          if (isAbortError(cause) || signal.aborted) throw new RequestAborted();
+          throw new AudioFailure("network", `音频数据读取失败，请检查网络后重试（${errorMessage(cause)}）。`, path);
+        }
+
+        let buffer: AudioBuffer;
+        try {
+          buffer = await decodeAudioData(audioContext, data);
+        } catch (cause) {
+          if (signal.aborted) throw new RequestAborted();
+          throw new AudioFailure("decode", `音频解码失败，当前浏览器可能不支持该格式（${errorMessage(cause)}）。`, path);
+        }
+
         if (signal.aborted) throw new RequestAborted();
-        throw new AudioFailure("decode", `音频解码失败，当前浏览器可能不支持该格式（${errorMessage(cause)}）。`, path);
-      }
+        touchCache(url, buffer);
+        return buffer;
+      })();
 
-      if (signal.aborted) throw new RequestAborted();
-      touchCache(url, buffer);
-      return buffer;
+      pendingBuffers.current.set(url, loading);
+      void loading.then(() => {
+        if (pendingBuffers.current.get(url) === loading) pendingBuffers.current.delete(url);
+      }, () => {
+        if (pendingBuffers.current.get(url) === loading) pendingBuffers.current.delete(url);
+      });
+      return loading;
     },
     [touchCache],
   );
@@ -368,6 +389,37 @@ export function useAudioPlayer() {
       }
     },
     [loadBuffer],
+  );
+
+  const preload = useCallback(
+    (nextRequest: AudioPreloadRequest) => {
+      const paths = nextRequest.paths.filter((path, index, all) => path && all.indexOf(path) === index);
+      preloadAbortController.current?.abort();
+      pendingBuffers.current.clear();
+      if (paths.length === 0) return;
+
+      const controller = new AbortController();
+      preloadAbortController.current = controller;
+
+      let audioContext: AudioContext;
+      try {
+        // 预加载只创建/解码上下文，不等待 resume；移动浏览器会在首次点击时恢复上下文。
+        audioContext = getContext();
+      } catch {
+        // 不支持网页音频的浏览器会在用户点击时显示明确错误，此处不打扰答题界面。
+        return;
+      }
+
+      void Promise.all(
+        paths.map((path) => {
+          const index = nextRequest.paths.indexOf(path);
+          return loadTrack(path, nextRequest.fallbackPaths?.[index], audioContext, controller.signal).catch(() => undefined);
+        }),
+      ).finally(() => {
+        if (preloadAbortController.current === controller) preloadAbortController.current = null;
+      });
+    },
+    [getContext, loadTrack],
   );
 
   const tick = useCallback(
@@ -411,6 +463,7 @@ export function useAudioPlayer() {
         ...nextRequest,
         paths: nextRequest.paths.slice(),
         fallbackPaths: nextRequest.fallbackPaths?.slice(),
+        voiceKeys: nextRequest.voiceKeys?.slice(),
       };
       status.current = "loading";
       setError(null);
@@ -418,6 +471,7 @@ export function useAudioPlayer() {
       setPlaying(false);
       setProgress(0);
       setLabel(nextRequest.label);
+      setVoiceKeys(nextRequest.voiceKeys?.slice() ?? []);
       clearTimer();
       stopNodes();
 
@@ -534,13 +588,17 @@ export function useAudioPlayer() {
     void start(request.current, retryOffset);
   }, [start]);
 
-  const stop = useCallback(() => {
+  const stop = useCallback((options?: { clearCache?: boolean }) => {
     requestGeneration.current += 1;
     abortController.current?.abort();
     abortController.current = null;
+    if (options?.clearCache) {
+      preloadAbortController.current?.abort();
+      pendingBuffers.current.clear();
+    }
     stopNodes();
     clearTimer();
-    clearCache();
+    if (options?.clearCache) clearCache();
     offset.current = 0;
     duration.current = 0;
     request.current = null;
@@ -551,6 +609,7 @@ export function useAudioPlayer() {
     setPlaying(false);
     setProgress(0);
     setLabel("");
+    setVoiceKeys([]);
   }, [clearCache, clearTimer, stopNodes]);
 
   const updateMuted = useCallback((muted: boolean[]) => {
@@ -579,6 +638,8 @@ export function useAudioPlayer() {
   useEffect(() => () => {
     requestGeneration.current += 1;
     abortController.current?.abort();
+    preloadAbortController.current?.abort();
+    pendingBuffers.current.clear();
     stopNodes();
     clearTimer();
     clearCache();
@@ -588,6 +649,7 @@ export function useAudioPlayer() {
 
   return {
     play,
+    preload,
     pause,
     resume,
     stop,
@@ -597,6 +659,7 @@ export function useAudioPlayer() {
     loading,
     progress,
     label,
+    voiceKeys,
     error,
   };
 }

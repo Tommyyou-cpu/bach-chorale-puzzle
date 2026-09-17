@@ -19,7 +19,7 @@ npm run validate
 npm run build
 ```
 
-`prepare:assets` 会从 WAV 生成移动端优先使用的 MP3，并预先雕刻三道题的 768 种四声部 SVG 乐谱。生成的 SVG 位于 `public/generated-scores`，由构建流程自动创建，不提交到 Git。
+`prepare:assets` 会从 WAV 生成移动端优先使用的 MP3，并预先雕刻 15 道题的 1740 种候选组合 SVG 乐谱。每局只抽取 3 题，浏览器只预加载这 3 题的音频。生成的 SVG 位于 `public/generated-scores`，由构建流程自动创建，不提交到 Git。
 
 题库与音频可通过下列命令重新生成：
 
@@ -29,6 +29,16 @@ npm run prepare:assets
 ```
 
 素材、许可与生成方法见 [SOURCES.md](./SOURCES.md)，自动检查记录见 [MUSIC_VALIDATION.md](./MUSIC_VALIDATION.md)。
+
+## 题库后台
+
+支持 Cloudflare D1（Cloudflare 边缘数据库）的部署可以通过 `/admin` 管理题目，包括新增、编辑、启停、排序和删除。首次部署需要：
+
+1. 创建 D1 数据库并绑定为 `DB`。
+2. 按顺序应用 `drizzle/` 中的迁移。
+3. 设置 `QUESTION_ADMIN_EMAILS`，多个 ChatGPT 管理员邮箱用逗号分隔。
+
+公开题库接口为 `/api/questions`。D1 不可用时会自动回退到构建时的 15 题静态题库；GitHub Pages（GitHub 静态页面托管）只使用这份静态回退，不提供可写后台。
 
 ## GitHub Pages
 

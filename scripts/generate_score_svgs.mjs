@@ -3,7 +3,7 @@
 /**
  * 在构建阶段将四个独立声部的 MusicXML（音乐交换格式）雕刻为静态 SVG。
  *
- * 每道题有 4^4 个组合，三道题共 768 个文件。脚本只写入
+ * 每道题按题库中每个声部的候选数量生成全部组合。脚本只写入
  * public/generated-scores，不改写题库或原始 MusicXML；重复执行会得到同一
  * 组路径和相同的 SVG 内容。
  */
@@ -22,7 +22,6 @@ const VOICES = ["soprano", "alto", "tenor", "bass"];
 const VOICE_NAMES = ["女高音", "女低音", "男高音", "男低音"];
 const VOICE_CLEFS = [["G", "2"], ["G", "2"], ["F", "4"], ["F", "4"]];
 const SAFE_ID = /^[A-Za-z0-9_-]+$/;
-const VARIANTS = 4;
 
 function assertSafeId(value, label) {
   if (typeof value !== "string" || !SAFE_ID.test(value)) {
@@ -32,8 +31,8 @@ function assertSafeId(value, label) {
 
 function scorePath(questionId, candidateIds) {
   assertSafeId(questionId, "题目");
-  if (!Array.isArray(candidateIds) || candidateIds.length !== VOICES.length) {
-    throw new Error(`${questionId} 的候选项数量不是四个`);
+  if (!Array.isArray(candidateIds) || candidateIds.length < 3 || candidateIds.length > VOICES.length) {
+    throw new Error(`${questionId} 的声部数量必须在 3–${VOICES.length} 之间`);
   }
   candidateIds.forEach((id) => assertSafeId(id, "候选项"));
   return path.join(OUTPUT_ROOT, questionId, `${candidateIds.join("--")}.svg`);
@@ -63,11 +62,26 @@ function parseXml(xml, filePath) {
   return document;
 }
 
+function verifyNotation(document, filePath, voiceIndex) {
+  const parts = document.getElementsByTagName("part");
+  const attributes = parts[0]?.getElementsByTagName("attributes")[0];
+  const key = attributes?.getElementsByTagName("key")[0];
+  const clef = attributes?.getElementsByTagName("clef")[0];
+  const [expectedSign, expectedLine] = VOICE_CLEFS[voiceIndex] || [];
+  const actualSign = clef?.getElementsByTagName("sign")[0]?.textContent;
+  const actualLine = clef?.getElementsByTagName("line")[0]?.textContent;
+  if (!key) throw new Error(`MusicXML 缺少调号：${filePath}`);
+  const tenorTreble = voiceIndex === 2 && actualSign === "G" && actualLine === "2";
+  if (!clef || (actualSign !== expectedSign || actualLine !== expectedLine) && !tenorTreble) {
+    throw new Error(`MusicXML 谱号错误：${filePath}，期望 ${expectedSign}${expectedLine}（男高音也允许原作 G2 低八度谱号）`);
+  }
+}
+
 function replaceId(node, id) {
   node.setAttribute("id", id);
 }
 
-function createClef(document, sign, line) {
+function createClef(document, sign, line, octaveChange = null) {
   const clef = document.createElement("clef");
   const signNode = document.createElement("sign");
   const lineNode = document.createElement("line");
@@ -75,6 +89,11 @@ function createClef(document, sign, line) {
   lineNode.appendChild(document.createTextNode(line));
   clef.appendChild(signNode);
   clef.appendChild(lineNode);
+  if (octaveChange) {
+    const octaveNode = document.createElement("clef-octave-change");
+    octaveNode.appendChild(document.createTextNode(octaveChange));
+    clef.appendChild(octaveNode);
+  }
   return clef;
 }
 
@@ -93,6 +112,10 @@ function normalizePart(document, index) {
   replaceId(part, id);
 
   const existingClefs = part.getElementsByTagName("clef");
+  const existingClef = existingClefs[0];
+  const sourceSign = existingClef?.getElementsByTagName("sign")[0]?.textContent;
+  const sourceLine = existingClef?.getElementsByTagName("line")[0]?.textContent;
+  const sourceOctaveChange = existingClef?.getElementsByTagName("clef-octave-change")[0]?.textContent || null;
   // getElementsByTagName 返回实时列表，反向删除可避免跳过节点。
   for (let item = existingClefs.length - 1; item >= 0; item -= 1) {
     existingClefs[item].parentNode?.removeChild(existingClefs[item]);
@@ -103,8 +126,8 @@ function normalizePart(document, index) {
     attributes = document.createElement("attributes");
     part.insertBefore(attributes, part.firstChild);
   }
-  const [sign, line] = VOICE_CLEFS[index];
-  attributes.appendChild(createClef(document, sign, line));
+  const [fallbackSign, fallbackLine] = VOICE_CLEFS[index];
+  attributes.appendChild(createClef(document, sourceSign || fallbackSign, sourceLine || fallbackLine, sourceOctaveChange));
   return { scorePart, part };
 }
 
@@ -150,14 +173,23 @@ function minifySvg(markup) {
 
 async function renderCombination(toolkit, question, candidates) {
   const paths = candidates.map((candidate) => resourcePath(candidate.score));
-  const documents = await Promise.all(paths.map(async (filePath) => parseXml(await readFile(filePath, "utf8"), filePath)));
+  const documents = await Promise.all(paths.map(async (filePath, index) => {
+    const document = parseXml(await readFile(filePath, "utf8"), filePath);
+    verifyNotation(document, filePath, index);
+    return document;
+  }));
   const xml = combineParts(documents);
   if (!toolkit.loadData(xml)) throw new Error(`${question.id} 的组合无法交给 Verovio`);
 
   const pages = [];
   for (let page = 1; page <= toolkit.getPageCount(); page += 1) pages.push(minifySvg(toolkit.renderToSVG(page)));
   if (!pages.length) throw new Error(`${question.id} 的组合没有生成 SVG 页面`);
-  return pages.join("\n");
+  const output = pages.join("\n");
+  const clefCount = (output.match(/class="clef"/g) || []).length;
+  if (clefCount < candidates.length) {
+    throw new Error(`${question.id} 的 SVG 缺少声部谱号：${clefCount}/${candidates.length}`);
+  }
+  return output;
 }
 
 async function removeStaleSvgFiles(expected) {
@@ -183,7 +215,9 @@ async function removeStaleSvgFiles(expected) {
 
 async function main() {
   const questions = JSON.parse(await readFile(QUESTIONS_PATH, "utf8"));
-  if (!Array.isArray(questions) || questions.length !== 3) throw new Error("题库必须包含三道题");
+  if (!Array.isArray(questions) || questions.length < 15 || questions.length > 20) {
+    throw new Error("题库必须包含 15–20 道题");
+  }
 
   const wasm = await import("verovio/wasm");
   const esm = await import("verovio/esm");
@@ -207,8 +241,8 @@ async function main() {
       assertSafeId(question.id, "题目");
       const voiceCandidates = VOICES.map((voice) => {
         const candidates = question.voices?.[voice];
-        if (!Array.isArray(candidates) || candidates.length !== VARIANTS) {
-          throw new Error(`${question.id}/${voice} 必须有四个候选项`);
+        if (!Array.isArray(candidates) || candidates.length < 3 || candidates.length > 4) {
+          throw new Error(`${question.id}/${voice} 必须有三个或四个候选项`);
         }
         candidates.forEach((candidate) => {
           assertSafeId(candidate.id, "候选项");
@@ -217,24 +251,24 @@ async function main() {
         return candidates;
       });
 
-      for (let soprano = 0; soprano < VARIANTS; soprano += 1) {
-        for (let alto = 0; alto < VARIANTS; alto += 1) {
-          for (let tenor = 0; tenor < VARIANTS; tenor += 1) {
-            for (let bass = 0; bass < VARIANTS; bass += 1) {
-              const indexes = [soprano, alto, tenor, bass];
-              const candidates = indexes.map((variant, index) => voiceCandidates[index][variant]);
-              const candidateIds = candidates.map((candidate) => candidate.id);
-              const outputPath = scorePath(question.id, candidateIds);
-              expected.add(outputPath);
-              await mkdir(path.dirname(outputPath), { recursive: true });
-              const svg = await renderCombination(toolkit, question, candidates);
-              await writeFile(outputPath, svg, "utf8");
-              totalBytes += Buffer.byteLength(svg);
-              generated += 1;
-            }
-          }
+      const renderAll = async (voiceIndex, selected) => {
+        if (voiceIndex === voiceCandidates.length) {
+          const candidates = [...selected];
+          const candidateIds = candidates.map((candidate) => candidate.id);
+          const outputPath = scorePath(question.id, candidateIds);
+          expected.add(outputPath);
+          await mkdir(path.dirname(outputPath), { recursive: true });
+          const svg = await renderCombination(toolkit, question, candidates);
+          await writeFile(outputPath, svg, "utf8");
+          totalBytes += Buffer.byteLength(svg);
+          generated += 1;
+          return;
         }
-      }
+        for (const candidate of voiceCandidates[voiceIndex]) {
+          await renderAll(voiceIndex + 1, [...selected, candidate]);
+        }
+      };
+      await renderAll(0, []);
     }
   } finally {
     toolkit.destroy();
@@ -253,7 +287,7 @@ async function main() {
       actual.push(filePath);
     }
   }
-  if (actual.length !== expected.size || generated !== 768) {
+  if (actual.length !== expected.size || generated !== expected.size) {
     throw new Error(`SVG 数量错误：生成=${generated}，期望=${expected.size}，实际=${actual.length}`);
   }
   console.log(JSON.stringify({ questions: questions.length, combinations: generated, files: actual.length, bytes: totalBytes }, null, 2));

@@ -8,7 +8,7 @@
   <identification>
     <creator type="composer">Johann Sebastian Bach / puzzle variant</creator>
     <encoding>
-      <encoding-date>2026-09-16</encoding-date>
+      <encoding-date>2026-09-17</encoding-date>
       <software>music21 v.8.3.0</software>
     </encoding>
   </identification>
@@ -38,6 +38,18 @@
     <measure number="1">
       <attributes>
         <divisions>10080</divisions>
+        <key>
+          <fifths>3</fifths>
+          <mode>minor</mode>
+        </key>
+        <time symbol="common">
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
       </attributes>
       <note>
         <pitch>

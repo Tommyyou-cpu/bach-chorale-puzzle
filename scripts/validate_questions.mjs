@@ -7,10 +7,9 @@ const QUESTIONS_PATH = path.join(ROOT, "app", "questions.generated.json");
 const MUSIC_DIR = path.join(ROOT, "public", "music");
 const GENERATED_SCORES_DIR = path.join(ROOT, "public", "generated-scores");
 const VOICES = ["soprano", "alto", "tenor", "bass"];
-const QUESTION_IDS = ["q1", "q2", "q3"];
 const DECOY_TYPES = ["voice-leading", "harmony", "mixed"];
-const VARIANTS_PER_VOICE = 4;
-const EXPECTED_ASSETS_PER_FORMAT = QUESTION_IDS.length * VOICES.length * VARIANTS_PER_VOICE;
+const MIN_QUESTIONS = 15;
+const MAX_QUESTIONS = 20;
 
 const errors = [];
 const referenced = { mp3: new Set(), wav: new Set(), musicxml: new Set() };
@@ -35,6 +34,37 @@ function assetRoute(questionId, candidateId, extension) {
   return `/music/${questionId}/${candidateId}.${extension}`;
 }
 
+function keySignatureLabel(fifths) {
+  const count = Math.abs(fifths);
+  const accidental = fifths > 0 ? "sharp" : fifths < 0 ? "flat" : "natural";
+  return count === 0 ? "no accidentals" : `${count} ${accidental}${count === 1 ? "" : "s"}`;
+}
+
+function musicXmlKeySignature(markup) {
+  const keyBlock = markup.match(/<key\b[^>]*>([\s\S]*?)<\/key>/i);
+  if (!keyBlock) return null;
+  const fifthsMatch = keyBlock[1].match(/<fifths>\s*(-?\d+)\s*<\/fifths>/i);
+  if (!fifthsMatch) return null;
+  return keySignatureLabel(Number(fifthsMatch[1]));
+}
+
+function musicXmlClef(markup) {
+  const clefBlock = markup.match(/<clef\b[^>]*>([\s\S]*?)<\/clef>/i);
+  if (!clefBlock) return null;
+  const signMatch = clefBlock[1].match(/<sign>\s*([^<]+?)\s*<\/sign>/i);
+  const lineMatch = clefBlock[1].match(/<line>\s*(\d+)\s*<\/line>/i);
+  const octaveMatch = clefBlock[1].match(/<clef-octave-change>\s*(-?\d+)\s*<\/clef-octave-change>/i);
+  if (!signMatch || !lineMatch) return null;
+  const sign = signMatch[1].trim();
+  const line = Number(lineMatch[1]);
+  const octaveChange = octaveMatch ? Number(octaveMatch[1]) : 0;
+  if (sign === "G" && line === 2 && octaveChange === -1) return "treble-8";
+  if (sign === "G" && line === 2 && octaveChange === 0) return "treble";
+  if (sign === "C" && line === 3 && octaveChange === 0) return "alto";
+  if (sign === "F" && line === 4 && octaveChange === 0) return "bass";
+  return `${sign}${line}${octaveChange > 0 ? "+" : ""}${octaveChange || ""}`;
+}
+
 function localAssetPath(route) {
   if (!route.startsWith("/music/")) return null;
   const filePath = path.resolve(ROOT, "public", `.${route}`);
@@ -45,7 +75,7 @@ function localAssetPath(route) {
   return filePath;
 }
 
-function verifyAsset({ questionId, voice, variant, candidate, field, extension }) {
+function verifyAsset({ question, questionId, voice, variant, candidate, field, extension }) {
   const label = `${questionId}/${voice}/variant ${variant}/${field}`;
   const route = candidate[field];
   if (!isNonEmptyString(route)) {
@@ -69,6 +99,23 @@ function verifyAsset({ questionId, voice, variant, candidate, field, extension }
     const stat = fs.statSync(filePath);
     if (!stat.isFile()) fail(`${label} 不是文件：${route}`);
     else if (stat.size === 0) fail(`${label} 资源为空：${route}`);
+    else if (extension === "musicxml") {
+      const markup = fs.readFileSync(filePath, "utf8");
+      const actualKeySignature = musicXmlKeySignature(markup);
+      if (!actualKeySignature) {
+        fail(`${label} 缺少调号：${route}`);
+      }
+      if (isNonEmptyString(question.keySignature) && actualKeySignature !== question.keySignature) {
+        fail(`${label} 调号与题目元数据不一致：JSON=${display(question.keySignature)}，MusicXML=${display(actualKeySignature)}`);
+      }
+      const actualClef = musicXmlClef(markup);
+      const expectedClef = isRecord(question.clefs) ? question.clefs[voice] : null;
+      if (!actualClef) {
+        fail(`${label} 缺少正确谱号：${route}`);
+      } else if (isNonEmptyString(expectedClef) && actualClef !== expectedClef) {
+        fail(`${label} 谱号与题目元数据不一致：JSON=${display(expectedClef)}，MusicXML=${display(actualClef)}`);
+      }
+    }
   } catch {
     fail(`${label} 缺少资源：${route}`);
   }
@@ -104,26 +151,44 @@ function verifyGeneratedScores(questions) {
     if (!isRecord(question) || !isNonEmptyString(question.id) || !isRecord(question.voices)) continue;
     const candidates = VOICES.map((voice) => question.voices[voice]);
     if (candidates.some((items) => !Array.isArray(items))) continue;
-    for (const soprano of candidates[0]) for (const alto of candidates[1]) {
-      for (const tenor of candidates[2]) for (const bass of candidates[3]) {
-        const selected = [soprano, alto, tenor, bass];
-        if (selected.some((candidate) => !isRecord(candidate) || !isNonEmptyString(candidate.id))) continue;
+    const collect = (voiceIndex, selected) => {
+      if (voiceIndex === candidates.length) {
+        if (selected.some((candidate) => !isRecord(candidate) || !isNonEmptyString(candidate.id))) return;
         expected.add(path.join(GENERATED_SCORES_DIR, question.id, `${selected.map((candidate) => candidate.id).join("--")}.svg`));
+        return;
       }
-    }
+      for (const candidate of candidates[voiceIndex]) collect(voiceIndex + 1, [...selected, candidate]);
+    };
+    collect(0, []);
   }
 
   let verified = 0;
   for (const filePath of expected) {
     try {
       const markup = fs.readFileSync(filePath, "utf8");
-      if (!/<svg(?:\s|>)/i.test(markup)) fail(`预生成乐谱不是有效 SVG：${path.relative(ROOT, filePath)}`);
-      else verified += 1;
+      if (!/<svg(?:\s|>)/i.test(markup)) {
+        fail(`预生成乐谱不是有效 SVG：${path.relative(ROOT, filePath)}`);
+      } else if ((markup.match(/class="clef"/g) || []).length < VOICES.length) {
+        fail(`预生成乐谱缺少声部谱号：${path.relative(ROOT, filePath)}`);
+      } else verified += 1;
     } catch {
       fail(`缺少预生成乐谱：${path.relative(ROOT, filePath)}`);
     }
   }
-  return { expected: expected.size, verified };
+  const actual = new Set();
+  const visit = (directory) => {
+    if (!fs.existsSync(directory)) return;
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      const filePath = path.join(directory, entry.name);
+      if (entry.isDirectory()) visit(filePath);
+      else if (entry.isFile() && entry.name.endsWith(".svg")) actual.add(filePath);
+    }
+  };
+  visit(GENERATED_SCORES_DIR);
+  for (const filePath of actual) {
+    if (!expected.has(filePath)) fail(`存在未被题库引用的 SVG：${path.relative(ROOT, filePath)}`);
+  }
+  return { expected: expected.size, verified, actual: actual.size };
 }
 
 let questions;
@@ -138,8 +203,8 @@ if (!Array.isArray(questions)) {
   questions = [];
 }
 
-if (questions.length !== QUESTION_IDS.length) {
-  fail(`题目数应为 ${QUESTION_IDS.length}，当前为 ${questions.length}`);
+if (questions.length < MIN_QUESTIONS || questions.length > MAX_QUESTIONS) {
+  fail(`题目数应为 ${MIN_QUESTIONS}–${MAX_QUESTIONS}，当前为 ${questions.length}`);
 }
 
 const seenQuestionIds = new Map();
@@ -160,17 +225,28 @@ for (const [index, question] of questions.entries()) {
   }
 }
 
-for (const questionId of QUESTION_IDS) {
-  if (!seenQuestionIds.has(questionId)) fail(`缺少预期题目：${questionId}`);
-}
-for (const questionId of seenQuestionIds.keys()) {
-  if (!QUESTION_IDS.includes(questionId)) fail(`存在非预期题目 id：${questionId}`);
-}
-
 for (const question of questions) {
   if (!isRecord(question) || !isNonEmptyString(question.id)) continue;
   const questionId = question.id;
   const voices = question.voices;
+  if (!isNonEmptyString(question.genre)) {
+    fail(`${questionId}.genre 必须是非空字符串`);
+  }
+  if (question.voiceCount !== VOICES.length) {
+    fail(`${questionId}.voiceCount 必须为 ${VOICES.length}，当前为 ${display(question.voiceCount)}`);
+  }
+  if (!isNonEmptyString(question.keySignature)) {
+    fail(`${questionId}.keySignature 必须是非空字符串`);
+  }
+  if (!isRecord(question.clefs)) {
+    fail(`${questionId}.clefs 必须是包含各声部谱号的对象`);
+  } else {
+    for (const voice of VOICES) {
+      if (!isNonEmptyString(question.clefs[voice])) {
+        fail(`${questionId}.clefs.${voice} 必须是非空字符串`);
+      }
+    }
+  }
   if (!isRecord(voices)) {
     fail(`${questionId}.voices 必须是包含四个声部的对象`);
     continue;
@@ -190,8 +266,8 @@ for (const question of questions) {
       fail(`${questionId}/${voice} 必须是变体数组`);
       continue;
     }
-    if (candidates.length !== VARIANTS_PER_VOICE) {
-      fail(`${questionId}/${voice} 应有 ${VARIANTS_PER_VOICE} 个变体，当前为 ${candidates.length}`);
+    if (candidates.length < 3 || candidates.length > 4) {
+      fail(`${questionId}/${voice} 应有三个或四个候选项，当前为 ${candidates.length}`);
     }
 
     const candidateIds = new Set();
@@ -239,17 +315,21 @@ for (const question of questions) {
         }
       }
 
-      verifyAsset({ questionId, voice, variant, candidate, field: "audio", extension: "mp3" });
-      verifyAsset({ questionId, voice, variant, candidate, field: "audioFallback", extension: "wav" });
-      verifyAsset({ questionId, voice, variant, candidate, field: "score", extension: "musicxml" });
+      verifyAsset({ question, questionId, voice, variant, candidate, field: "audio", extension: "mp3" });
+      verifyAsset({ question, questionId, voice, variant, candidate, field: "audioFallback", extension: "wav" });
+      verifyAsset({ question, questionId, voice, variant, candidate, field: "score", extension: "musicxml" });
     }
 
-    if (decoyTypes.length === VARIANTS_PER_VOICE - 1) {
-      for (const decoyType of DECOY_TYPES) {
+    if (decoyTypes.length === candidates.length - 1) {
+      const expectedDecoys = candidates.length === 3 ? DECOY_TYPES.slice(0, 2) : DECOY_TYPES;
+      for (const decoyType of expectedDecoys) {
         const count = decoyTypes.filter((type) => type === decoyType).length;
         if (count !== 1) {
-          fail(`${questionId}/${voice} 的三个干扰项必须各含一个 ${decoyType} decoyType，当前为 ${count} 个`);
+          fail(`${questionId}/${voice} 的干扰项必须各含一个 ${decoyType} decoyType，当前为 ${count} 个`);
         }
+      }
+      for (const decoyType of DECOY_TYPES.filter((type) => !expectedDecoys.includes(type))) {
+        if (decoyTypes.includes(decoyType)) fail(`${questionId}/${voice} 三选项题不应包含 ${decoyType} decoyType`);
       }
     }
   }
@@ -257,17 +337,21 @@ for (const question of questions) {
 
 const musicAssets = collectMusicAssets();
 const generatedScores = verifyGeneratedScores(questions);
-const dynamicExpectedAssets = questions.length * VOICES.length * VARIANTS_PER_VOICE;
-if (dynamicExpectedAssets !== EXPECTED_ASSETS_PER_FORMAT) {
-  fail(`按当前题目数计算应有 ${dynamicExpectedAssets} 个 MP3、WAV 与 MusicXML；项目约定应为 ${EXPECTED_ASSETS_PER_FORMAT} 个`);
-}
+const candidateCounts = questions.flatMap((question) => VOICES.map((voice) => question?.voices?.[voice]?.length || 0));
+const dynamicExpectedAssets = candidateCounts.reduce((total, count) => total + count, 0);
+const combinations = questions.reduce(
+  (total, question) => total + VOICES.reduce((product, voice) => product * (question.voices?.[voice]?.length || 0), 1),
+  0,
+);
+if (!candidateCounts.includes(3)) fail("题库至少应包含一题三选项声部");
+if (!candidateCounts.includes(4)) fail("题库至少应包含一题四选项声部");
 
 for (const extension of ["mp3", "wav", "musicxml"]) {
-  if (referenced[extension].size !== EXPECTED_ASSETS_PER_FORMAT) {
-    fail(`题库引用的 ${extension} 资源应为 ${EXPECTED_ASSETS_PER_FORMAT} 个唯一文件，当前为 ${referenced[extension].size}`);
+  if (referenced[extension].size !== dynamicExpectedAssets) {
+    fail(`题库引用的 ${extension} 资源应为 ${dynamicExpectedAssets} 个唯一文件，当前为 ${referenced[extension].size}`);
   }
-  if (musicAssets[extension].size !== EXPECTED_ASSETS_PER_FORMAT) {
-    fail(`public/music 中的 ${extension} 资源应为 ${EXPECTED_ASSETS_PER_FORMAT} 个，当前为 ${musicAssets[extension].size}`);
+  if (musicAssets[extension].size !== dynamicExpectedAssets) {
+    fail(`public/music 中的 ${extension} 资源应为 ${dynamicExpectedAssets} 个，当前为 ${musicAssets[extension].size}`);
   }
   for (const route of musicAssets[extension]) {
     if (!referenced[extension].has(route)) fail(`存在未被题库引用的 ${extension} 资源：${route}`);
@@ -282,11 +366,15 @@ if (errors.length > 0) {
   console.log(JSON.stringify({
     questions: questions.length,
     tracks: dynamicExpectedAssets,
-    combinations: questions.length * VARIANTS_PER_VOICE ** VOICES.length,
+    combinations,
     mp3Files: musicAssets.mp3.size,
     wavFiles: musicAssets.wav.size,
     musicxmlFiles: musicAssets.musicxml.size,
     generatedScoreFiles: generatedScores.verified,
-    scoreCases: { allCorrect: "3/12", allWrong: "0/0", partial: "0–3/0–12" },
+    generatedScoreFilesExpected: generatedScores.expected,
+    candidateCounts: {
+      three: candidateCounts.filter((count) => count === 3).length,
+      four: candidateCounts.filter((count) => count === 4).length,
+    },
   }, null, 2));
 }

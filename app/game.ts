@@ -25,16 +25,21 @@ export type Question = {
   sourceLabel: string;
   analysis: string;
   licenseNote: string;
-  voices: Record<VoiceKey, Candidate[]>;
+  /** 题目可为三声部或四声部；未列出的声部不会参与作答、评分或预加载。 */
+  activeVoices?: VoiceKey[];
+  voices: Partial<Record<VoiceKey, Candidate[]>>;
 };
 
 export type Selections = Record<string, Partial<Record<VoiceKey, string>>>;
 export type Orders = Record<string, Record<VoiceKey, string[]>>;
 
-export const GAME_STATE_VERSION = 3 as const;
+export const QUESTIONS_PER_GAME = 3 as const;
+export const GAME_STATE_VERSION = 4 as const;
 export type GameState = {
   version: typeof GAME_STATE_VERSION;
   seed: number;
+  /** 本局抽中的题目 ID，顺序就是答题与结果页的顺序。 */
+  questionIds: string[];
   current: number;
   submitted: boolean;
   selections: Selections;
@@ -60,6 +65,48 @@ function normalizedSeed(seed: number) {
   return Number.isFinite(seed) ? Math.trunc(seed) : Date.now();
 }
 
+function uniqueQuestionIds(questions: Question[]) {
+  const seen = new Set<string>();
+  return questions.flatMap((question) => {
+    if (seen.has(question.id)) return [];
+    seen.add(question.id);
+    return [question.id];
+  });
+}
+
+/**
+ * 使用确定性随机数从题库抽取本局题目。题目池可以大于三题，传入同一个种子会得到同一组题。
+ */
+export function drawQuestionIds(
+  questions: Question[],
+  seed: number,
+  count = QUESTIONS_PER_GAME,
+) {
+  const random = mulberry32(normalizedSeed(seed));
+  const ids = uniqueQuestionIds(questions);
+  const amount = Math.max(0, Math.min(Math.trunc(count), ids.length));
+
+  for (let index = ids.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(random() * (index + 1));
+    [ids[index], ids[swapIndex]] = [ids[swapIndex], ids[index]];
+  }
+
+  return ids.slice(0, amount);
+}
+
+export function questionsForGame(questions: Question[], state: Pick<GameState, "questionIds">) {
+  const byId = new Map(questions.map((question) => [question.id, question]));
+  return state.questionIds
+    .map((id) => byId.get(id))
+    .filter((question): question is Question => Boolean(question));
+}
+
+export function voicesForQuestion(question: Question): VoiceKey[] {
+  const listedVoices = question.activeVoices?.filter((voice) => (question.voices[voice]?.length ?? 0) > 0);
+  if (listedVoices && listedVoices.length > 0) return [...new Set(listedVoices)];
+  return VOICES.filter((voice) => (question.voices[voice]?.length ?? 0) > 0);
+}
+
 export function buildOrders(questions: Question[], seed: number, previousOrders?: Orders): Orders {
   const random = mulberry32(seed);
   const orders: Orders = {};
@@ -67,8 +114,8 @@ export function buildOrders(questions: Question[], seed: number, previousOrders?
   for (const question of questions) {
     orders[question.id] = {} as Record<VoiceKey, string[]>;
 
-    for (const voice of VOICES) {
-      const ids = question.voices[voice].map((candidate) => candidate.id);
+    for (const voice of voicesForQuestion(question)) {
+      const ids = (question.voices[voice] ?? []).map((candidate) => candidate.id);
       const previous = previousOrders?.[question.id]?.[voice];
       let shuffled = ids.slice();
 
@@ -98,6 +145,16 @@ function freshOrders(questions: Question[], seed: number, previousOrders?: Order
   return { orders: buildOrders(questions, normalized, previousOrders), seed: normalized };
 }
 
+function validQuestionIds(questions: Question[], value: unknown) {
+  if (!Array.isArray(value)) return undefined;
+
+  const available = new Set(uniqueQuestionIds(questions));
+  const ids = value.filter((id): id is string => typeof id === "string" && available.has(id));
+  const unique = [...new Set(ids)];
+  const expectedCount = Math.min(QUESTIONS_PER_GAME, available.size);
+  return unique.length === expectedCount ? unique : undefined;
+}
+
 function hasValidOrder(candidateIds: unknown, candidates: Candidate[]) {
   if (!Array.isArray(candidateIds) || candidateIds.length !== candidates.length) return false;
 
@@ -119,7 +176,7 @@ function isValidOrders(questions: Question[], value: unknown): value is Orders {
 
     return (
       isRecord(questionOrders) &&
-      VOICES.every((voice) => hasValidOrder(questionOrders[voice], question.voices[voice]))
+      voicesForQuestion(question).every((voice) => hasValidOrder(questionOrders[voice], question.voices[voice] ?? []))
     );
   });
 }
@@ -135,7 +192,7 @@ export function sanitizeSelections(questions: Question[], value: unknown): Selec
 
     const validQuestionSelections: Partial<Record<VoiceKey, string>> = {};
 
-    for (const voice of VOICES) {
+    for (const voice of voicesForQuestion(question)) {
       const selectedId = savedQuestionSelections[voice];
       if (typeof selectedId === "string" && candidateFor(question, voice, selectedId)) {
         validQuestionSelections[voice] = selectedId;
@@ -157,15 +214,22 @@ function validCurrent(value: unknown, questionCount: number) {
 }
 
 export function hasAllSelections(questions: Question[], selections: Selections) {
-  return questions.length > 0 && questions.every((question) => VOICES.every((voice) => Boolean(selections[question.id]?.[voice])));
+  return questions.length > 0 && questions.every((question) => {
+    const voices = voicesForQuestion(question);
+    return voices.length > 0 && voices.every((voice) => Boolean(selections[question.id]?.[voice]));
+  });
 }
 
 export function newGame(questions: Question[], seed = Date.now(), previousOrders?: Orders): GameState {
-  const next = freshOrders(questions, seed, previousOrders);
+  const normalized = normalizedSeed(seed);
+  const questionIds = drawQuestionIds(questions, normalized);
+  const selectedQuestions = questionsForGame(questions, { questionIds });
+  const next = freshOrders(selectedQuestions, normalized, previousOrders);
 
   return {
     version: GAME_STATE_VERSION,
     seed: next.seed,
+    questionIds,
     current: 0,
     submitted: false,
     selections: {},
@@ -179,31 +243,39 @@ export function newGame(questions: Question[], seed = Date.now(), previousOrders
  */
 export function restoreGame(questions: Question[], saved: unknown, seed = Date.now()): GameState {
   const persisted = isRecord(saved) ? saved : {};
-  const selections = sanitizeSelections(questions, persisted.selections);
-  const previousOrders = isValidOrders(questions, persisted.orders) ? persisted.orders : undefined;
-  const next = freshOrders(questions, seed, previousOrders);
+  const savedSeed = typeof persisted.seed === "number" ? persisted.seed : seed;
+  const normalized = normalizedSeed(savedSeed);
+  const questionIds = validQuestionIds(questions, persisted.questionIds) ?? drawQuestionIds(questions, normalized);
+  const selectedQuestions = questionsForGame(questions, { questionIds });
+  const selections = sanitizeSelections(selectedQuestions, persisted.selections);
+  const previousOrders = isValidOrders(selectedQuestions, persisted.orders) ? persisted.orders : undefined;
+  const next = freshOrders(selectedQuestions, normalized, previousOrders);
 
   return {
     version: GAME_STATE_VERSION,
     seed: next.seed,
-    current: validCurrent(persisted.current, questions.length),
-    submitted: persisted.submitted === true && hasAllSelections(questions, selections),
+    questionIds,
+    current: validCurrent(persisted.current, selectedQuestions.length),
+    submitted: persisted.submitted === true && hasAllSelections(selectedQuestions, selections),
     selections,
     orders: next.orders,
   };
 }
 
-export function isComplete(state: GameState) {
-  const questionIds = Object.keys(state.orders);
-  return questionIds.length > 0 && questionIds.every((questionId) => VOICES.every((voice) => Boolean(state.selections[questionId]?.[voice])));
+export function isComplete(state: GameState, questions?: Question[]) {
+  return state.questionIds.length > 0 && state.questionIds.every((questionId) => {
+    const question = questions?.find((item) => item.id === questionId);
+    const voices = question ? voicesForQuestion(question) : Object.keys(state.orders[questionId] ?? {}) as VoiceKey[];
+    return voices.length > 0 && voices.every((voice) => Boolean(state.selections[questionId]?.[voice]));
+  });
 }
 
 export function candidateFor(question: Question, voice: VoiceKey, id?: string) {
-  return question.voices[voice].find((candidate) => candidate.id === id);
+  return question.voices[voice]?.find((candidate) => candidate.id === id);
 }
 
 export function originalCandidateFor(question: Question, voice: VoiceKey) {
-  return question.voices[voice].find((candidate) => candidate.isOriginal);
+  return question.voices[voice]?.find((candidate) => candidate.isOriginal);
 }
 
 export function isOriginalSelection(question: Question, voice: VoiceKey, selectedId?: string) {
@@ -213,19 +285,38 @@ export function isOriginalSelection(question: Question, voice: VoiceKey, selecte
 export function scoreGame(questions: Question[], selections: Selections) {
   let voices = 0;
   let questionsCorrect = 0;
+  let totalVoices = 0;
 
   for (const question of questions) {
+    const activeVoices = voicesForQuestion(question);
     let correct = 0;
 
-    for (const voice of VOICES) {
+    totalVoices += activeVoices.length;
+    for (const voice of activeVoices) {
       if (isOriginalSelection(question, voice, selections[question.id]?.[voice])) {
         voices += 1;
         correct += 1;
       }
     }
 
-    if (correct === VOICES.length) questionsCorrect += 1;
+    if (activeVoices.length > 0 && correct === activeVoices.length) questionsCorrect += 1;
   }
 
-  return { voices, questions: questionsCorrect };
+  const totalQuestions = questions.length;
+  const questionRatio = totalQuestions > 0 ? questionsCorrect / totalQuestions : 0;
+  const voiceRatio = totalVoices > 0 ? voices / totalVoices : 0;
+  const questionPoints = questionRatio * 40;
+  const voicePoints = voiceRatio * 60;
+
+  return {
+    voices,
+    totalVoices,
+    questions: questionsCorrect,
+    totalQuestions,
+    questionRatio,
+    voiceRatio,
+    questionPoints,
+    voicePoints,
+    totalScore: questionPoints + voicePoints,
+  };
 }

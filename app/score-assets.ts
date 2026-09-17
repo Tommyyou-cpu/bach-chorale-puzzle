@@ -7,7 +7,8 @@
  */
 
 const SAFE_ID = /^[A-Za-z0-9_-]+$/;
-export const SCORE_VOICES = ["soprano", "alto", "tenor", "bass"] as const;
+export const MIN_SCORE_VOICES = 3;
+export const MAX_SCORE_VOICES = 4;
 export const GENERATED_SCORE_ROOT = "/generated-scores";
 
 export type ScoreSelection = {
@@ -19,9 +20,13 @@ function isSafeId(value: string) {
   return SAFE_ID.test(value);
 }
 
-/** 返回构建阶段生成的四声部组合谱 SVG（可缩放矢量图）路径。 */
+function hasSupportedVoiceCount(count: number) {
+  return count >= MIN_SCORE_VOICES && count <= MAX_SCORE_VOICES;
+}
+
+/** 返回构建阶段生成的三或四声部组合谱 SVG（可缩放矢量图）路径。 */
 export function generatedScorePath(questionId: string, candidateIds: readonly string[]) {
-  if (!isSafeId(questionId) || candidateIds.length !== SCORE_VOICES.length || candidateIds.some((id) => !isSafeId(id))) {
+  if (!isSafeId(questionId) || !hasSupportedVoiceCount(candidateIds.length) || candidateIds.some((id) => !isSafeId(id))) {
     return null;
   }
 
@@ -29,11 +34,11 @@ export function generatedScorePath(questionId: string, candidateIds: readonly st
 }
 
 /**
- * 从旧版组件仍然传入的四个 MusicXML（音乐交换格式）路径中恢复静态资源键。
+ * 从旧版组件仍然传入的 MusicXML（音乐交换格式）路径中恢复静态资源键。
  * 这样页面在逐步切换到显式 questionId/candidateIds props 时仍可安全回退。
  */
 export function scoreSelectionFromPaths(paths: readonly string[]): ScoreSelection | null {
-  if (paths.length !== SCORE_VOICES.length) return null;
+  if (!hasSupportedVoiceCount(paths.length)) return null;
 
   const entries = paths.map((path) => {
     try {
