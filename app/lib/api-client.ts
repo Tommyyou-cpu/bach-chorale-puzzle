@@ -1,5 +1,7 @@
 "use client";
 
+import staticQuestions from "../questions.generated.json";
+
 /**
  * 浏览器端与 Worker（边缘函数）的最小接口层。
  * NEXT_PUBLIC_API_BASE_URL 可以是 Worker 根地址，也可以是带 /api 的地址。
@@ -197,6 +199,170 @@ export class ApiError extends Error {
   }
 }
 
+type LocalCandidate = RevealCandidate;
+type LocalQuestion = Omit<PublicQuestion, "voices"> & {
+  voices: Record<string, LocalCandidate[]>;
+};
+type LocalSession = {
+  rules: GameRules;
+  questions: LocalQuestion[];
+};
+
+const LOCAL_RULES: GameRules = {
+  questionsPerGame: 3,
+  allocation: { chorale: 1, fugue: 1, other: 1 },
+  scoreWeights: { completeQuestion: 40, voiceAccuracy: 60 },
+  revision: 1,
+};
+
+const LOCAL_SESSIONS = new Map<string, LocalSession>();
+const STATIC_QUESTIONS = staticQuestions as unknown as LocalQuestion[];
+
+function shuffle<T>(items: readonly T[]) {
+  const result = [...items];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
+  }
+  return result;
+}
+
+function cloneLocalQuestion(question: LocalQuestion): LocalQuestion {
+  return {
+    ...question,
+    voices: Object.fromEntries(
+      Object.entries(question.voices).map(([voice, candidates]) => [
+        voice,
+        shuffle(candidates.map((candidate) => ({ ...candidate }))),
+      ]),
+    ) as Record<string, LocalCandidate[]>,
+  };
+}
+
+function stripLocalAnswers(question: LocalQuestion): PublicQuestion {
+  return {
+    ...question,
+    voices: Object.fromEntries(
+      Object.entries(question.voices).map(([voice, candidates]) => [
+        voice,
+        candidates.map((candidate) => ({
+          id: candidate.id,
+          audio: candidate.audio,
+          audioFallback: candidate.audioFallback,
+          score: candidate.score,
+          variant: candidate.variant,
+        })),
+      ]),
+    ) as Record<string, PublicCandidate[]>,
+  };
+}
+
+function localSessionId() {
+  const random = typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  return `local-${random}`;
+}
+
+function createLocalGameSession(): GameSession {
+  const byGenre = new Map<string, LocalQuestion[]>();
+  for (const question of STATIC_QUESTIONS) {
+    const bucket = byGenre.get(question.genre) || [];
+    bucket.push(question);
+    byGenre.set(question.genre, bucket);
+  }
+
+  const selected = shuffle(["chorale", "fugue", "other"]).map((genre) => {
+    const bucket = byGenre.get(genre) || STATIC_QUESTIONS;
+    return cloneLocalQuestion(bucket[Math.floor(Math.random() * bucket.length)]);
+  });
+  const sessionId = localSessionId();
+  const session = { rules: LOCAL_RULES, questions: selected } satisfies LocalSession;
+  LOCAL_SESSIONS.set(sessionId, session);
+  return {
+    sessionId,
+    rules: LOCAL_RULES,
+    questions: selected.map(stripLocalAnswers),
+  };
+}
+
+function submitLocalGameSession(sessionId: string, selections: Record<string, Record<string, string>>): SubmitResult {
+  const session = LOCAL_SESSIONS.get(sessionId);
+  if (!session) throw new ApiError("本地题目会话已过期，请重新开始。", 410, {});
+
+  let correctVoices = 0;
+  let totalVoices = 0;
+  let completeQuestions = 0;
+  const questionResults: ServerQuestionResult[] = [];
+  const results: SubmittedQuestionResult[] = [];
+
+  for (const question of session.questions) {
+    const selected: Record<string, RevealCandidate | undefined> = {};
+    const originals: Record<string, RevealCandidate | undefined> = {};
+    const voiceResults: Record<string, ServerVoiceResult> = {};
+    let questionCorrectVoices = 0;
+
+    for (const voice of question.voiceOrder) {
+      const candidates = question.voices[voice] || [];
+      const original = candidates.find((candidate) => candidate.isOriginal);
+      const selectedCandidate = candidates.find((candidate) => candidate.id === selections[question.id]?.[voice]);
+      const correct = Boolean(selectedCandidate && original && selectedCandidate.id === original.id);
+      totalVoices += 1;
+      if (correct) {
+        correctVoices += 1;
+        questionCorrectVoices += 1;
+      }
+      selected[voice] = selectedCandidate;
+      originals[voice] = original;
+      voiceResults[voice] = {
+        selectedId: selectedCandidate?.id || null,
+        correctId: original?.id || null,
+        correct,
+        decoyType: selectedCandidate?.decoyType || null,
+        explanation: selectedCandidate?.explanation || null,
+      };
+    }
+
+    const questionComplete = questionCorrectVoices === question.voiceOrder.length;
+    if (questionComplete) completeQuestions += 1;
+    questionResults.push({ id: question.id, genre: question.genre, correct: questionComplete, voices: voiceResults });
+    results.push({
+      questionId: question.id,
+      selected,
+      originals,
+      correctVoices: questionCorrectVoices,
+      totalVoices: question.voiceOrder.length,
+      complete: questionComplete,
+    });
+  }
+
+  const totalQuestions = session.questions.length;
+  const questionRatio = totalQuestions > 0 ? completeQuestions / totalQuestions : 0;
+  const voiceRatio = totalVoices > 0 ? correctVoices / totalVoices : 0;
+  const questionPoints = questionRatio * session.rules.scoreWeights.completeQuestion;
+  const voicePoints = voiceRatio * session.rules.scoreWeights.voiceAccuracy;
+  return {
+    sessionId,
+    rules: session.rules,
+    questions: session.questions as SubmittedQuestion[],
+    results,
+    score: {
+      totalScore: questionPoints + voicePoints,
+      questionPoints,
+      voicePoints,
+      questions: completeQuestions,
+      totalQuestions,
+      voices: correctVoices,
+      totalVoices,
+      questionRatio,
+      voiceRatio,
+      questionResults,
+    },
+  };
+}
+
+const API_TIMEOUT_MS = 1800;
+
 export async function requestJson<T>(path: string, init: RequestInit = {}, token?: string): Promise<T> {
   const headers = new Headers(init.headers);
   if (!headers.has("Accept")) headers.set("Accept", "application/json");
@@ -205,7 +371,25 @@ export async function requestJson<T>(path: string, init: RequestInit = {}, token
   }
   if (token) headers.set("Authorization", `Bearer ${token}`);
 
-  const response = await fetch(apiUrl(path), { ...init, headers, cache: "no-store" });
+  const controller = new AbortController();
+  const timeout = globalThis.setTimeout(() => controller.abort(), API_TIMEOUT_MS);
+  const onAbort = () => controller.abort();
+  if (init.signal) {
+    if (init.signal.aborted) controller.abort();
+    else init.signal.addEventListener("abort", onAbort, { once: true });
+  }
+  let response: Response;
+  try {
+    response = await fetch(apiUrl(path), { ...init, headers, cache: "no-store", signal: controller.signal });
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new ApiError("题目服务连接超时。", 408, {});
+    }
+    throw error;
+  } finally {
+    globalThis.clearTimeout(timeout);
+    init.signal?.removeEventListener("abort", onAbort);
+  }
   const payload = await readPayload(response);
   if (!response.ok) throw new ApiError(errorText(response, payload), response.status, payload);
   return payload as T;
@@ -224,11 +408,17 @@ async function withLegacyFallback<T>(paths: string[], init: RequestInit, token?:
   throw last instanceof Error ? last : new Error("接口不可用");
 }
 
-export function createGameSession() {
-  return requestJson<GameSession>("/game/sessions", { method: "POST", body: JSON.stringify({}) });
+export async function createGameSession() {
+  try {
+    return await requestJson<GameSession>("/game/sessions", { method: "POST", body: JSON.stringify({}) });
+  } catch {
+    // 后端 Worker 未上线时，GitHub Pages 仍可使用前端题库完成游戏。
+    return createLocalGameSession();
+  }
 }
 
 export function submitGameSession(sessionId: string, selections: Record<string, Record<string, string>>) {
+  if (LOCAL_SESSIONS.has(sessionId)) return Promise.resolve(submitLocalGameSession(sessionId, selections));
   return requestJson<SubmitResult>(`/game/sessions/${encodeURIComponent(sessionId)}/submit`, {
     method: "POST",
     body: JSON.stringify({ selections }),
