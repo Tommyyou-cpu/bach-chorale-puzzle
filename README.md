@@ -8,7 +8,7 @@
 - 管理后台：[https://tommyyou-cpu.github.io/bach-chorale-puzzle/admin/](https://tommyyou-cpu.github.io/bach-chorale-puzzle/admin/)
 - Worker 接口：部署后将 `WORKER_API_URL` 写入 GitHub Actions Variables；仓库不预设无法从代码推断的 Cloudflare 域名。
 
-GitHub Pages（GitHub 静态页面托管）只提供前端静态文件。管理员登录、题库维护、抽题和判分由 Cloudflare Worker（Cloudflare 边缘函数）处理，D1（边缘数据库）保存题库与会话。当前生产部署不启用 R2（对象存储），内置题目的音频、MusicXML（音乐交换格式）和 SVG（可缩放矢量图）随 GitHub Pages 一起发布，因此不会产生对象存储订阅费用。
+GitHub Pages（GitHub 静态页面托管）只提供前端静态文件。当前工作流默认只更新 GitHub Pages，Cloudflare Worker（Cloudflare 边缘函数）部署作业保持跳过，因此暂时不需要配置后端密钥；前端在 Worker 尚未上线时会显示服务不可用提示。后续需要启用后端时，将 GitHub Actions Variables（GitHub Actions 配置变量）中的 `DEPLOY_WORKER` 设置为 `true`，再补齐 Cloudflare Secrets（Cloudflare 加密变量）。当前生产部署不启用 R2（对象存储），内置题目的音频、MusicXML（音乐交换格式）和 SVG（可缩放矢量图）随 GitHub Pages 一起发布，因此不会产生对象存储订阅费用。
 
 ## 题库与规则
 
@@ -71,19 +71,18 @@ npx wrangler d1 create bach-chorale-puzzle
 - `WORKER_API_URL`：Worker 根地址，例如 `https://bach-chorale-puzzle-api.example.workers.dev`，不要带末尾 `/api`。
 - `NEXT_PUBLIC_API_BASE_URL`：通常与 `WORKER_API_URL` 相同；工作流会把它传给静态构建。
 
-上述 Cloudflare 账号、真实 D1 `database_id`、Worker 域名和 GitHub Secret 均无法从仓库内容安全推断，缺少任一项时工作流会在部署前明确失败。当前工作流不读取、不要求 `CLOUDFLARE_R2_BUCKET_NAME`，也不会创建或使用 R2 资源。
+后端部署保持关闭时，上述 Cloudflare 账号、真实 D1 `database_id` 和 GitHub Secret 均可暂不配置；设置 `DEPLOY_WORKER=true` 后，工作流会在部署前检查这些配置。当前工作流不读取、不要求 `CLOUDFLARE_R2_BUCKET_NAME`，也不会创建或使用 R2 资源。
 
 ## GitHub Actions 发布顺序
 
-`.github/workflows/deploy.yml` 使用同一仓库完成发布，顺序为：
+`.github/workflows/deploy.yml` 使用同一仓库完成发布，前端默认顺序为：
 
 1. 安装依赖，运行测试、类型检查和代码检查。
-2. 应用远程 D1 迁移。
-3. 部署 Cloudflare Worker。
-4. 调用 Worker 健康检查，并验证默认规则和 30 道题库存。
-5. 构建 Next.js 静态页面，检查 `out/index.html` 与 `out/admin/index.html`。
-6. 动态核对 30 道题及其音频、MusicXML 和预生成 SVG 资源。
-7. 将 `out/` 发布到 GitHub Pages。
+2. 构建 Next.js 静态页面，检查 `out/index.html` 与 `out/admin/index.html`。
+3. 动态核对 30 道题及其音频、MusicXML 和预生成 SVG 资源。
+4. 将 `out/` 发布到 GitHub Pages。
+
+当 `DEPLOY_WORKER=true` 时，工作流会在前端构建前额外应用 D1 迁移、部署 Worker，并执行健康检查；该作业失败不会改变前端构建的依赖关系。
 
 在仓库的 **Settings → Pages** 中选择 **GitHub Actions** 作为发布来源。推送 `main` 或手动运行工作流即可发布。
 

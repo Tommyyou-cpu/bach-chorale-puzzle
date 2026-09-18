@@ -1,4 +1,4 @@
-name: Deploy Worker and GitHub Pages
+name: Deploy GitHub Pages frontend
 
 on:
   push:
@@ -61,6 +61,8 @@ jobs:
 
   worker:
     name: Migrate D1 and deploy Worker
+    # 后端部署默认关闭。设置 DEPLOY_WORKER=true 后才会读取 Cloudflare Secrets。
+    if: ${{ vars.DEPLOY_WORKER == 'true' }}
     runs-on: ubuntu-latest
     needs: test
     env:
@@ -133,7 +135,8 @@ jobs:
   build:
     name: Build and verify GitHub Pages site
     runs-on: ubuntu-latest
-    needs: worker
+    # 前端发布不依赖 Worker，后端未配置时仍可更新 GitHub Pages。
+    needs: test
     env:
       WORKER_API_URL: ${{ vars.WORKER_API_URL }}
       NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
