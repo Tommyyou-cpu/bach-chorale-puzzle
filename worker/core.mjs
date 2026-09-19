@@ -7,8 +7,8 @@ export const CATEGORIES = ["chorale", "fugue", "other"];
 
 export const DEFAULT_GAME_RULES = Object.freeze({
   questionsPerGame: 3,
-  allocation: Object.freeze({ chorale: 1, fugue: 1, other: 1 }),
-  scoreWeights: Object.freeze({ completeQuestion: 40, voiceAccuracy: 60 }),
+  allocation: Object.freeze({ chorale: 3, fugue: 0, other: 0 }),
+  scoreWeights: Object.freeze({ completeQuestion: 25, voiceAccuracy: 75 }),
   revision: 1,
 });
 

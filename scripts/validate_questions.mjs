@@ -7,8 +7,8 @@ const QUESTIONS_PATH = path.join(ROOT, "app", "questions.generated.json");
 const MUSIC_DIR = path.join(ROOT, "public", "music");
 const GENERATED_SCORES_DIR = path.join(ROOT, "public", "generated-scores");
 const DECOY_TYPES = ["voice-leading", "harmony", "mixed"];
-const EXPECTED_QUESTIONS = 30;
-const EXPECTED_GENRES = { chorale: 15, fugue: 10, other: 5 };
+const EXPECTED_QUESTIONS = 45;
+const EXPECTED_GENRES = { chorale: 30, fugue: 10, other: 5 };
 
 const errors = [];
 const referenced = { mp3: new Set(), wav: new Set(), musicxml: new Set() };
@@ -294,8 +294,8 @@ for (const question of questions) {
       fail(`${questionId}/${voice} 必须是变体数组`);
       continue;
     }
-    if (candidates.length < 3 || candidates.length > 4) {
-      fail(`${questionId}/${voice} 应有三个或四个候选项，当前为 ${candidates.length}`);
+    if (candidates.length !== 3) {
+      fail(`${questionId}/${voice} 必须有三个候选项，当前为 ${candidates.length}`);
     }
 
     const candidateIds = new Set();
@@ -371,8 +371,7 @@ const combinations = questions.reduce(
   (total, question) => total + (question.voiceOrder || []).reduce((product, voice) => product * (question.voices?.[voice]?.length || 0), 1),
   0,
 );
-if (!candidateCounts.includes(3)) fail("题库至少应包含一题三选项声部");
-if (!candidateCounts.includes(4)) fail("题库至少应包含一题四选项声部");
+if (candidateCounts.some((count) => count !== 3)) fail("每个声部必须恰好包含三个选项");
 
 for (const extension of ["mp3", "wav", "musicxml"]) {
   if (referenced[extension].size !== dynamicExpectedAssets) {

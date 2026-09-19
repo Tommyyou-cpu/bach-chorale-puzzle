@@ -210,8 +210,8 @@ type LocalSession = {
 
 const LOCAL_RULES: GameRules = {
   questionsPerGame: 3,
-  allocation: { chorale: 1, fugue: 1, other: 1 },
-  scoreWeights: { completeQuestion: 40, voiceAccuracy: 60 },
+  allocation: { chorale: 3, fugue: 0, other: 0 },
+  scoreWeights: { completeQuestion: 25, voiceAccuracy: 75 },
   revision: 1,
 };
 
@@ -272,10 +272,8 @@ function createLocalGameSession(): GameSession {
     byGenre.set(question.genre, bucket);
   }
 
-  const selected = shuffle(["chorale", "fugue", "other"]).map((genre) => {
-    const bucket = byGenre.get(genre) || STATIC_QUESTIONS;
-    return cloneLocalQuestion(bucket[Math.floor(Math.random() * bucket.length)]);
-  });
+  const chorales = byGenre.get("chorale") || STATIC_QUESTIONS;
+  const selected = shuffle(chorales).slice(0, LOCAL_RULES.questionsPerGame).map(cloneLocalQuestion);
   const sessionId = localSessionId();
   const session = { rules: LOCAL_RULES, questions: selected } satisfies LocalSession;
   LOCAL_SESSIONS.set(sessionId, session);

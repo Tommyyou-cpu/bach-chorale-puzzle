@@ -63,8 +63,8 @@ type QuestionForm = {
 
 const DEFAULT_RULES: GameRules = {
   questionsPerGame: 3,
-  allocation: { chorale: 1, fugue: 1, other: 1 },
-  scoreWeights: { completeQuestion: 40, voiceAccuracy: 60 },
+  allocation: { chorale: 3, fugue: 0, other: 0 },
+  scoreWeights: { completeQuestion: 25, voiceAccuracy: 75 },
   revision: 0,
 };
 

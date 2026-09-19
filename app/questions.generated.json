@@ -50,16 +50,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 C#5 改为 C5，改变该拍的和声成员。"
-        },
-        {
-          "id": "soprano-cadence",
-          "audio": "/music/q1/soprano-cadence.mp3",
-          "audioFallback": "/music/q1/soprano-cadence.wav",
-          "score": "/music/q1/soprano-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 1 小节第 3 拍将 C#5 改为 C5 改变和声，并在第 4 小节第 2 拍将 B4 改为 F#5 扰动声部连接。"
         }
       ],
       "alto": [
@@ -92,16 +82,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 4 小节第 3 拍的稳定拍将 E-4 改为 D4，改变该拍的和声成员。"
-        },
-        {
-          "id": "alto-cadence",
-          "audio": "/music/q1/alto-cadence.mp3",
-          "audioFallback": "/music/q1/alto-cadence.wav",
-          "score": "/music/q1/alto-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 4 小节第 3 拍将 E-4 改为 D4 改变和声，并在第 1 小节第 4 拍将 E4 改为 A4 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -134,16 +114,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 C#4 改为 D4，改变该拍的和声成员。"
-        },
-        {
-          "id": "tenor-cadence",
-          "audio": "/music/q1/tenor-cadence.mp3",
-          "audioFallback": "/music/q1/tenor-cadence.wav",
-          "score": "/music/q1/tenor-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 1 小节第 1 拍将 C#4 改为 D4 改变和声，并在第 2 小节第 2.5 拍将 D4 改为 G3 扰动声部连接。"
         }
       ],
       "bass": [
@@ -176,16 +146,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 4 小节第 1 拍的稳定拍将 G#3 改为 E-3，改变该拍的和声成员。"
-        },
-        {
-          "id": "bass-cadence",
-          "audio": "/music/q1/bass-cadence.mp3",
-          "audioFallback": "/music/q1/bass-cadence.wav",
-          "score": "/music/q1/bass-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 4 小节第 1 拍将 G#3 改为 E-3 改变和声，并在第 4 小节第 3.5 拍将 B2 改为 E2 扰动声部连接。"
         }
       ]
     },
@@ -265,16 +225,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 2 小节第 3 拍的稳定拍将 C5 改为 B-4，改变该拍的和声成员。"
-        },
-        {
-          "id": "soprano-cadence",
-          "audio": "/music/q2/soprano-cadence.mp3",
-          "audioFallback": "/music/q2/soprano-cadence.wav",
-          "score": "/music/q2/soprano-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 2 小节第 3 拍将 C5 改为 B-4 改变和声，并在第 1 小节第 2 拍将 G4 改为 D5 扰动声部连接。"
         }
       ],
       "alto": [
@@ -307,16 +257,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 G4 改为 F#4，改变该拍的和声成员。"
-        },
-        {
-          "id": "alto-cadence",
-          "audio": "/music/q2/alto-cadence.mp3",
-          "audioFallback": "/music/q2/alto-cadence.wav",
-          "score": "/music/q2/alto-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 1 小节第 3 拍将 G4 改为 F#4 改变和声，并在第 2 小节第 4 拍将 F4 改为 B-3 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -349,16 +289,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 4 小节第 3 拍的稳定拍将 B-3 改为 C4，改变该拍的和声成员。"
-        },
-        {
-          "id": "tenor-cadence",
-          "audio": "/music/q2/tenor-cadence.mp3",
-          "audioFallback": "/music/q2/tenor-cadence.wav",
-          "score": "/music/q2/tenor-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 4 小节第 3 拍将 B-3 改为 C4 改变和声，并在第 1 小节第 2 拍将 B-3 改为 F3 扰动声部连接。"
         }
       ],
       "bass": [
@@ -391,16 +321,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 4 小节第 1 拍的稳定拍将 G3 改为 F#3，改变该拍的和声成员。"
-        },
-        {
-          "id": "bass-cadence",
-          "audio": "/music/q2/bass-cadence.mp3",
-          "audioFallback": "/music/q2/bass-cadence.wav",
-          "score": "/music/q2/bass-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 4 小节第 1 拍将 G3 改为 F#3 改变和声，并在第 2 小节第 3.5 拍将 C3 改为 F2 扰动声部连接。"
         }
       ]
     },
@@ -480,16 +400,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 2 小节第 1 拍的稳定拍将 G4 改为 D5，改变该拍的和声成员。"
-        },
-        {
-          "id": "soprano-cadence",
-          "audio": "/music/q3/soprano-cadence.mp3",
-          "audioFallback": "/music/q3/soprano-cadence.wav",
-          "score": "/music/q3/soprano-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 2 小节第 1 拍将 G4 改为 D5 改变和声，并在第 1 小节第 2 拍将 C5 改为 G5 扰动声部连接。"
         }
       ],
       "alto": [
@@ -522,16 +432,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 1 小节第 3 拍的稳定拍将 D4 改为 E-4，改变该拍的和声成员。"
-        },
-        {
-          "id": "alto-cadence",
-          "audio": "/music/q3/alto-cadence.mp3",
-          "audioFallback": "/music/q3/alto-cadence.wav",
-          "score": "/music/q3/alto-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 1 小节第 3 拍将 D4 改为 E-4 改变和声，并在第 1 小节第 3.5 拍将 E4 改为 A3 扰动声部连接。"
         }
       ],
       "tenor": [
@@ -564,16 +464,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 3 小节第 3 拍的稳定拍将 D4 改为 C#4，改变该拍的和声成员。"
-        },
-        {
-          "id": "tenor-cadence",
-          "audio": "/music/q3/tenor-cadence.mp3",
-          "audioFallback": "/music/q3/tenor-cadence.wav",
-          "score": "/music/q3/tenor-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 3 小节第 3 拍将 D4 改为 C#4 改变和声，并在第 1 小节第 2 拍将 F4 改为 B-3 扰动声部连接。"
         }
       ],
       "bass": [
@@ -606,16 +496,6 @@
           "variant": 2,
           "decoyType": "harmony",
           "explanation": "和声干扰：在第 1 小节第 1 拍的稳定拍将 B-3 改为 F3，改变该拍的和声成员。"
-        },
-        {
-          "id": "bass-cadence",
-          "audio": "/music/q3/bass-cadence.mp3",
-          "audioFallback": "/music/q3/bass-cadence.wav",
-          "score": "/music/q3/bass-cadence.musicxml",
-          "isOriginal": false,
-          "variant": 3,
-          "decoyType": "mixed",
-          "explanation": "混合干扰：在第 1 小节第 1 拍将 B-3 改为 F3 改变和声，并在第 3 小节第 4 拍将 A2 改为 D2 扰动声部连接。"
         }
       ]
     },
@@ -5001,6 +4881,2631 @@
           "audio": "/music/q30/voice3-folio.mp3",
           "audioFallback": "/music/q30/voice3-folio.wav",
           "score": "/music/q30/voice3-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q31",
+    "title": "巴赫四声部众赞歌（BWV 28.6）",
+    "bwv": "BWV 28.6",
+    "measures": "第 1–4 小节",
+    "duration": 16.7,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "no accidentals",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv28.6",
+    "sourceEdition": "music21 参考语料库：bach/bwv28.6（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q31/soprano-ivory.mp3",
+          "audioFallback": "/music/q31/soprano-ivory.wav",
+          "score": "/music/q31/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q31/soprano-quill.mp3",
+          "audioFallback": "/music/q31/soprano-quill.wav",
+          "score": "/music/q31/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q31/soprano-folio.mp3",
+          "audioFallback": "/music/q31/soprano-folio.wav",
+          "score": "/music/q31/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q31/alto-ivory.mp3",
+          "audioFallback": "/music/q31/alto-ivory.wav",
+          "score": "/music/q31/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q31/alto-quill.mp3",
+          "audioFallback": "/music/q31/alto-quill.wav",
+          "score": "/music/q31/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q31/alto-folio.mp3",
+          "audioFallback": "/music/q31/alto-folio.wav",
+          "score": "/music/q31/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q31/tenor-ivory.mp3",
+          "audioFallback": "/music/q31/tenor-ivory.wav",
+          "score": "/music/q31/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q31/tenor-quill.mp3",
+          "audioFallback": "/music/q31/tenor-quill.wav",
+          "score": "/music/q31/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q31/tenor-folio.mp3",
+          "audioFallback": "/music/q31/tenor-folio.wav",
+          "score": "/music/q31/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q31/bass-ivory.mp3",
+          "audioFallback": "/music/q31/bass-ivory.wav",
+          "score": "/music/q31/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q31/bass-quill.mp3",
+          "audioFallback": "/music/q31/bass-quill.wav",
+          "score": "/music/q31/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q31/bass-folio.mp3",
+          "audioFallback": "/music/q31/bass-folio.wav",
+          "score": "/music/q31/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q32",
+    "title": "巴赫四声部众赞歌（BWV 38.6）",
+    "bwv": "BWV 38.6",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "no accidentals",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv38.6",
+    "sourceEdition": "music21 参考语料库：bach/bwv38.6（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q32/soprano-ivory.mp3",
+          "audioFallback": "/music/q32/soprano-ivory.wav",
+          "score": "/music/q32/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q32/soprano-quill.mp3",
+          "audioFallback": "/music/q32/soprano-quill.wav",
+          "score": "/music/q32/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q32/soprano-folio.mp3",
+          "audioFallback": "/music/q32/soprano-folio.wav",
+          "score": "/music/q32/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q32/alto-ivory.mp3",
+          "audioFallback": "/music/q32/alto-ivory.wav",
+          "score": "/music/q32/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q32/alto-quill.mp3",
+          "audioFallback": "/music/q32/alto-quill.wav",
+          "score": "/music/q32/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q32/alto-folio.mp3",
+          "audioFallback": "/music/q32/alto-folio.wav",
+          "score": "/music/q32/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q32/tenor-ivory.mp3",
+          "audioFallback": "/music/q32/tenor-ivory.wav",
+          "score": "/music/q32/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q32/tenor-quill.mp3",
+          "audioFallback": "/music/q32/tenor-quill.wav",
+          "score": "/music/q32/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q32/tenor-folio.mp3",
+          "audioFallback": "/music/q32/tenor-folio.wav",
+          "score": "/music/q32/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q32/bass-ivory.mp3",
+          "audioFallback": "/music/q32/bass-ivory.wav",
+          "score": "/music/q32/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q32/bass-quill.mp3",
+          "audioFallback": "/music/q32/bass-quill.wav",
+          "score": "/music/q32/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q32/bass-folio.mp3",
+          "audioFallback": "/music/q32/bass-folio.wav",
+          "score": "/music/q32/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q33",
+    "title": "巴赫四声部众赞歌（BWV 40.8）",
+    "bwv": "BWV 40.8",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "3 flats",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv40.8",
+    "sourceEdition": "music21 参考语料库：bach/bwv40.8（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q33/soprano-ivory.mp3",
+          "audioFallback": "/music/q33/soprano-ivory.wav",
+          "score": "/music/q33/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q33/soprano-quill.mp3",
+          "audioFallback": "/music/q33/soprano-quill.wav",
+          "score": "/music/q33/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q33/soprano-folio.mp3",
+          "audioFallback": "/music/q33/soprano-folio.wav",
+          "score": "/music/q33/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q33/alto-ivory.mp3",
+          "audioFallback": "/music/q33/alto-ivory.wav",
+          "score": "/music/q33/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q33/alto-quill.mp3",
+          "audioFallback": "/music/q33/alto-quill.wav",
+          "score": "/music/q33/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q33/alto-folio.mp3",
+          "audioFallback": "/music/q33/alto-folio.wav",
+          "score": "/music/q33/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q33/tenor-ivory.mp3",
+          "audioFallback": "/music/q33/tenor-ivory.wav",
+          "score": "/music/q33/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q33/tenor-quill.mp3",
+          "audioFallback": "/music/q33/tenor-quill.wav",
+          "score": "/music/q33/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q33/tenor-folio.mp3",
+          "audioFallback": "/music/q33/tenor-folio.wav",
+          "score": "/music/q33/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q33/bass-ivory.mp3",
+          "audioFallback": "/music/q33/bass-ivory.wav",
+          "score": "/music/q33/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q33/bass-quill.mp3",
+          "audioFallback": "/music/q33/bass-quill.wav",
+          "score": "/music/q33/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q33/bass-folio.mp3",
+          "audioFallback": "/music/q33/bass-folio.wav",
+          "score": "/music/q33/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q34",
+    "title": "巴赫四声部众赞歌（BWV 33.6）",
+    "bwv": "BWV 33.6",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "no accidentals",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv33.6",
+    "sourceEdition": "music21 参考语料库：bach/bwv33.6（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 1.0,
+      "alto": 1.0,
+      "tenor": 1.0,
+      "bass": 1.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q34/soprano-ivory.mp3",
+          "audioFallback": "/music/q34/soprano-ivory.wav",
+          "score": "/music/q34/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q34/soprano-quill.mp3",
+          "audioFallback": "/music/q34/soprano-quill.wav",
+          "score": "/music/q34/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q34/soprano-folio.mp3",
+          "audioFallback": "/music/q34/soprano-folio.wav",
+          "score": "/music/q34/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q34/alto-ivory.mp3",
+          "audioFallback": "/music/q34/alto-ivory.wav",
+          "score": "/music/q34/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q34/alto-quill.mp3",
+          "audioFallback": "/music/q34/alto-quill.wav",
+          "score": "/music/q34/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q34/alto-folio.mp3",
+          "audioFallback": "/music/q34/alto-folio.wav",
+          "score": "/music/q34/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q34/tenor-ivory.mp3",
+          "audioFallback": "/music/q34/tenor-ivory.wav",
+          "score": "/music/q34/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q34/tenor-quill.mp3",
+          "audioFallback": "/music/q34/tenor-quill.wav",
+          "score": "/music/q34/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q34/tenor-folio.mp3",
+          "audioFallback": "/music/q34/tenor-folio.wav",
+          "score": "/music/q34/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q34/bass-ivory.mp3",
+          "audioFallback": "/music/q34/bass-ivory.wav",
+          "score": "/music/q34/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q34/bass-quill.mp3",
+          "audioFallback": "/music/q34/bass-quill.wav",
+          "score": "/music/q34/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q34/bass-folio.mp3",
+          "audioFallback": "/music/q34/bass-folio.wav",
+          "score": "/music/q34/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q35",
+    "title": "巴赫四声部众赞歌（BWV 86.6）",
+    "bwv": "BWV 86.6",
+    "measures": "第 1–4 小节",
+    "duration": 16.7,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "4 sharps",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv86.6",
+    "sourceEdition": "music21 参考语料库：bach/bwv86.6（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q35/soprano-ivory.mp3",
+          "audioFallback": "/music/q35/soprano-ivory.wav",
+          "score": "/music/q35/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q35/soprano-quill.mp3",
+          "audioFallback": "/music/q35/soprano-quill.wav",
+          "score": "/music/q35/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q35/soprano-folio.mp3",
+          "audioFallback": "/music/q35/soprano-folio.wav",
+          "score": "/music/q35/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q35/alto-ivory.mp3",
+          "audioFallback": "/music/q35/alto-ivory.wav",
+          "score": "/music/q35/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q35/alto-quill.mp3",
+          "audioFallback": "/music/q35/alto-quill.wav",
+          "score": "/music/q35/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q35/alto-folio.mp3",
+          "audioFallback": "/music/q35/alto-folio.wav",
+          "score": "/music/q35/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q35/tenor-ivory.mp3",
+          "audioFallback": "/music/q35/tenor-ivory.wav",
+          "score": "/music/q35/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q35/tenor-quill.mp3",
+          "audioFallback": "/music/q35/tenor-quill.wav",
+          "score": "/music/q35/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q35/tenor-folio.mp3",
+          "audioFallback": "/music/q35/tenor-folio.wav",
+          "score": "/music/q35/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q35/bass-ivory.mp3",
+          "audioFallback": "/music/q35/bass-ivory.wav",
+          "score": "/music/q35/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q35/bass-quill.mp3",
+          "audioFallback": "/music/q35/bass-quill.wav",
+          "score": "/music/q35/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q35/bass-folio.mp3",
+          "audioFallback": "/music/q35/bass-folio.wav",
+          "score": "/music/q35/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q36",
+    "title": "巴赫四声部众赞歌（BWV 145.5）",
+    "bwv": "BWV 145.5",
+    "measures": "第 1–4 小节",
+    "duration": 10.0,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "2 sharps",
+    "timeSignature": "3/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv145.5",
+    "sourceEdition": "music21 参考语料库：bach/bwv145.5（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q36/soprano-ivory.mp3",
+          "audioFallback": "/music/q36/soprano-ivory.wav",
+          "score": "/music/q36/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q36/soprano-quill.mp3",
+          "audioFallback": "/music/q36/soprano-quill.wav",
+          "score": "/music/q36/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q36/soprano-folio.mp3",
+          "audioFallback": "/music/q36/soprano-folio.wav",
+          "score": "/music/q36/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q36/alto-ivory.mp3",
+          "audioFallback": "/music/q36/alto-ivory.wav",
+          "score": "/music/q36/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q36/alto-quill.mp3",
+          "audioFallback": "/music/q36/alto-quill.wav",
+          "score": "/music/q36/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q36/alto-folio.mp3",
+          "audioFallback": "/music/q36/alto-folio.wav",
+          "score": "/music/q36/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q36/tenor-ivory.mp3",
+          "audioFallback": "/music/q36/tenor-ivory.wav",
+          "score": "/music/q36/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q36/tenor-quill.mp3",
+          "audioFallback": "/music/q36/tenor-quill.wav",
+          "score": "/music/q36/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q36/tenor-folio.mp3",
+          "audioFallback": "/music/q36/tenor-folio.wav",
+          "score": "/music/q36/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q36/bass-ivory.mp3",
+          "audioFallback": "/music/q36/bass-ivory.wav",
+          "score": "/music/q36/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q36/bass-quill.mp3",
+          "audioFallback": "/music/q36/bass-quill.wav",
+          "score": "/music/q36/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q36/bass-folio.mp3",
+          "audioFallback": "/music/q36/bass-folio.wav",
+          "score": "/music/q36/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q37",
+    "title": "巴赫四声部众赞歌（BWV 318）",
+    "bwv": "BWV 318",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "1 sharp",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv318",
+    "sourceEdition": "music21 参考语料库：bach/bwv318（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q37/soprano-ivory.mp3",
+          "audioFallback": "/music/q37/soprano-ivory.wav",
+          "score": "/music/q37/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q37/soprano-quill.mp3",
+          "audioFallback": "/music/q37/soprano-quill.wav",
+          "score": "/music/q37/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q37/soprano-folio.mp3",
+          "audioFallback": "/music/q37/soprano-folio.wav",
+          "score": "/music/q37/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q37/alto-ivory.mp3",
+          "audioFallback": "/music/q37/alto-ivory.wav",
+          "score": "/music/q37/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q37/alto-quill.mp3",
+          "audioFallback": "/music/q37/alto-quill.wav",
+          "score": "/music/q37/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q37/alto-folio.mp3",
+          "audioFallback": "/music/q37/alto-folio.wav",
+          "score": "/music/q37/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q37/tenor-ivory.mp3",
+          "audioFallback": "/music/q37/tenor-ivory.wav",
+          "score": "/music/q37/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q37/tenor-quill.mp3",
+          "audioFallback": "/music/q37/tenor-quill.wav",
+          "score": "/music/q37/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q37/tenor-folio.mp3",
+          "audioFallback": "/music/q37/tenor-folio.wav",
+          "score": "/music/q37/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q37/bass-ivory.mp3",
+          "audioFallback": "/music/q37/bass-ivory.wav",
+          "score": "/music/q37/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q37/bass-quill.mp3",
+          "audioFallback": "/music/q37/bass-quill.wav",
+          "score": "/music/q37/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q37/bass-folio.mp3",
+          "audioFallback": "/music/q37/bass-folio.wav",
+          "score": "/music/q37/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q38",
+    "title": "巴赫四声部众赞歌（BWV 180.7）",
+    "bwv": "BWV 180.7",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "1 flat",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv180.7",
+    "sourceEdition": "music21 参考语料库：bach/bwv180.7（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q38/soprano-ivory.mp3",
+          "audioFallback": "/music/q38/soprano-ivory.wav",
+          "score": "/music/q38/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q38/soprano-quill.mp3",
+          "audioFallback": "/music/q38/soprano-quill.wav",
+          "score": "/music/q38/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q38/soprano-folio.mp3",
+          "audioFallback": "/music/q38/soprano-folio.wav",
+          "score": "/music/q38/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q38/alto-ivory.mp3",
+          "audioFallback": "/music/q38/alto-ivory.wav",
+          "score": "/music/q38/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q38/alto-quill.mp3",
+          "audioFallback": "/music/q38/alto-quill.wav",
+          "score": "/music/q38/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q38/alto-folio.mp3",
+          "audioFallback": "/music/q38/alto-folio.wav",
+          "score": "/music/q38/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q38/tenor-ivory.mp3",
+          "audioFallback": "/music/q38/tenor-ivory.wav",
+          "score": "/music/q38/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q38/tenor-quill.mp3",
+          "audioFallback": "/music/q38/tenor-quill.wav",
+          "score": "/music/q38/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q38/tenor-folio.mp3",
+          "audioFallback": "/music/q38/tenor-folio.wav",
+          "score": "/music/q38/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q38/bass-ivory.mp3",
+          "audioFallback": "/music/q38/bass-ivory.wav",
+          "score": "/music/q38/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q38/bass-quill.mp3",
+          "audioFallback": "/music/q38/bass-quill.wav",
+          "score": "/music/q38/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q38/bass-folio.mp3",
+          "audioFallback": "/music/q38/bass-folio.wav",
+          "score": "/music/q38/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q39",
+    "title": "巴赫四声部众赞歌（BWV 36.8-2）",
+    "bwv": "BWV 36.8-2",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "2 sharps",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv36.8-2",
+    "sourceEdition": "music21 参考语料库：bach/bwv36.8-2（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q39/soprano-ivory.mp3",
+          "audioFallback": "/music/q39/soprano-ivory.wav",
+          "score": "/music/q39/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q39/soprano-quill.mp3",
+          "audioFallback": "/music/q39/soprano-quill.wav",
+          "score": "/music/q39/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q39/soprano-folio.mp3",
+          "audioFallback": "/music/q39/soprano-folio.wav",
+          "score": "/music/q39/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q39/alto-ivory.mp3",
+          "audioFallback": "/music/q39/alto-ivory.wav",
+          "score": "/music/q39/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q39/alto-quill.mp3",
+          "audioFallback": "/music/q39/alto-quill.wav",
+          "score": "/music/q39/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q39/alto-folio.mp3",
+          "audioFallback": "/music/q39/alto-folio.wav",
+          "score": "/music/q39/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q39/tenor-ivory.mp3",
+          "audioFallback": "/music/q39/tenor-ivory.wav",
+          "score": "/music/q39/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q39/tenor-quill.mp3",
+          "audioFallback": "/music/q39/tenor-quill.wav",
+          "score": "/music/q39/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q39/tenor-folio.mp3",
+          "audioFallback": "/music/q39/tenor-folio.wav",
+          "score": "/music/q39/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q39/bass-ivory.mp3",
+          "audioFallback": "/music/q39/bass-ivory.wav",
+          "score": "/music/q39/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q39/bass-quill.mp3",
+          "audioFallback": "/music/q39/bass-quill.wav",
+          "score": "/music/q39/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q39/bass-folio.mp3",
+          "audioFallback": "/music/q39/bass-folio.wav",
+          "score": "/music/q39/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q40",
+    "title": "巴赫四声部众赞歌（BWV 32.6）",
+    "bwv": "BWV 32.6",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "1 sharp",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv32.6",
+    "sourceEdition": "music21 参考语料库：bach/bwv32.6（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q40/soprano-ivory.mp3",
+          "audioFallback": "/music/q40/soprano-ivory.wav",
+          "score": "/music/q40/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q40/soprano-quill.mp3",
+          "audioFallback": "/music/q40/soprano-quill.wav",
+          "score": "/music/q40/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q40/soprano-folio.mp3",
+          "audioFallback": "/music/q40/soprano-folio.wav",
+          "score": "/music/q40/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q40/alto-ivory.mp3",
+          "audioFallback": "/music/q40/alto-ivory.wav",
+          "score": "/music/q40/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q40/alto-quill.mp3",
+          "audioFallback": "/music/q40/alto-quill.wav",
+          "score": "/music/q40/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q40/alto-folio.mp3",
+          "audioFallback": "/music/q40/alto-folio.wav",
+          "score": "/music/q40/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q40/tenor-ivory.mp3",
+          "audioFallback": "/music/q40/tenor-ivory.wav",
+          "score": "/music/q40/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q40/tenor-quill.mp3",
+          "audioFallback": "/music/q40/tenor-quill.wav",
+          "score": "/music/q40/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q40/tenor-folio.mp3",
+          "audioFallback": "/music/q40/tenor-folio.wav",
+          "score": "/music/q40/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q40/bass-ivory.mp3",
+          "audioFallback": "/music/q40/bass-ivory.wav",
+          "score": "/music/q40/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q40/bass-quill.mp3",
+          "audioFallback": "/music/q40/bass-quill.wav",
+          "score": "/music/q40/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q40/bass-folio.mp3",
+          "audioFallback": "/music/q40/bass-folio.wav",
+          "score": "/music/q40/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q41",
+    "title": "巴赫四声部众赞歌（BWV 248.53-5）",
+    "bwv": "BWV 248.53-5",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "3 sharps",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv248.53-5",
+    "sourceEdition": "music21 参考语料库：bach/bwv248.53-5（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q41/soprano-ivory.mp3",
+          "audioFallback": "/music/q41/soprano-ivory.wav",
+          "score": "/music/q41/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q41/soprano-quill.mp3",
+          "audioFallback": "/music/q41/soprano-quill.wav",
+          "score": "/music/q41/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q41/soprano-folio.mp3",
+          "audioFallback": "/music/q41/soprano-folio.wav",
+          "score": "/music/q41/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q41/alto-ivory.mp3",
+          "audioFallback": "/music/q41/alto-ivory.wav",
+          "score": "/music/q41/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q41/alto-quill.mp3",
+          "audioFallback": "/music/q41/alto-quill.wav",
+          "score": "/music/q41/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q41/alto-folio.mp3",
+          "audioFallback": "/music/q41/alto-folio.wav",
+          "score": "/music/q41/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q41/tenor-ivory.mp3",
+          "audioFallback": "/music/q41/tenor-ivory.wav",
+          "score": "/music/q41/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q41/tenor-quill.mp3",
+          "audioFallback": "/music/q41/tenor-quill.wav",
+          "score": "/music/q41/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q41/tenor-folio.mp3",
+          "audioFallback": "/music/q41/tenor-folio.wav",
+          "score": "/music/q41/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q41/bass-ivory.mp3",
+          "audioFallback": "/music/q41/bass-ivory.wav",
+          "score": "/music/q41/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q41/bass-quill.mp3",
+          "audioFallback": "/music/q41/bass-quill.wav",
+          "score": "/music/q41/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q41/bass-folio.mp3",
+          "audioFallback": "/music/q41/bass-folio.wav",
+          "score": "/music/q41/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q42",
+    "title": "巴赫四声部众赞歌（BWV 115.6）",
+    "bwv": "BWV 115.6",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "1 sharp",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv115.6",
+    "sourceEdition": "music21 参考语料库：bach/bwv115.6（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q42/soprano-ivory.mp3",
+          "audioFallback": "/music/q42/soprano-ivory.wav",
+          "score": "/music/q42/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q42/soprano-quill.mp3",
+          "audioFallback": "/music/q42/soprano-quill.wav",
+          "score": "/music/q42/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q42/soprano-folio.mp3",
+          "audioFallback": "/music/q42/soprano-folio.wav",
+          "score": "/music/q42/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q42/alto-ivory.mp3",
+          "audioFallback": "/music/q42/alto-ivory.wav",
+          "score": "/music/q42/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q42/alto-quill.mp3",
+          "audioFallback": "/music/q42/alto-quill.wav",
+          "score": "/music/q42/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q42/alto-folio.mp3",
+          "audioFallback": "/music/q42/alto-folio.wav",
+          "score": "/music/q42/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q42/tenor-ivory.mp3",
+          "audioFallback": "/music/q42/tenor-ivory.wav",
+          "score": "/music/q42/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q42/tenor-quill.mp3",
+          "audioFallback": "/music/q42/tenor-quill.wav",
+          "score": "/music/q42/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q42/tenor-folio.mp3",
+          "audioFallback": "/music/q42/tenor-folio.wav",
+          "score": "/music/q42/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q42/bass-ivory.mp3",
+          "audioFallback": "/music/q42/bass-ivory.wav",
+          "score": "/music/q42/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q42/bass-quill.mp3",
+          "audioFallback": "/music/q42/bass-quill.wav",
+          "score": "/music/q42/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q42/bass-folio.mp3",
+          "audioFallback": "/music/q42/bass-folio.wav",
+          "score": "/music/q42/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q43",
+    "title": "巴赫四声部众赞歌（BWV 122.6）",
+    "bwv": "BWV 122.6",
+    "measures": "第 1–4 小节",
+    "duration": 10.0,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "2 flats",
+    "timeSignature": "3/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv122.6",
+    "sourceEdition": "music21 参考语料库：bach/bwv122.6（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q43/soprano-ivory.mp3",
+          "audioFallback": "/music/q43/soprano-ivory.wav",
+          "score": "/music/q43/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q43/soprano-quill.mp3",
+          "audioFallback": "/music/q43/soprano-quill.wav",
+          "score": "/music/q43/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q43/soprano-folio.mp3",
+          "audioFallback": "/music/q43/soprano-folio.wav",
+          "score": "/music/q43/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q43/alto-ivory.mp3",
+          "audioFallback": "/music/q43/alto-ivory.wav",
+          "score": "/music/q43/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q43/alto-quill.mp3",
+          "audioFallback": "/music/q43/alto-quill.wav",
+          "score": "/music/q43/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q43/alto-folio.mp3",
+          "audioFallback": "/music/q43/alto-folio.wav",
+          "score": "/music/q43/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q43/tenor-ivory.mp3",
+          "audioFallback": "/music/q43/tenor-ivory.wav",
+          "score": "/music/q43/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q43/tenor-quill.mp3",
+          "audioFallback": "/music/q43/tenor-quill.wav",
+          "score": "/music/q43/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q43/tenor-folio.mp3",
+          "audioFallback": "/music/q43/tenor-folio.wav",
+          "score": "/music/q43/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q43/bass-ivory.mp3",
+          "audioFallback": "/music/q43/bass-ivory.wav",
+          "score": "/music/q43/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q43/bass-quill.mp3",
+          "audioFallback": "/music/q43/bass-quill.wav",
+          "score": "/music/q43/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q43/bass-folio.mp3",
+          "audioFallback": "/music/q43/bass-folio.wav",
+          "score": "/music/q43/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q44",
+    "title": "巴赫四声部众赞歌（BWV 159.5）",
+    "bwv": "BWV 159.5",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "3 flats",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv159.5",
+    "sourceEdition": "music21 参考语料库：bach/bwv159.5（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q44/soprano-ivory.mp3",
+          "audioFallback": "/music/q44/soprano-ivory.wav",
+          "score": "/music/q44/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q44/soprano-quill.mp3",
+          "audioFallback": "/music/q44/soprano-quill.wav",
+          "score": "/music/q44/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q44/soprano-folio.mp3",
+          "audioFallback": "/music/q44/soprano-folio.wav",
+          "score": "/music/q44/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q44/alto-ivory.mp3",
+          "audioFallback": "/music/q44/alto-ivory.wav",
+          "score": "/music/q44/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q44/alto-quill.mp3",
+          "audioFallback": "/music/q44/alto-quill.wav",
+          "score": "/music/q44/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q44/alto-folio.mp3",
+          "audioFallback": "/music/q44/alto-folio.wav",
+          "score": "/music/q44/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q44/tenor-ivory.mp3",
+          "audioFallback": "/music/q44/tenor-ivory.wav",
+          "score": "/music/q44/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q44/tenor-quill.mp3",
+          "audioFallback": "/music/q44/tenor-quill.wav",
+          "score": "/music/q44/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q44/tenor-folio.mp3",
+          "audioFallback": "/music/q44/tenor-folio.wav",
+          "score": "/music/q44/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q44/bass-ivory.mp3",
+          "audioFallback": "/music/q44/bass-ivory.wav",
+          "score": "/music/q44/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q44/bass-quill.mp3",
+          "audioFallback": "/music/q44/bass-quill.wav",
+          "score": "/music/q44/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q44/bass-folio.mp3",
+          "audioFallback": "/music/q44/bass-folio.wav",
+          "score": "/music/q44/bass-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ]
+    }
+  },
+  {
+    "id": "q45",
+    "title": "巴赫四声部众赞歌（BWV 194.6）",
+    "bwv": "BWV 194.6",
+    "measures": "第 1–4 小节",
+    "duration": 13.3,
+    "bpm": 72,
+    "genre": "chorale",
+    "voiceCount": 4,
+    "voiceOrder": [
+      "soprano",
+      "alto",
+      "tenor",
+      "bass"
+    ],
+    "voiceLabels": {
+      "soprano": "女高音",
+      "alto": "女低音",
+      "tenor": "男高音",
+      "bass": "男低音"
+    },
+    "clefs": {
+      "soprano": "treble",
+      "alto": "treble",
+      "tenor": "bass",
+      "bass": "bass"
+    },
+    "keySignature": "2 flats",
+    "timeSignature": "4/4",
+    "measureStart": 1,
+    "measureEnd": 4,
+    "source": "https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "sourceLabel": "music21 参考语料库：bach/bwv194.6",
+    "sourceEdition": "music21 参考语料库：bach/bwv194.6（节选第 1–4 小节）",
+    "sourceLicense": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+    "licenseNote": "巴赫作品为公共领域；编码来源 music21 参考语料库：https://www.music21.org/music21docs/about/referenceCorpus.html",
+    "maxRestByVoice": {
+      "soprano": 0.0,
+      "alto": 0.0,
+      "tenor": 0.0,
+      "bass": 0.0
+    },
+    "revision": 1,
+    "voices": {
+      "soprano": [
+        {
+          "id": "soprano-ivory",
+          "audio": "/music/q45/soprano-ivory.mp3",
+          "audioFallback": "/music/q45/soprano-ivory.wav",
+          "score": "/music/q45/soprano-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "soprano-quill",
+          "audio": "/music/q45/soprano-quill.mp3",
+          "audioFallback": "/music/q45/soprano-quill.wav",
+          "score": "/music/q45/soprano-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "soprano-folio",
+          "audio": "/music/q45/soprano-folio.mp3",
+          "audioFallback": "/music/q45/soprano-folio.wav",
+          "score": "/music/q45/soprano-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "alto": [
+        {
+          "id": "alto-ivory",
+          "audio": "/music/q45/alto-ivory.mp3",
+          "audioFallback": "/music/q45/alto-ivory.wav",
+          "score": "/music/q45/alto-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "alto-quill",
+          "audio": "/music/q45/alto-quill.mp3",
+          "audioFallback": "/music/q45/alto-quill.wav",
+          "score": "/music/q45/alto-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "alto-folio",
+          "audio": "/music/q45/alto-folio.mp3",
+          "audioFallback": "/music/q45/alto-folio.wav",
+          "score": "/music/q45/alto-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "tenor": [
+        {
+          "id": "tenor-ivory",
+          "audio": "/music/q45/tenor-ivory.mp3",
+          "audioFallback": "/music/q45/tenor-ivory.wav",
+          "score": "/music/q45/tenor-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "tenor-quill",
+          "audio": "/music/q45/tenor-quill.mp3",
+          "audioFallback": "/music/q45/tenor-quill.wav",
+          "score": "/music/q45/tenor-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "tenor-folio",
+          "audio": "/music/q45/tenor-folio.mp3",
+          "audioFallback": "/music/q45/tenor-folio.wav",
+          "score": "/music/q45/tenor-folio.musicxml",
+          "isOriginal": false,
+          "variant": 2,
+          "decoyType": "harmony",
+          "explanation": "和声干扰：改写稳定拍音级，改变局部和声成员。"
+        }
+      ],
+      "bass": [
+        {
+          "id": "bass-ivory",
+          "audio": "/music/q45/bass-ivory.mp3",
+          "audioFallback": "/music/q45/bass-ivory.wav",
+          "score": "/music/q45/bass-ivory.musicxml",
+          "isOriginal": true,
+          "variant": 0,
+          "decoyType": "original",
+          "explanation": "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。"
+        },
+        {
+          "id": "bass-quill",
+          "audio": "/music/q45/bass-quill.mp3",
+          "audioFallback": "/music/q45/bass-quill.wav",
+          "score": "/music/q45/bass-quill.musicxml",
+          "isOriginal": false,
+          "variant": 1,
+          "decoyType": "voice-leading",
+          "explanation": "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
+        },
+        {
+          "id": "bass-folio",
+          "audio": "/music/q45/bass-folio.mp3",
+          "audioFallback": "/music/q45/bass-folio.wav",
+          "score": "/music/q45/bass-folio.musicxml",
           "isOriginal": false,
           "variant": 2,
           "decoyType": "harmony",

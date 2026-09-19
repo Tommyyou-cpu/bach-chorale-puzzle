@@ -72,8 +72,8 @@ assert.equal(score.questions, 1);
 assert.equal(score.totalQuestions, 3);
 assert.equal(score.voices, 5);
 assert.equal(score.totalVoices, 11);
-assert.ok(Math.abs(score.questionPoints - 40 / 3) < 1e-9);
-assert.ok(Math.abs(score.voicePoints - (5 / 11) * 60) < 1e-9);
+assert.ok(Math.abs(score.questionPoints - 25 / 3) < 1e-9);
+assert.ok(Math.abs(score.voicePoints - (5 / 11) * 75) < 1e-9);
 
 const fugue = makeQuestion("fugue", ["voice1", "voice2", "voice3"]);
 fugue.voiceOrder = ["voice1", "voice2", "voice3"];

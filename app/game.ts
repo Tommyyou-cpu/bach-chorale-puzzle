@@ -322,8 +322,8 @@ export function scoreGame(
   const totalQuestions = questions.length;
   const questionRatio = totalQuestions > 0 ? questionsCorrect / totalQuestions : 0;
   const voiceRatio = totalVoices > 0 ? voices / totalVoices : 0;
-  const completeQuestionWeight = weights.completeQuestion ?? 40;
-  const voiceAccuracyWeight = weights.voiceAccuracy ?? 60;
+  const completeQuestionWeight = weights.completeQuestion ?? 25;
+  const voiceAccuracyWeight = weights.voiceAccuracy ?? 75;
   const questionPoints = questionRatio * completeQuestionWeight;
   const voicePoints = voiceRatio * voiceAccuracyWeight;
 

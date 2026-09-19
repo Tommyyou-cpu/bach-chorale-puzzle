@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""生成 q16-q30 的音乐资源，并给 q1-q15 补齐动态题目元数据。"""
+"""生成 30 道四声部巴赫众赞歌的三选项音乐素材。"""
 from __future__ import annotations
 
 import itertools
@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
+from music21 import clef, corpus, instrument, key, meter, stream
 
 ROOT = Path(__file__).resolve().parents[1]
 MUSIC = ROOT / "public" / "music"
@@ -21,36 +22,26 @@ EPS = 1e-5
 PERFECT = {0, 7}
 DISSONANT = {1, 2, 6, 10, 11}
 KINDS = ("ivory", "quill", "folio")
-FIXED_MUTATIONS = {
-    "q18": {
-        "voice1": ((10, 72), (0, 60)),
-        "voice2": ((16, 60), (4, 58)),
-        "voice3": ((16, 58), (0, 56)),
-        "voice4": ((48, 58), (13, 48)),
-    },
-}
-WTC = "https://github.com/ksnortum/bach-well-tempered-1"
-SINF = "https://github.com/ksnortum/bach-15-sinfonias"
 M21 = "https://www.music21.org/music21docs/about/referenceCorpus.html"
-LICENSE = "CC BY-SA 4.0（知识共享署名—相同方式共享 4.0 国际许可）, https://creativecommons.org/licenses/by-sa/4.0/"
+VOICE_KEYS = ("soprano", "alto", "tenor", "bass")
 
-# 片段均来自已经在仓库外核对过的 ksnortum 开放谱源。start/end 是原谱小节号。
-SPECS = {
-    "q16": ("BWV 847", "《十二平均律》第一册 C 小调赋格", "fugue", 20, 25, 3, "4/4", ["treble", "treble", "bass"], "3 flats", WTC, "fugue-2-bwv-847-parts.ily"),
-    "q17": ("BWV 848", "《十二平均律》第一册 C♯ 大调赋格", "fugue", 45, 50, 3, "4/4", ["treble", "treble", "bass"], "7 sharps", WTC, "fugue-3-bwv-848-parts.ily"),
-    "q18": ("BWV 850", "《十二平均律》第一册 D 大调赋格", "fugue", 17, 20, 4, "4/4", ["treble", "treble", "bass", "bass"], "2 sharps", WTC, "fugue-5-bwv-850-parts.ily"),
-    "q19": ("BWV 852", "《十二平均律》第一册 E♭ 大调赋格", "fugue", 32, 37, 3, "4/4", ["treble", "treble", "bass"], "3 flats", WTC, "fugue-7-bwv-852-parts.ily"),
-    "q20": ("BWV 857", "《十二平均律》第一册 F 小调赋格", "fugue", 53, 58, 4, "4/4", ["treble", "treble", "bass", "bass"], "4 flats", WTC, "fugue-12-bwv-857-parts.ily"),
-    "q21": ("BWV 858", "《十二平均律》第一册 F♯ 大调赋格", "fugue", 22, 27, 3, "4/4", ["treble", "treble", "bass"], "6 sharps", WTC, "fugue-13-bwv-858-parts.ily"),
-    "q22": ("BWV 861", "《十二平均律》第一册 G 小调赋格", "fugue", 15, 18, 4, "4/4", ["treble", "treble", "bass", "bass"], "2 flats", WTC, "fugue-16-bwv-861-parts.ily"),
-    "q23": ("BWV 864", "《十二平均律》第一册 A 大调赋格", "fugue", 7, 12, 3, "9/8", ["treble", "treble", "bass"], "3 sharps", WTC, "fugue-19-bwv-864-parts.ily"),
-    "q24": ("BWV 865", "《十二平均律》第一册 B 大调赋格", "fugue", 57, 62, 4, "4/4", ["treble", "treble", "bass", "bass"], "no accidentals", WTC, "fugue-20-bwv-865-parts.ily"),
-    "q25": ("BWV 846", "《十二平均律》第一册 C 大调赋格", "fugue", 21, 26, 4, "4/4", ["treble", "treble", "bass", "bass"], "no accidentals", WTC, "fugue-1-bwv-846-parts.ily"),
-    "q26": ("BWV 787", "三声部创意曲第一首 C 大调", "other", 5, 10, 3, "4/4", ["treble", "treble", "bass"], "no accidentals", SINF, "sinfonia-no1-C-maj-parts.ily"),
-    "q27": ("BWV 788", "三声部创意曲第二首 C 小调", "other", 23, 28, 3, "12/8", ["treble", "treble", "bass"], "3 flats", SINF, "sinfonia-no2-C-min-parts.ily"),
-    "q28": ("BWV 789", "三声部创意曲第三首 D 大调", "other", 5, 10, 3, "4/4", ["treble", "treble", "bass"], "2 sharps", SINF, "sinfonia-no3-D-maj-parts.ily"),
-    "q29": ("BWV 790", "三声部创意曲第四首 D 小调", "other", 18, 23, 3, "4/4", ["treble", "treble", "bass"], "1 flat", SINF, "sinfonia-no4-D-min-parts.ily"),
-    "q30": ("BWV 791", "三声部创意曲第五首 E♭ 大调", "other", 33, 38, 3, "3/4", ["treble", "treble", "bass"], "3 flats", SINF, "sinfonia-no5-Eb-maj-parts.ily"),
+# q1–q15 保留既有众赞歌；q31–q45 从同一 music21 参考语料库扩充。
+CHORALE_SPECS = {
+    "q31": ("bach/bwv28.6", "BWV 28.6"),
+    "q32": ("bach/bwv38.6", "BWV 38.6"),
+    "q33": ("bach/bwv40.8", "BWV 40.8"),
+    "q34": ("bach/bwv33.6", "BWV 33.6"),
+    "q35": ("bach/bwv86.6", "BWV 86.6"),
+    "q36": ("bach/bwv145.5", "BWV 145.5"),
+    "q37": ("bach/bwv318", "BWV 318"),
+    "q38": ("bach/bwv180.7", "BWV 180.7"),
+    "q39": ("bach/bwv36.8-2", "BWV 36.8-2"),
+    "q40": ("bach/bwv32.6", "BWV 32.6"),
+    "q41": ("bach/bwv248.53-5", "BWV 248.53-5"),
+    "q42": ("bach/bwv115.6", "BWV 115.6"),
+    "q43": ("bach/bwv122.6", "BWV 122.6"),
+    "q44": ("bach/bwv159.5", "BWV 159.5"),
+    "q45": ("bach/bwv194.6", "BWV 194.6"),
 }
 
 
@@ -455,28 +446,17 @@ def enrich_old(items):
     return items
 
 
-def build(qid: str, spec):
-    bwv, title, genre, start, end, count, time, expected_clefs, expected_key, source_url, source_file = spec
-    order = [f"voice{i + 1}" for i in range(count)]
+def build(qid: str, corpus_id: str, bwv: str):
+    start, end = 1, 4
+    order = list(VOICE_KEYS)
     parts = [parse(MUSIC / qid / f"{voice}-ivory.musicxml") for voice in order]
-    if any(part.time != time or part.clef != expected_clefs[index] for index, part in enumerate(parts)):
-        raise RuntimeError(f"{qid} MusicXML 拍号或谱号不符合核对结果")
-    if any(part.key != expected_key for part in parts):
-        raise RuntimeError(f"{qid} MusicXML 调号不一致")
+    if any(not part.events for part in parts):
+        raise RuntimeError(f"{qid} 存在空声部")
     source = [part.events for part in parts]
-    if qid in FIXED_MUTATIONS:
-        candidates = []
-        for voice, events in zip(order, source):
-            leading, harmony = FIXED_MUTATIONS[qid][voice]
-            candidates.append([events, changed(events, leading), changed(events, harmony)])
-        stable, parallel_base = bases(source, parts[0].bar)
-        report = {
-            "stableExceptions": len(stable),
-            "parallelExceptions": len(parallel_base),
-            "proposals": [{"voice": index + 1, "fixed": True} for index in range(len(order))],
-        }
-    else:
+    try:
         candidates, report = choose(source, parts[0].bar)
+    except RuntimeError as error:
+        raise RuntimeError(f"{qid}（{corpus_id}）：{error}") from error
     qdir = MUSIC / qid
     qdir.mkdir(parents=True, exist_ok=True)
     expected_files = {f"{voice}-{kind}.{ext}" for voice in order for kind in KINDS for ext in ("wav", "musicxml")}
@@ -484,7 +464,7 @@ def build(qid: str, spec):
         if path.is_file() and path.name not in expected_files:
             path.unlink()
     voices = {}
-    flats = "flat" in expected_key
+    flats = "flat" in parts[0].key
     total = max(part.total for part in parts)
     for voice_index, (voice, part, variants) in enumerate(zip(order, parts, candidates)):
         entries = []
@@ -499,38 +479,91 @@ def build(qid: str, spec):
             if variant == 0:
                 explanation, kind = "巴赫原作：保留源谱音高、节奏、休止、谱号、调号和拍号。", "original"
             elif variant == 1:
-                explanation = "声部进行干扰：改写非稳定拍的局部音级，保持四条旋律的节奏骨架。" if qid == "q18" else "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。"
-                kind = "voice-leading"
+                explanation, kind = "声部进行干扰：改写非稳定拍的局部音级，稳定拍和声骨架保持不变。", "voice-leading"
             else:
                 explanation, kind = "和声干扰：改写稳定拍音级，改变局部和声成员。", "harmony"
             entries.append({"id": stem, "audio": f"/music/{qid}/{stem}.mp3", "audioFallback": f"/music/{qid}/{stem}.wav", "score": f"/music/{qid}/{stem}.musicxml", "isOriginal": variant == 0, "variant": variant, "decoyType": kind, "explanation": explanation})
         voices[voice] = entries
     question = {
-        "id": qid, "title": title, "bwv": bwv, "measures": f"第 {start}–{end} 小节", "duration": round(total * 60 / 72, 1), "bpm": 72,
-        "genre": genre, "voiceCount": count, "voiceOrder": order, "voiceLabels": {voice: f"第 {i + 1} 声部" for i, voice in enumerate(order)},
+        "id": qid, "title": f"巴赫四声部众赞歌（{bwv}）", "bwv": bwv, "measures": f"第 {start}–{end} 小节", "duration": round(total * 60 / 72, 1), "bpm": 72,
+        "genre": "chorale", "voiceCount": 4, "voiceOrder": order, "voiceLabels": {"soprano": "女高音", "alto": "女低音", "tenor": "男高音", "bass": "男低音"},
         "clefs": {voice: part.clef for voice, part in zip(order, parts)}, "keySignature": parts[0].key, "timeSignature": parts[0].time,
-        "measureStart": start, "measureEnd": end, "source": source_url, "sourceLabel": "ksnortum 开放巴赫谱源（GitHub）",
-        "sourceEdition": f"{source_file}（LilyPond 转 MusicXML，节选第 {start}–{end} 小节）", "sourceLicense": LICENSE,
-        "analysis": "第 17—20 小节的四条复调声部均持续活动；按原始 MIDI 事件顺序重建为严格单旋律，避免相邻三十二分音符被错误合并为纵向和弦。每声部提供原作、声部进行干扰和和声干扰。" if qid == "q18" else "片段由连续完整小节组成，所有声部均有活动音符；每声部提供原作、声部进行干扰和和声干扰。",
-        "licenseNote": f"巴赫作品为公共领域；数字谱源按 {LICENSE} 发布。", "maxRestByVoice": {voice: max_rest(part) for voice, part in zip(order, parts)}, "revision": 2 if qid == "q18" else 1, "voices": voices,
+        "measureStart": start, "measureEnd": end, "source": M21, "sourceLabel": f"music21 参考语料库：{corpus_id}",
+        "sourceEdition": f"music21 参考语料库：{corpus_id}（节选第 {start}–{end} 小节）", "sourceLicense": f"巴赫作品为公共领域；编码来源 music21 参考语料库：{M21}",
+        "analysis": "四个声部以圣咏式节律共同推进；可对照外声部轮廓、内声部级进与终止前的和声连接进行听辨。每个声部提供原作、声部进行干扰和和声干扰。",
+        "licenseNote": f"巴赫作品为公共领域；编码来源 music21 参考语料库：{M21}", "maxRestByVoice": {voice: max_rest(part) for voice, part in zip(order, parts)}, "revision": 1, "voices": voices,
     }
     return question, report
+
+
+def excerpt_part(part, start: int, end: int, voice_index: int, fifths: int, time_signature: str):
+    result = stream.Part(id=part.id)
+    result.partName = part.partName
+    result.insert(0, instrument.Piano())
+    result.insert(0, key.KeySignature(fifths))
+    result.insert(0, meter.TimeSignature(time_signature))
+    result.insert(0, clef.TrebleClef() if voice_index < 2 else clef.BassClef())
+    for measure in part.getElementsByClass(stream.Measure):
+        if start <= measure.number <= end:
+            copied = measure.coreCopyAsDerivation("chorale-excerpt")
+            copied.number = measure.number - start + 1
+            result.append(copied)
+    return result
+
+
+def write_chorale_source(qid: str, corpus_id: str):
+    score = corpus.parse(corpus_id)
+    if len(score.parts) != 4:
+        raise RuntimeError(f"{corpus_id} 不是四声部众赞歌")
+    qdir = MUSIC / qid
+    qdir.mkdir(parents=True, exist_ok=True)
+    signature = next(iter(score.recurse().getElementsByClass(key.KeySignature)), key.KeySignature(0))
+    timing = next(iter(score.recurse().getElementsByClass(meter.TimeSignature)), meter.TimeSignature("4/4"))
+    for voice_index, (voice, part) in enumerate(zip(VOICE_KEYS, score.parts)):
+        excerpt = excerpt_part(part, 1, 4, voice_index, signature.sharps, timing.ratioString)
+        if not list(excerpt.recurse().notes):
+            raise RuntimeError(f"{corpus_id}/{voice} 在第 1–4 小节没有音符")
+        excerpt.write("musicxml", fp=str(qdir / f"{voice}-ivory.musicxml"))
+
+
+def remove_unused_assets(manifest):
+    expected = {
+        MUSIC / question["id"] / f"{candidate['id']}.{extension}"
+        for question in manifest
+        for candidates in question["voices"].values()
+        for candidate in candidates
+        for extension in ("mp3", "wav", "musicxml")
+    }
+    for qdir in MUSIC.iterdir():
+        if not qdir.is_dir():
+            continue
+        for path in qdir.iterdir():
+            if path.is_file() and path.suffix in (".mp3", ".wav", ".musicxml") and path not in expected:
+                path.unlink()
 
 
 def main():
     old = json.loads(QUESTIONS.read_text(encoding="utf-8"))
     if not isinstance(old, list) or len(old) < 15:
         raise RuntimeError("现有题库缺少 q1-q15")
-    manifest = enrich_old(old[:15])
+    manifest = enrich_old(old[:15]) + old[15:30]
+    for question in manifest[:15]:
+        question["genre"] = "chorale"
+        question["voiceCount"] = 4
+        question["voiceOrder"] = list(VOICE_KEYS)
+        question["voiceLabels"] = {"soprano": "女高音", "alto": "女低音", "tenor": "男高音", "bass": "男低音"}
+        question["voices"] = {voice: question["voices"][voice][:3] for voice in VOICE_KEYS}
     reports = []
-    for qid, spec in SPECS.items():
-        question, report = build(qid, spec)
+    for qid, (corpus_id, bwv) in CHORALE_SPECS.items():
+        write_chorale_source(qid, corpus_id)
+        question, report = build(qid, corpus_id, bwv)
         manifest.append(question); reports.append({"id": qid, **report})
-    if len(manifest) != 30:
+    if len(manifest) != 45:
         raise RuntimeError(f"题库数量错误：{len(manifest)}")
     counts = {genre: sum(item.get("genre") == genre for item in manifest) for genre in ("chorale", "fugue", "other")}
-    if counts != {"chorale": 15, "fugue": 10, "other": 5}:
+    if counts != {"chorale": 30, "fugue": 10, "other": 5}:
         raise RuntimeError(f"分类数量错误：{counts}")
+    remove_unused_assets(manifest)
     QUESTIONS.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     tracks = sum(len(candidates) for question in manifest for candidates in question["voices"].values())
     print(json.dumps({"questions": len(manifest), "categories": counts, "tracks": tracks, "wav": tracks, "musicxml": tracks, "new": reports}, ensure_ascii=False, indent=2))

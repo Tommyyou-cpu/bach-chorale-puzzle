@@ -20,6 +20,11 @@ const MUSIC_ROOT = path.join(ROOT, "public", "music");
 const OUTPUT_ROOT = path.join(ROOT, "public", "generated-scores");
 const CLEF_XML = { treble: ["G", "2"], "treble-8": ["G", "2", "-1"], alto: ["C", "3"], bass: ["F", "4"] };
 const SAFE_ID = /^[A-Za-z0-9_-]+$/;
+const FORCE_RENDER = process.argv.includes("--force");
+const forcedQuestionIndex = process.argv.indexOf("--force-question");
+const FORCE_QUESTION_IDS = new Set(
+  forcedQuestionIndex >= 0 ? (process.argv[forcedQuestionIndex + 1] || "").split(",").filter(Boolean) : [],
+);
 
 function assertSafeId(value, label) {
   if (typeof value !== "string" || !SAFE_ID.test(value)) {
@@ -212,8 +217,8 @@ async function removeStaleSvgFiles(expected) {
 
 async function main() {
   const questions = JSON.parse(await readFile(QUESTIONS_PATH, "utf8"));
-  if (!Array.isArray(questions) || questions.length !== 30) {
-    throw new Error("题库必须恰好包含 30 道题");
+  if (!Array.isArray(questions) || questions.length !== 45) {
+    throw new Error("题库必须恰好包含 45 道题");
   }
 
   const wasm = await import("verovio/wasm");
@@ -241,8 +246,8 @@ async function main() {
       }
       const voiceCandidates = question.voiceOrder.map((voice) => {
         const candidates = question.voices?.[voice];
-        if (!Array.isArray(candidates) || candidates.length < 3 || candidates.length > 4) {
-          throw new Error(`${question.id}/${voice} 必须有三个或四个候选项`);
+        if (!Array.isArray(candidates) || candidates.length !== 3) {
+          throw new Error(`${question.id}/${voice} 必须有三个候选项`);
         }
         candidates.forEach((candidate) => {
           assertSafeId(candidate.id, "候选项");
@@ -258,6 +263,18 @@ async function main() {
           const outputPath = scorePath(question.id, candidateIds);
           expected.add(outputPath);
           await mkdir(path.dirname(outputPath), { recursive: true });
+          if (!FORCE_RENDER && !FORCE_QUESTION_IDS.has(question.id)) {
+            try {
+              const current = await stat(outputPath);
+              if (current.isFile() && current.size > 0) {
+                totalBytes += current.size;
+                generated += 1;
+                return;
+              }
+            } catch {
+              // 缺失或不可读取的组合谱会在下方重新生成。
+            }
+          }
           const svg = await renderCombination(toolkit, question, candidates);
           await writeFile(outputPath, svg, "utf8");
           totalBytes += Buffer.byteLength(svg);

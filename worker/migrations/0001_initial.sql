@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS settings (
 INSERT OR IGNORE INTO settings (key, value_json, revision)
 VALUES (
   'game_rules',
-  '{"questionsPerGame":3,"allocation":{"chorale":1,"fugue":1,"other":1},"scoreWeights":{"completeQuestion":40,"voiceAccuracy":60},"revision":1}',
+  '{"questionsPerGame":3,"allocation":{"chorale":3,"fugue":0,"other":0},"scoreWeights":{"completeQuestion":25,"voiceAccuracy":75},"revision":1}',
   1
 );
 
@@ -85,4 +85,3 @@ CREATE TABLE IF NOT EXISTS game_sessions (
 );
 
 CREATE INDEX IF NOT EXISTS game_sessions_expiry_idx ON game_sessions (expires_at);
-

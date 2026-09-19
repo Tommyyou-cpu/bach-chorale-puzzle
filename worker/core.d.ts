@@ -2,8 +2,8 @@
 export const CATEGORIES: readonly string[];
 export const DEFAULT_GAME_RULES: {
   readonly questionsPerGame: 3;
-  readonly allocation: { readonly chorale: 1; readonly fugue: 1; readonly other: 1 };
-  readonly scoreWeights: { readonly completeQuestion: 40; readonly voiceAccuracy: 60 };
+  readonly allocation: { readonly chorale: 3; readonly fugue: 0; readonly other: 0 };
+  readonly scoreWeights: { readonly completeQuestion: 25; readonly voiceAccuracy: 75 };
   readonly revision: 1;
 };
 export function cloneRules(rules?: unknown): any;

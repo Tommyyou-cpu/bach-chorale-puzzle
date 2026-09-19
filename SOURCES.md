@@ -1,16 +1,15 @@
 # 素材来源
 
-## 巴赫圣咏
+## 巴赫众赞歌
 
-- Johann Sebastian Bach, `BWV 66.6`, 第 1–4 小节。
-- Johann Sebastian Bach, `BWV 140.7`, *Gloria sei dir gesungen*，第 1–4 小节。
-- Johann Sebastian Bach, `BWV 244.54`, *O Haupt voll Blut und Wunden*，第 1–4 小节。
+- q1–q15：既有 15 道巴赫四声部众赞歌，第 1–4 小节。
+- q31–q45：新增 15 道巴赫四声部众赞歌，分别为 BWV 28.6、38.6、40.8、33.6、86.6、145.5、318、180.7、36.8-2、32.6、248.53-5、115.6、122.6、159.5、194.6，第 1–4 小节。
 
-三份编码均由 `music21` 参考语料库提供：<https://www.music21.org/music21docs/about/referenceCorpus.html>。巴赫原作已进入公共领域；本项目没有复制现代商业录音，48 条 WAV 音轨均由 `scripts/generate_music_assets.py` 以同一合成钢琴音色本地渲染。
+30 道众赞歌的编码均由 `music21`（音乐分析与记谱库）参考语料库提供：<https://www.music21.org/music21docs/about/referenceCorpus.html>。巴赫原作已进入公共领域；本项目没有复制现代商业录音，音轨均由 `scripts/generate_music_assets.py` 以同一合成钢琴音色本地渲染。
 
 ## 干扰声部
 
-每条原作声部对应三个局部重塑版本。重塑保留每一时点的音高类，通过局部八度折叠改变声部线条与音区。因此，每题 256 种组合均保留巴赫原作的垂直音高类。自动检查只能证明这一结构约束，不代表全部组合经过了人工审美判定。
+每条原作声部对应两个局部重塑版本，连同原作固定为三个选项。重塑分别针对非稳定拍的声部进行和稳定拍的和声成员。自动检查只能证明结构约束，不代表全部组合经过了人工审美判定。
 
 ## 谱面引擎
 

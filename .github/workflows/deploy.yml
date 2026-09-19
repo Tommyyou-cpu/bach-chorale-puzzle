@@ -32,28 +32,28 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
-      - name: Check the 30-question manifest
+      - name: Check the 45-question manifest
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import fs from "node:fs";
           const questions = JSON.parse(fs.readFileSync("app/questions.generated.json", "utf8"));
-          if (questions.length !== 30) throw new Error(`题目数量必须为 30，当前为 ${questions.length}`);
+          if (questions.length !== 45) throw new Error(`题目数量必须为 45，当前为 ${questions.length}`);
           const counts = Object.fromEntries(["chorale", "fugue", "other"].map((genre) => [genre, questions.filter((question) => question.genre === genre).length]));
-          if (JSON.stringify(counts) !== JSON.stringify({ chorale: 15, fugue: 10, other: 5 })) {
-            throw new Error(`题目分类必须为 15/10/5：${JSON.stringify(counts)}`);
+          if (JSON.stringify(counts) !== JSON.stringify({ chorale: 30, fugue: 10, other: 5 })) {
+            throw new Error(`题目分类必须为 30/10/5：${JSON.stringify(counts)}`);
           }
-          const seed = fs.readFileSync("worker/migrations/0002_seed_questions.sql", "utf8");
+          const seed = fs.readFileSync("worker/migrations/0003_expand_chorales.sql", "utf8");
           const seedHeader = seed.match(/Questions:\s*(\d+)/i);
-          if (!seedHeader || Number(seedHeader[1]) !== 30) throw new Error("D1 seed migration 必须包含最终 30 道题");
+          if (!seedHeader || Number(seedHeader[1]) !== 45) throw new Error("D1 seed migration 必须包含最终 45 道题");
           const seededIds = [...seed.matchAll(/VALUES\s*\('([^']+)'/g)].map((match) => match[1]);
-          if (new Set(seededIds).size !== 30) throw new Error(`D1 seed migration 的题目 INSERT 数量必须为 30，当前为 ${new Set(seededIds).size}`);
+          if (new Set(seededIds).size !== 45) throw new Error(`D1 seed migration 的题目 INSERT 数量必须为 45，当前为 ${new Set(seededIds).size}`);
           for (const question of questions) {
             const voices = question.voiceOrder || Object.keys(question.voices || {});
             if (voices.length !== question.voiceCount) throw new Error(`${question.id} 声部数量与 voiceCount 不一致`);
             for (const voice of voices) {
               const candidates = question.voices?.[voice];
-              if (!Array.isArray(candidates) || candidates.length < 3 || candidates.length > 4) throw new Error(`${question.id}/${voice} 候选数量不在 3—4 范围`);
+              if (!Array.isArray(candidates) || candidates.length !== 3) throw new Error(`${question.id}/${voice} 候选数量必须为 3`);
             }
           }
           console.log(JSON.stringify({ questions: questions.length, counts }, null, 2));
@@ -120,14 +120,14 @@ jobs:
           API_URL="${API_URL%/}"
           curl --fail --silent --show-error "$API_URL/api/health" | jq -e '.ok == true' >/dev/null
           session_json="$(curl --fail --silent --show-error -X POST "$API_URL/api/game/sessions" -H 'Content-Type: application/json' -d '{}')"
-          printf '%s' "$session_json" | jq -e '.rules.questionsPerGame == 3 and .rules.allocation.chorale == 1 and .rules.allocation.fugue == 1 and .rules.allocation.other == 1 and (.questions | length) == 3' >/dev/null
+          printf '%s' "$session_json" | jq -e '.rules.questionsPerGame == 3 and .rules.allocation.chorale == 3 and .rules.allocation.fugue == 0 and .rules.allocation.other == 0 and .rules.scoreWeights.completeQuestion == 25 and .rules.scoreWeights.voiceAccuracy == 75 and (.questions | length) == 3 and ([.questions[].genre] | all(. == "chorale"))' >/dev/null
           printf '%s' "$session_json" | jq -e '([.questions[] | .voices | to_entries[] | .value[] | has("isOriginal")] | any) | not' >/dev/null
           login_json="$(curl --fail --silent --show-error -X POST "$API_URL/api/auth/login" -H 'Content-Type: application/json' -d "$(jq -n --arg username "$ADMIN_BOOTSTRAP_USERNAME" --arg password "$ADMIN_BOOTSTRAP_PASSWORD" '{username:$username,password:$password}')")"
           token="$(printf '%s' "$login_json" | jq -er '.token')"
           questions_json="$(curl --fail --silent --show-error "$API_URL/api/admin/questions" -H "Authorization: Bearer $token")"
-          printf '%s' "$questions_json" | jq -e '(.questions | length) == 30' >/dev/null
-          printf '%s' "$questions_json" | jq -e '([.questions[] | select(.genre == "chorale")] | length) == 15 and ([.questions[] | select(.genre == "fugue")] | length) == 10 and ([.questions[] | select(.genre == "other")] | length) == 5' >/dev/null
-          printf 'Worker health, default rules, public answer stripping, and 30-question inventory passed.\n'
+          printf '%s' "$questions_json" | jq -e '(.questions | length) == 45' >/dev/null
+          printf '%s' "$questions_json" | jq -e '([.questions[] | select(.genre == "chorale")] | length) == 30 and ([.questions[] | select(.genre == "fugue")] | length) == 10 and ([.questions[] | select(.genre == "other")] | length) == 5' >/dev/null
+          printf 'Worker health, default rules, public answer stripping, and 45-question inventory passed.\n'
       - name: Remove CI-only configuration
         if: always()
         run: rm -f worker/wrangler.ci.toml "$RUNNER_TEMP/worker-secrets.env"

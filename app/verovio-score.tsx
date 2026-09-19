@@ -177,9 +177,15 @@ function scoreSelection(
 export function VerovioScore({ paths, title, questionId, candidateIds, voiceLabels = [], clefs = [] }: VerovioScoreProps) {
   const pathsKey = paths.join("|");
   const candidateIdsKey = candidateIds?.join("|") || "";
+  const voiceLabelsKey = voiceLabels.join("|");
+  const clefsKey = clefs.join("|");
   // 数组由页面渲染时重新创建；只在实际资源键变化时替换稳定副本。
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const stablePaths = useMemo(() => paths.slice(), [pathsKey]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const stableVoiceLabels = useMemo(() => voiceLabels.slice(), [voiceLabelsKey]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const stableClefs = useMemo(() => clefs.slice(), [clefsKey]);
   const selection = useMemo(
     () => scoreSelection(questionId, candidateIds, stablePaths),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -228,7 +234,7 @@ export function VerovioScore({ paths, title, questionId, candidateIds, voiceLabe
       }
 
       try {
-        const markup = await renderDynamicScore(stablePaths, controller?.signal, voiceLabels, clefs);
+        const markup = await renderDynamicScore(stablePaths, controller?.signal, stableVoiceLabels, stableClefs);
         if (!cancelled) {
           setSvg(markup);
           setLoading(false);
@@ -265,7 +271,7 @@ export function VerovioScore({ paths, title, questionId, candidateIds, voiceLabe
       cancelled = true;
       controller?.abort();
     };
-  }, [clefs, pathsKey, retry, stablePaths, staticPath, voiceLabels]);
+  }, [clefsKey, pathsKey, retry, stableClefs, stablePaths, stableVoiceLabels, staticPath, voiceLabelsKey]);
 
   const downloadLinks = paths.map((path, index) => (
     <a key={path} href={resolveAsset(path)} download>
