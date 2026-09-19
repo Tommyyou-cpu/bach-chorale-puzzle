@@ -46,8 +46,8 @@ jobs:
           const seed = fs.readFileSync("worker/migrations/0003_expand_chorales.sql", "utf8");
           const seedHeader = seed.match(/Questions:\s*(\d+)/i);
           if (!seedHeader || Number(seedHeader[1]) !== 45) throw new Error("D1 seed migration 必须包含最终 45 道题");
-          const seededIds = [...seed.matchAll(/VALUES\s*\('([^']+)'/g)].map((match) => match[1]);
-          if (new Set(seededIds).size !== 45) throw new Error(`D1 seed migration 的题目 INSERT 数量必须为 45，当前为 ${new Set(seededIds).size}`);
+          const questionInserts = [...seed.matchAll(/INSERT INTO questions\s*\(/g)].length;
+          if (questionInserts !== 45) throw new Error(`D1 seed migration 的题目 INSERT 数量必须为 45，当前为 ${questionInserts}`);
           for (const question of questions) {
             const voices = question.voiceOrder || Object.keys(question.voices || {});
             if (voices.length !== question.voiceCount) throw new Error(`${question.id} 声部数量与 voiceCount 不一致`);
